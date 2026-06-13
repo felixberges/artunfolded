@@ -1,0 +1,31 @@
+.hello {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #0f0f12;
+  color: #f5f5f0;
+  gap: 0.75rem;
+  padding: 2rem;
+}
+
+.hello h1 {
+  font-size: 3rem;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.hello p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #b8b8b0;
+}
+
+.hello .status {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #8a8a82;
+}
