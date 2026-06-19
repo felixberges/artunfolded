@@ -1,0 +1,189 @@
+/* ============================================================
+   annotations.css — Capa de anotaciones sobre el visor 2D (Fase 3)
+   Va en: src/annotations.css  (lo importa AnnotatedViewer.jsx)
+
+   Hereda las variables de color de index.css (--accent, --ink, --line…),
+   que ya es global. Se dejan fallbacks por si se usa el componente suelto.
+   Prefijo .au-anno-* para no colisionar con las clases de la galería.
+   ============================================================ */
+
+/* ---------- Toggle Información (esquina superior derecha) ---------- */
+
+.au-anno-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 11;
+  padding: 0.55rem 0.95rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink, #e9e7e2);
+  background: rgba(20, 18, 16, 0.72);
+  border: 1px solid rgba(233, 231, 226, 0.25);
+  border-radius: 4px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.au-anno-toggle[aria-pressed='false'] {
+  color: var(--ink-dim, #9a9387);
+  border-color: rgba(233, 231, 226, 0.12);
+}
+
+/* ---------- Contorno de la región (escala con el zoom) ---------- */
+
+.au-anno-outline {
+  pointer-events: none;          /* decorativo: nunca captura el clic */
+  border: 1px solid var(--accent, #b08953);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 0 18px rgba(176, 137, 83, 0.25);
+  border-radius: 2px;
+  transition: opacity 0.35s ease;
+}
+
+/* ---------- Pin: punto fijo en pantalla + nombre corto ---------- */
+
+.au-anno-pin {
+  position: relative;
+  width: 30px;                   /* área de toque amplia para tablet */
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: opacity 0.35s ease;
+}
+
+.au-anno-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--accent, #b08953);
+  border: 2px solid rgba(20, 18, 16, 0.9);
+  box-shadow: 0 0 0 2px rgba(176, 137, 83, 0.4), 0 1px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.au-anno-pin:hover .au-anno-dot,
+.au-anno-pin:focus-visible .au-anno-dot {
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+/* nombre corto: visible al revelarse el pin, refuerzo al hover/foco */
+.au-anno-label {
+  position: absolute;
+  left: calc(50% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--ink, #ece7dd);
+  background: rgba(20, 18, 16, 0.82);
+  padding: 0.28rem 0.55rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+}
+
+.au-anno-pin:hover .au-anno-label,
+.au-anno-pin:focus-visible .au-anno-label {
+  opacity: 1;
+}
+
+.au-anno-pin:focus-visible {
+  outline: 2px solid var(--accent, #b08953);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+/* ---------- Panel de ficha (lateral derecho, provisional) ---------- */
+
+.au-anno-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 12;
+  width: min(380px, 90vw);
+  height: 100%;
+  overflow-y: auto;
+  padding: 4.5rem 1.8rem 2rem;
+  background: rgba(22, 19, 15, 0.94);
+  border-left: 1px solid var(--line-strong, rgba(236, 231, 221, 0.28));
+  backdrop-filter: blur(10px);
+  color: var(--ink, #ece7dd);
+  animation: au-anno-slide 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes au-anno-slide {
+  from { transform: translateX(24px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+.au-anno-panel-close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--line, rgba(236, 231, 221, 0.14));
+  border-radius: 4px;
+  background: none;
+  color: var(--ink-dim, #9a9387);
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.au-anno-panel-close:hover {
+  color: var(--ink, #ece7dd);
+  border-color: var(--line-strong, rgba(236, 231, 221, 0.28));
+}
+
+.au-anno-panel-eyebrow {
+  margin: 0 0 0.9rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent, #b08953);
+}
+
+.au-anno-panel-title {
+  margin: 0 0 0.4rem;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.au-anno-panel-place {
+  margin: 0 0 1.4rem;
+  font-size: 0.92rem;
+  color: var(--ink-dim, #9a9387);
+}
+
+.au-anno-panel-body {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+/* ---------- Accesibilidad ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .au-anno-outline,
+  .au-anno-pin,
+  .au-anno-dot,
+  .au-anno-label { transition: none; }
+  .au-anno-panel { animation: none; }
+}

@@ -1,11 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   Art Unfolded — hoja de estilos del archivo (galería)
+   Estética: folio de láminas en sala oscura. Sora (display),
+   Inter (texto), IBM Plex Mono (datos / anotaciones de catálogo).
+   El acento bronce evoca el dorado de bóvedas y la ocre del fresco;
+   se usa con moderación (número de lámina y señuelo al pasar).
+   ============================================================ */
+
+:root {
+  --ground: #16130f;     /* muro de sala, casi negro cálido */
+  --ground-2: #1e1a15;   /* panel / marco vacío */
+  --ink: #ece7dd;        /* blanco papel cálido */
+  --ink-dim: #9a9387;    /* texto secundario */
+  --line: rgba(236, 231, 221, 0.14);
+  --line-strong: rgba(236, 231, 221, 0.28);
+  --accent: #b08953;     /* bronce / ocre, con moderación */
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 #root {
   min-height: 100svh;
+}
+
+/* ---------- Estructura de página ---------- */
+
+.gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem) 4rem;
+}
+
+/* ---------- Cabecera ---------- */
+
+.masthead {
+  max-width: 60ch;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.eyebrow {
+  margin: 0 0 1.4rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.wordmark {
+  margin: 0 0 1.2rem;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+}
+
+.thesis {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+
+/* ---------- Rejilla de láminas ---------- */
+
+.plates {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+.plate {
+  /* entrada escalonada; --i lo pone Gallery.jsx en cada <li> */
+  opacity: 0;
+  animation: plate-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+@keyframes plate-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* el botón es toda la lámina: reseteamos su apariencia */
+.plate-btn {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.plate-num {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- Marco de la imagen (aquí se arregla el tamaño) ---------- */
+
+.plate-frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;          /* proporción fija de catálogo */
+  overflow: hidden;
+  background: var(--ground-2);   /* marco neutro mientras carga */
+  border: 1px solid var(--line);
+  transition: border-color 0.28s ease;
+}
+
+.plate-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;             /* recorta sin deformar, todas iguales */
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* señuelo "Abrir visor", oculto hasta hover/foco */
+.plate-open {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2.5rem 1rem 0.9rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+  background: linear-gradient(to top, rgba(15, 13, 10, 0.85), transparent);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+/* ---------- Pie de cada lámina ---------- */
+
+.plate-meta {
+  display: block;
+  padding-top: 0.9rem;
+}
+
+.plate-title {
+  display: block;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 1.18rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.plate-place {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+}
+
+.plate-spec {
+  display: block;
+  margin-top: 0.55rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+}
+
+/* ---------- Interacción ---------- */
+
+.plate-btn:hover .plate-frame,
+.plate-btn:focus-visible .plate-frame {
+  border-color: var(--line-strong);
+}
+
+.plate-btn:hover .plate-img,
+.plate-btn:focus-visible .plate-img {
+  transform: scale(1.035);
+}
+
+.plate-btn:hover .plate-open,
+.plate-btn:focus-visible .plate-open {
+  opacity: 1;
+  transform: none;
+}
+
+.plate-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+/* ---------- Colofón ---------- */
+
+.colophon {
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-dim);
+}
+
+/* ---------- Accesibilidad ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .plate {
+    opacity: 1;
+    animation: none;
+  }
+  .plate-img,
+  .plate-frame,
+  .plate-open {
+    transition: none;
+  }
 }
