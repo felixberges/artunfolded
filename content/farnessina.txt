@@ -1,0 +1,42 @@
+[TITULO]
+es: Loggia Galtea en Villa Farnessina
+[TEXTO]
+titulo:
+	es: Fresco el triunfo de Galatea
+
+	es: La Logia de Galatea es una de las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512.
+
+[VISOR 2D]
+tiles: galatea
+titulo: desplegable del techo
+punto:0.5, 0.5  
+info visor: 
+	es :Titulo de la información 1
+info anotaciones:
+	es: Texto en el centro de la imagen, este texto es claramente mas largo
+punto:0.3, 0.5  
+info visor: 
+	es :Titulo de la información 2
+info anotaciones:
+	es: las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512.
+
+[CARRUSEL]
+titulo: Galeria de fotos 
+carpeta: galatea_detalles
+imagen: 01.jpg
+	pie:
+		es: Detalle 1 texto largo
+imagen: 02.jpg
+	pie:
+		es: DEtalle 2 pie de foto
+imagen: 03.jpg
+	pie:
+		es: DEtalle 3 pie de foto
+imagen: 04.jpg
+	pie:
+		es: DEtalle 4 pie de foto
+imagen: 05.jpg
+	pie:
+		es: DEtalle 5 pie de foto
+
+opciones: ajuste=contain, autoplay=0, bucle, miniaturas

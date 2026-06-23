@@ -1,0 +1,135 @@
+/* ============================================================
+   carousel.css — Carrusel de imágenes (tercer visor: [CARRUSEL])
+   Va en: src/carousel.css  (lo importa Carousel.jsx)
+   Hereda los tokens de color de index.css (--ground, --ink, --accent…).
+   ============================================================ */
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  height: 100%;
+  outline: none;
+}
+.carousel:focus-visible {
+  outline: 2px solid var(--accent, #b08953);
+  outline-offset: 4px;
+}
+
+.carousel-stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;        /* deja que el escenario crezca y la imagen quepa */
+  background: var(--ground, #15130f);
+  border: 1px solid var(--line, rgba(236, 231, 221, 0.14));
+  overflow: hidden;
+}
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* object-fit lo fija el componente segun options.fit (contain | cover) */
+}
+
+/* flechas */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--ink, #ece7dd);
+  background: rgba(20, 18, 16, 0.55);
+  border: 1px solid rgba(236, 231, 221, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+.carousel-arrow:hover { background: rgba(20, 18, 16, 0.8); }
+.carousel-arrow:disabled { opacity: 0.25; cursor: default; }
+.carousel-prev { left: 0.8rem; }
+.carousel-next { right: 0.8rem; }
+
+/* contador */
+.carousel-counter {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.8rem;
+  font-family: var(--au-mono, 'IBM Plex Mono', monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--ink, #ece7dd);
+  background: rgba(20, 18, 16, 0.6);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  backdrop-filter: blur(4px);
+}
+
+/* pie */
+.carousel-caption {
+  margin: 0;
+  font-family: var(--au-mono, 'IBM Plex Mono', monospace);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-dim, #9a9387);
+}
+
+/* miniaturas */
+.carousel-thumbs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.2rem;
+}
+.carousel-thumb {
+  flex: 0 0 auto;
+  width: 4.5rem;
+  height: 3.4rem;
+  padding: 0;
+  border: 1px solid var(--line, rgba(236, 231, 221, 0.14));
+  border-radius: 2px;
+  background: var(--ground-2, #1e1a15);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+.carousel-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel-thumb:hover { opacity: 0.85; }
+.carousel-thumb.is-active {
+  opacity: 1;
+  border-color: var(--accent, #b08953);
+}
+
+/* puntos (alternativa a miniaturas) */
+.carousel-dots { display: flex; gap: 0.45rem; justify-content: center; }
+.carousel-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(236, 231, 221, 0.3);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.carousel-dot:hover { background: rgba(236, 231, 221, 0.55); }
+.carousel-dot.is-active {
+  background: var(--accent, #b08953);
+  transform: scale(1.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-arrow,
+  .carousel-thumb,
+  .carousel-dot { transition: none; }
+}

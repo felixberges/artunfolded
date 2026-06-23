@@ -75,12 +75,12 @@
   transform: translate(-50%, -50%) scale(1.25);
 }
 
-/* nombre corto: visible al revelarse el pin, refuerzo al hover/foco */
+/* nombre corto: centrado justo encima del punto; refuerzo al hover/foco */
 .au-anno-label {
   position: absolute;
-  left: calc(50% + 14px);
-  top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  bottom: calc(50% + 14px);          /* centrado justo encima del punto */
+  transform: translateX(-50%);
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.7rem;
   letter-spacing: 0.06em;
@@ -89,6 +89,7 @@
   padding: 0.28rem 0.55rem;
   border-radius: 3px;
   white-space: nowrap;
+  text-align: center;
   backdrop-filter: blur(4px);
   opacity: 0.92;
   transition: opacity 0.2s ease;

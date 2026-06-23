@@ -1,0 +1,240 @@
+/* unfolded-ui.css — estilos de la UI nueva (cabecera de app, detalle de
+   monumento, visores). La PORTADA (archivo de láminas) la gobierna index.css.
+   Tokens mapeados a la paleta museo de index.css (oscuro + bronce). */
+
+:root {
+  --au-ink: #1c1a17;
+  --au-paper: #f6f4ef;
+  --au-line: #d9d4ca;
+  --au-muted: #6f6a61;
+  --au-accent: #7a3b2e;
+  --au-stage: #15130f;
+  --au-display: 'Sora', system-ui, sans-serif;
+  --au-body: 'Inter', system-ui, sans-serif;
+  --au-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* ---- app bar (fija arriba) ------------------------------------------- */
+.app-bar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1.4rem;
+  background: var(--ground, var(--au-paper));
+  border-bottom: 1px solid var(--line, var(--au-line));
+}
+.app-bar-left { display: flex; align-items: center; gap: 1.2rem; min-width: 0; }
+.app-mark {
+  font-family: var(--au-display);
+  font-size: 1.5rem; font-weight: 600; letter-spacing: 0.01em;
+  color: var(--accent, #b08953);   /* naranja suave / bronce del sistema */
+}
+
+/* ---- volver al archivo (Home) ---------------------------------------- */
+.back-button {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--au-body); font-size: 1.02rem; font-weight: 500;
+  color: var(--ink, var(--au-ink));
+  background: none; border: none; cursor: pointer; padding: 0.15rem 0;
+}
+.back-button .arrow { font-size: 1.35rem; line-height: 1; }
+.back-button:hover { color: var(--accent, var(--au-accent)); }
+
+/* ---- language selector ------------------------------------------------ */
+.lang-selector { display: inline-flex; gap: 0.15rem; }
+.lang-btn {
+  font-family: var(--au-mono);
+  font-size: 0.72rem; letter-spacing: 0.06em;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid transparent; border-radius: 2px;
+  background: none; color: var(--ink-dim, var(--au-muted)); cursor: pointer;
+}
+.lang-btn:hover { color: var(--ink, var(--au-ink)); }
+.lang-btn.is-active {
+  color: var(--ink, var(--au-ink));
+  border-color: var(--line-strong, var(--au-line));
+  background: rgba(236, 231, 221, 0.06);
+}
+
+/* ---- monument header ------------------------------------------------- */
+.monument-header {
+  display: grid; gap: 0.6rem;
+  padding: 1.2rem 1.4rem 0;
+}
+.monument-title {
+  font-family: var(--au-display); font-weight: 500; font-size: 1.9rem; margin: 0;
+  color: var(--ink, var(--au-ink)); letter-spacing: -0.01em;
+}
+.monument-location { font-family: var(--au-mono); font-size: 0.78rem; color: var(--ink-dim, var(--au-muted)); margin: 0.15rem 0 0; }
+
+/* ---- intro descriptivo (texto del detalle, ENCIMA de las pestañas) ---- */
+.monument-intro { max-width: 72ch; margin-top: 0.2rem; }
+.monument-section {
+  font-family: var(--au-display); font-weight: 500; font-size: 1.2rem;
+  color: var(--ink, var(--au-ink)); letter-spacing: -0.01em; margin: 0 0 0.4rem;
+}
+.monument-intro .article { margin: 0; font-size: 0.96rem; }
+
+/* ---- view switcher (tabs) -------------------------------------------- */
+.view-switcher {
+  display: flex; flex-wrap: wrap; gap: 0.2rem;
+  margin-top: 0.6rem; border-bottom: 1px solid var(--line, var(--au-line));
+}
+.view-tab {
+  font-family: var(--au-body); font-size: 0.86rem;
+  padding: 0.55rem 0.9rem; margin-bottom: -1px;
+  background: none; border: none; border-bottom: 2px solid transparent;
+  color: var(--ink-dim, var(--au-muted)); cursor: pointer;
+}
+.view-tab:hover { color: var(--ink, var(--au-ink)); }
+.view-tab.is-active {
+  color: var(--ink, var(--au-ink));
+  border-bottom-color: var(--accent, var(--au-accent));
+}
+
+/* ---- stage: visor + panel de anotaciones (dos columnas) -------------- */
+.monument-stage {
+  padding: 1.2rem 1.4rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+@media (min-width: 900px) {
+  .monument-stage { grid-template-columns: minmax(0, 1fr) 18rem; }
+}
+.stage-viewer {
+  min-width: 0;
+  /* alto fijo del visor: conserva su tamaño aunque el texto de arriba crezca.
+     Ajusta este valor si lo quieres más alto/bajo. */
+  height: min(74vh, 820px);
+}
+.view-empty { color: var(--ink-dim, var(--au-muted)); font-family: var(--au-mono); padding: 2rem; }
+
+/* ---- panel de anotaciones (reservado; se rellena más adelante) ------- */
+.anno-panel { border-left: 1px solid var(--line, var(--au-line)); padding-left: 1.2rem; }
+.anno-panel-eyebrow {
+  margin: 0 0 0.6rem;
+  font-family: var(--au-mono); font-size: 0.66rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent, var(--au-accent));
+}
+.anno-panel-empty { margin: 0; font-family: var(--au-mono); font-size: 0.72rem; color: var(--ink-dim, var(--au-muted)); }
+
+/* lista de puntos en el panel */
+.anno-panel { overflow: auto; }
+.anno-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.3rem; }
+.anno-item {
+  width: 100%; display: flex; gap: 0.6rem; align-items: flex-start; text-align: left;
+  background: none; border: 1px solid transparent; border-radius: 4px;
+  padding: 0.5rem 0.55rem; cursor: pointer; color: var(--ink, var(--au-ink));
+  font-family: var(--au-body); font-size: 0.86rem; line-height: 1.4;
+}
+.anno-item:hover { border-color: var(--line, var(--au-line)); }
+.anno-item.is-active { border-color: var(--accent, var(--au-accent)); background: rgba(176, 137, 83, 0.10); }
+.anno-item-num {
+  flex: 0 0 auto; width: 1.4rem; height: 1.4rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--accent, var(--au-accent)); color: #fff;
+  font-family: var(--au-mono); font-size: 0.72rem;
+}
+.anno-item-text { flex: 1 1 auto; }
+
+/* pin seleccionado en el visor */
+.au-anno-pin.is-active .au-anno-dot {
+  transform: translate(-50%, -50%) scale(1.35);
+  box-shadow: 0 0 0 3px rgba(176, 137, 83, 0.55), 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+@media (max-width: 899px) {
+  .anno-panel { border-left: none; border-top: 1px solid var(--line, var(--au-line)); padding-left: 0; padding-top: 1rem; }
+}
+
+/* ---- deep zoom -------------------------------------------------------- */
+.deepzoom { display: grid; grid-template-columns: 1fr; gap: 1rem; height: 100%; }
+@media (min-width: 900px) {
+  .deepzoom:has(.deepzoom-controls) { grid-template-columns: 1fr 12rem; }
+}
+.deepzoom-stage {
+  width: 100%; height: 100%;
+  background: var(--ground, var(--au-stage)); border: 1px solid var(--line, var(--au-line));
+}
+.deepzoom-controls { display: grid; gap: 1.1rem; align-content: start; }
+.control-group { display: grid; gap: 0.4rem; }
+.control-title {
+  font-family: var(--au-mono); font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-dim, var(--au-muted)); margin: 0;
+}
+.source-btn {
+  text-align: left; font-family: var(--au-body); font-size: 0.82rem;
+  padding: 0.4rem 0.55rem; border: 1px solid var(--line, var(--au-line)); border-radius: 2px;
+  background: var(--ground-2, #fff); color: var(--ink, var(--au-ink)); cursor: pointer;
+}
+.source-btn.is-active { border-color: var(--accent, var(--au-accent)); color: var(--accent, var(--au-accent)); }
+.overlay-control { display: grid; gap: 0.25rem; font-family: var(--au-body); font-size: 0.82rem; color: var(--ink, var(--au-ink)); }
+.overlay-control input[type="range"] { width: 100%; accent-color: var(--accent, var(--au-accent)); }
+
+/* ---- gallery ---------------------------------------------------------- */
+.photo-grid {
+  display: grid; gap: 0.9rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.photo-item { margin: 0; cursor: pointer; }
+.photo-item img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border: 1px solid var(--line, var(--au-line)); display: block;
+}
+.photo-item figcaption {
+  font-family: var(--au-mono); font-size: 0.72rem; color: var(--ink-dim, var(--au-muted)); margin-top: 0.35rem;
+}
+.lightbox {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center; padding: 2rem;
+  background: rgba(12, 10, 8, 0.86);
+}
+.lightbox-close {
+  position: absolute; top: 1rem; right: 1.2rem;
+  font-size: 1.6rem; line-height: 1; color: #fff; background: none; border: none; cursor: pointer;
+}
+.lightbox-figure { margin: 0; max-width: min(92vw, 1100px); }
+.lightbox-figure img { width: 100%; max-height: 80vh; object-fit: contain; display: block; }
+.lightbox-figure figcaption {
+  font-family: var(--au-mono); font-size: 0.78rem; color: #d8d2c7; margin-top: 0.6rem; text-align: center;
+}
+
+/* ---- article ---------------------------------------------------------- */
+.article { max-width: 62ch; font-family: var(--au-body); line-height: 1.6; color: var(--ink, var(--au-ink)); }
+.article h3 { font-family: var(--au-display); font-weight: 500; font-size: 1.25rem; margin: 1.6rem 0 0.5rem; }
+.article h4 { font-family: var(--au-display); font-weight: 500; font-size: 1.05rem; margin: 1.2rem 0 0.4rem; }
+.article p { margin: 0 0 0.9rem; }
+.article .muted { color: var(--ink-dim, var(--au-muted)); font-family: var(--au-mono); }
+
+/* ---- diagram ---------------------------------------------------------- */
+.diagram-stage { position: relative; margin: 0; display: inline-block; max-width: 100%; }
+.diagram-stage img { width: 100%; height: auto; border: 1px solid var(--line, var(--au-line)); display: block; }
+.diagram-stage figcaption {
+  font-family: var(--au-mono); font-size: 0.72rem; color: var(--ink-dim, var(--au-muted)); margin-top: 0.4rem;
+}
+.hotspot {
+  position: absolute; transform: translate(-50%, -50%);
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: none; border: none; cursor: pointer; padding: 0;
+}
+.hotspot-dot {
+  width: 0.7rem; height: 0.7rem; border-radius: 50%;
+  background: var(--accent, var(--au-accent)); box-shadow: 0 0 0 4px rgba(176, 137, 83, 0.25);
+}
+.hotspot-label {
+  font-family: var(--au-mono); font-size: 0.7rem; color: var(--ink, var(--au-ink));
+  background: rgba(20, 18, 16, 0.9); padding: 0.1rem 0.35rem; border-radius: 2px;
+  opacity: 0; transition: opacity 0.15s;
+}
+.hotspot:hover .hotspot-label { opacity: 1; }
+
+/* ======================================================================
+   La página de monumento FLUYE y hace scroll normal de página: el visor
+   tiene alto fijo (.stage-viewer) para conservar su tamaño aunque el texto
+   de arriba crezca; te desplazas para centrarlo. El panel de anotaciones se
+   estira al alto del visor.
+   ====================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot-label { transition: none; }
+}

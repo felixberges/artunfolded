@@ -1,0 +1,57 @@
+[
+  {
+    "id": "trastevere",
+    "title": {
+      "es": "Santa Maria del Trastevere"
+    },
+    "location": null,
+    "views": [
+      {
+        "type": "article",
+        "title": {
+          "es": "Cúpula del ábside"
+        },
+        "body": {
+          "es": "En la cúpula del ábside puede admirarse un mosaico del trono celestial, del siglo XII, adornado en su parte inferior con Historias de la Virgen, también en mosaico, obra de Pietro Cavallini (1291)."
+        }
+      },
+      {
+        "type": "deepzoom",
+        "title": {
+          "*": "desplegable de la cupula"
+        },
+        "tiles": "trastevere",
+        "annotations": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "text": {
+              "es": "Texto en el centro de la imagen"
+            }
+          },
+          {
+            "x": 0.1,
+            "y": 0.2,
+            "text": {
+              "es": "Texto en 0.1, 0.2"
+            }
+          },
+          {
+            "x": 0.6,
+            "y": 0.8,
+            "text": {
+              "es": "Texto en 0.6, 0.8"
+            }
+          }
+        ]
+      },
+      {
+        "type": "model3d",
+        "title": {
+          "*": "fotogrametría"
+        },
+        "model": "trastevere"
+      }
+    ]
+  }
+]

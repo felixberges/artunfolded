@@ -1,0 +1,234 @@
+[
+  {
+    "id": "farnessina",
+    "title": {
+      "es": "Loggia Galtea en Villa Farnessina"
+    },
+    "location": {},
+    "thumb": "/thumbs/farnessina.jpg",
+    "defaultView": "deepzoom",
+    "views": [
+      {
+        "id": "article",
+        "type": "article",
+        "label": {
+          "es": "Fresco el triunfo de Galatea"
+        },
+        "body": {
+          "es": "La Logia de Galatea es una de las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512."
+        }
+      },
+      {
+        "id": "deepzoom",
+        "type": "deepzoom",
+        "label": {
+          "*": "desplegable del techo"
+        },
+        "sources": [
+          {
+            "id": "base",
+            "label": {
+              "*": "desplegable del techo"
+            },
+            "tileSource": "/tiles/farnessina/galatea.dzi",
+            "overlays": [
+              {
+                "id": "notes",
+                "type": "annotations",
+                "label": {
+                  "es": "Anotaciones",
+                  "it": "Annotazioni",
+                  "en": "Annotations"
+                },
+                "regions": [
+                  {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "label": {
+                      "es": "Titulo de la información 1"
+                    },
+                    "text": {
+                      "es": "Texto en el centro de la imagen, este texto es claramente mas largo"
+                    },
+                    "mask": "/masks/farnessina/01.png"
+                  },
+                  {
+                    "x": 0.3,
+                    "y": 0.5,
+                    "label": {
+                      "es": "Titulo de la información 2"
+                    },
+                    "text": {
+                      "es": "las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512."
+                    },
+                    "mask": "/masks/farnessina/02.png"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "carousel",
+        "type": "carousel",
+        "label": {
+          "*": "Galeria de fotos"
+        },
+        "images": [
+          {
+            "src": "/carrusel/galatea_detalles/01.jpg",
+            "caption": {
+              "es": "Detalle 1 texto largo"
+            }
+          },
+          {
+            "src": "/carrusel/galatea_detalles/02.jpg",
+            "caption": {
+              "es": "DEtalle 2 pie de foto"
+            }
+          },
+          {
+            "src": "/carrusel/galatea_detalles/03.jpg",
+            "caption": {
+              "es": "DEtalle 3 pie de foto"
+            }
+          },
+          {
+            "src": "/carrusel/galatea_detalles/04.jpg",
+            "caption": {
+              "es": "DEtalle 4 pie de foto"
+            }
+          },
+          {
+            "src": "/carrusel/galatea_detalles/05.jpg",
+            "caption": {
+              "es": "DEtalle 5 pie de foto"
+            }
+          }
+        ],
+        "options": {
+          "fit": "contain",
+          "autoplay": 0,
+          "loop": true,
+          "thumbnails": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "trastevere",
+    "title": {
+      "es": "Santa Maria del Trastevere"
+    },
+    "location": {},
+    "thumb": "/thumbs/trastevere.jpg",
+    "defaultView": "deepzoom",
+    "views": [
+      {
+        "id": "article",
+        "type": "article",
+        "label": {
+          "es": "Cúpula del ábside"
+        },
+        "body": {
+          "es": "En la cúpula del ábside puede admirarse un mosaico del trono celestial, del siglo XII, adornado en su parte inferior con Historias de la Virgen, también en mosaico, obra de Pietro Cavallini (1291)."
+        }
+      },
+      {
+        "id": "deepzoom",
+        "type": "deepzoom",
+        "label": {
+          "*": "desplegable de la cupula"
+        },
+        "sources": [
+          {
+            "id": "base",
+            "label": {
+              "*": "desplegable de la cupula"
+            },
+            "tileSource": "/tiles/trastevere/trastevere.dzi",
+            "overlays": [
+              {
+                "id": "notes",
+                "type": "annotations",
+                "label": {
+                  "es": "Anotaciones",
+                  "it": "Annotazioni",
+                  "en": "Annotations"
+                },
+                "regions": [
+                  {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "label": {
+                      "es": "Titulo de la información 1"
+                    },
+                    "text": {
+                      "es": "Texto en el centro de la imagen, este texto es claramente mas largo"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "model3d",
+        "type": "model3d",
+        "label": {
+          "*": "fotogrametría"
+        },
+        "model": "/models/trastevere/trastevere.glb",
+        "options": {
+          "unlit": true
+        },
+        "camera": {
+          "orbit": {
+            "eye": [
+              0,
+              14,
+              60
+            ],
+            "target": [
+              0,
+              14,
+              0
+            ],
+            "focal": 30,
+            "focalRange": [
+              15,
+              105
+            ]
+          },
+          "eyeLevel": {
+            "eye": [
+              0,
+              2.5,
+              5
+            ],
+            "target": [
+              0,
+              5,
+              -3
+            ],
+            "pan": [
+              -70,
+              70
+            ],
+            "tilt": [
+              -40,
+              65
+            ],
+            "focal": 15,
+            "focalRange": [
+              10,
+              95
+            ]
+          }
+        }
+      }
+    ]
+  }
+]

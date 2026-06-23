@@ -1,25 +1,23 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# volcados de depuración
+build_out.txt
+salida.txt
 
-node_modules
-dist
-dist-ssr
-*.local
+# temporales del pipeline 3D
+tmp_resized.glb
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# modelos originales/intermedios pesados (solo se sube el .glb final)
+public/models/**/*.original.glb
+public/models/**/*.ktx2.glb
+
+# notas de sesión, no son de la web
+claude/
+
+# duplicado por error
+src/**/*.css.txt
+
+dist/
+node_modules/
+
+# editor/SO
+.vscode/
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-.vercel
