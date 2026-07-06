@@ -94,3 +94,62 @@
 @media (max-width: 520px) {
   .objectviewer { grid-template-columns: 1fr 48px; }
 }
+
+/* --- Retoque táctil (dedo, no ratón/stylus): SOLO pointer:coarse ---------
+   Los <input type="range"> nativos usan su propia caja como zona de toque
+   real (no solo el pomo dibujado): un slider de 6px de ancho es una franja
+   de 6px para el dedo, de ahí que costara acertar. Se ensancha la caja,
+   se fuerza un pomo más grande (perdemos accent-color aquí, se repinta a
+   mano en bronce), y touch-action:none para que el arrastre no compita con
+   el scroll de la página. Cero efecto en desktop/tablet con stylus. */
+@media (pointer: coarse) {
+  .ov-height {
+    width: 32px;
+    touch-action: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--track);
+    border-radius: 999px;
+  }
+  .ov-azimuth {
+    height: 32px;
+    touch-action: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--track);
+    border-radius: 999px;
+  }
+  .ov-height::-webkit-slider-thumb,
+  .ov-azimuth::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--bronze);
+    border: 2px solid rgba(233, 231, 226, 0.35);
+  }
+  .ov-height::-moz-range-thumb,
+  .ov-azimuth::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--bronze);
+    border: 2px solid rgba(233, 231, 226, 0.35);
+  }
+  .ov-height::-moz-range-track,
+  .ov-azimuth::-moz-range-track {
+    background: var(--track);
+    border-radius: 999px;
+  }
+
+  /* Botones flotantes (estilo inline en ObjectViewer.jsx): el !important
+     es a propósito, solo para ganarle la partida al inline style dentro de
+     este breakpoint táctil; en pointer:fine no se aplica nada de esto. */
+  .ov-btn {
+    padding: 0.85rem 1.1rem !important;
+  }
+  .ov-zbtn {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}

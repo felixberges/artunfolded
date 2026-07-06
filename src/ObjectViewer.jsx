@@ -605,13 +605,13 @@ export default function ObjectViewer({ model, camera, light, color, options }) {
     <div className="objectviewer">
       <div className="ov-stage">
         <div style={wrapTL}>
-          <button type="button" onClick={() => setMoveLight((v) => !v)} style={btn(moveLight)}
+          <button type="button" onClick={() => setMoveLight((v) => !v)} style={btn(moveLight)} className="ov-btn"
             title="Activa para mover la luz arrastrando (con cualquier botón)">
             {moveLight ? 'Moviendo luz' : 'Mover luz'}
           </button>
         </div>
         <div style={wrapTR}>
-          <button type="button" onClick={goHome} style={btn(false)} title="Volver a la vista inicial">⌂ Inicio</button>
+          <button type="button" onClick={goHome} style={btn(false)} className="ov-btn" title="Volver a la vista inicial">⌂ Inicio</button>
         </div>
 
         <Canvas
@@ -651,8 +651,8 @@ export default function ObjectViewer({ model, camera, light, color, options }) {
         </div>
 
         <div style={wrapBR}>
-          <button type="button" onClick={() => doZoom(1)} style={zbtn} title="Acercar" aria-label="Acercar">+</button>
-          <button type="button" onClick={() => doZoom(-1)} style={zbtn} title="Alejar" aria-label="Alejar">−</button>
+          <button type="button" onClick={() => doZoom(1)} style={zbtn} className="ov-zbtn" title="Acercar" aria-label="Acercar">+</button>
+          <button type="button" onClick={() => doZoom(-1)} style={zbtn} className="ov-zbtn" title="Alejar" aria-label="Alejar">−</button>
         </div>
       </div>
 

@@ -148,6 +148,59 @@
   .pathviewer { grid-template-columns: 1fr 48px; }
 }
 
+/* --- Retoque táctil (dedo, no ratón/stylus): SOLO pointer:coarse ---------
+   Mismo motivo que en objectviewer.css: la caja del <input type="range">
+   ES la zona de toque real, no solo el pomo dibujado. Se ensancha, se
+   fuerza un pomo más grande (perdemos accent-color aquí, se repinta a mano
+   en bronce), y touch-action:none en los propios sliders (el .pv-stage ya
+   lo tenía, pero los sliders son elementos aparte). El botón Inicio ya usa
+   clase CSS (no inline), así que aquí no hace falta !important. Cero
+   efecto en desktop/tablet con stylus. */
+@media (pointer: coarse) {
+  .pv-height {
+    width: 32px;
+    touch-action: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--track);
+    border-radius: 999px;
+  }
+  .pv-advance {
+    height: 32px;
+    touch-action: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--track);
+    border-radius: 999px;
+  }
+  .pv-height::-webkit-slider-thumb,
+  .pv-advance::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--bronze);
+    border: 2px solid rgba(233, 231, 226, 0.35);
+  }
+  .pv-height::-moz-range-thumb,
+  .pv-advance::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--bronze);
+    border: 2px solid rgba(233, 231, 226, 0.35);
+  }
+  .pv-height::-moz-range-track,
+  .pv-advance::-moz-range-track {
+    background: var(--track);
+    border-radius: 999px;
+  }
+  .pv-home {
+    width: 48px;
+    height: 48px;
+  }
+}
+
 /* --- Contenido del panel de afinado (el contenedor lo pone .debug-panel) --- */
 .pv-tune-block {
   margin: 0;
