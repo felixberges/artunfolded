@@ -104,7 +104,7 @@
    el scroll de la página. Cero efecto en desktop/tablet con stylus. */
 @media (pointer: coarse) {
   .ov-height {
-    width: 32px;
+    width: 20px;
     touch-action: none;
     -webkit-appearance: none;
     appearance: none;
@@ -112,7 +112,7 @@
     border-radius: 999px;
   }
   .ov-azimuth {
-    height: 32px;
+    height: 20px;
     touch-action: none;
     -webkit-appearance: none;
     appearance: none;
@@ -122,16 +122,16 @@
   .ov-height::-webkit-slider-thumb,
   .ov-azimuth::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: var(--bronze);
     border: 2px solid rgba(233, 231, 226, 0.35);
   }
   .ov-height::-moz-range-thumb,
   .ov-azimuth::-moz-range-thumb {
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: var(--bronze);
     border: 2px solid rgba(233, 231, 226, 0.35);
