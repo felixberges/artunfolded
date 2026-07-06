@@ -19,12 +19,15 @@ const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 
 const roman = (n) => ROMAN[n] ?? String(n);
 
 const SPEC = {
-  deepzoom: 'imagen desplegada',
-  model3d: 'fotogrametría',
-  gallery: 'fotografías',
-  diagram: 'situación',
+  deepzoom: ui.specDeepzoom,
+  model3d: ui.specModel3d,
+  object3d: ui.specObject3d,
+  path3d: ui.specPath3d,
+  gallery: ui.specGallery,
+  diagram: ui.specDiagram,
+  carousel: ui.specCarousel,
 };
-const specFor = (m) => m.views.map((v) => SPEC[v.type]).filter(Boolean).join(' · ');
+const specFor = (m, t) => m.views.map((v) => SPEC[v.type]).filter(Boolean).map(t).join(' · ');
 
 // Anotaciones de una vista (solo deepzoom las trae, en el primer source).
 function annotationsOf(view) {
@@ -38,12 +41,9 @@ function Archive({ onSelect }) {
   return (
     <main className="gallery">
       <header className="masthead">
-        <p className="eyebrow">Archivo visual de superficies</p>
+        <p className="eyebrow">{t(ui.archiveEyebrow)}</p>
         <h1 className="wordmark">Art Unfolded</h1>
-        <p className="thesis">
-          Arquitectura y pintura antiguas, desplegadas en superficies planas de
-          altísima resolución para inspeccionarlas de cerca.
-        </p>
+        <p className="thesis">{t(ui.archiveThesis)}</p>
       </header>
 
       <ul className="plates">
@@ -56,19 +56,19 @@ function Archive({ onSelect }) {
                 className="plate-btn"
                 type="button"
                 onClick={() => onSelect(m.id)}
-                aria-label={`Abrir el visor de ${title}`}
+                aria-label={`${t(ui.openViewerFor)} ${title}`}
               >
-                <span className="plate-num">Lámina {roman(i + 1)}</span>
+                <span className="plate-num">{t(ui.plateLabel)} {roman(i + 1)}</span>
 
                 <span className="plate-frame">
                   <img className="plate-img" src={m.thumb} alt={title} loading="lazy" />
-                  <span className="plate-open" aria-hidden="true">Abrir visor ↗</span>
+                  <span className="plate-open" aria-hidden="true">{t(ui.openViewerCta)} ↗</span>
                 </span>
 
                 <span className="plate-meta">
                   <span className="plate-title">{title}</span>
                   {place && <span className="plate-place">{place}</span>}
-                  <span className="plate-spec">{specFor(m)}</span>
+                  <span className="plate-spec">{specFor(m, t)}</span>
                 </span>
               </button>
             </li>
@@ -77,7 +77,7 @@ function Archive({ onSelect }) {
       </ul>
 
       <footer className="colophon">
-        Art Unfolded · prototipo de archivo · {new Date().getFullYear()}
+        Art Unfolded · {t(ui.archivePrototype)} · {new Date().getFullYear()}
       </footer>
     </main>
   );
@@ -161,6 +161,7 @@ function MonumentDetail({ monument }) {
 }
 
 function AppInner() {
+  const t = useT();
   const [selectedId, setSelectedId] = useState(null);
   const monument = monuments.find((m) => m.id === selectedId) ?? null;
 
@@ -170,7 +171,7 @@ function AppInner() {
         <div className="app-bar-left">
           {monument && (
             <button type="button" className="back-button" onClick={() => setSelectedId(null)}>
-              <span className="arrow" aria-hidden="true">←</span> Home
+              <span className="arrow" aria-hidden="true">←</span> {t(ui.back)}
             </button>
           )}
           <span className="app-mark">Art Unfolded</span>

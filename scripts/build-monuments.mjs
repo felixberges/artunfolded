@@ -13,6 +13,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 
 import { join, basename, dirname, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parsePage } from './lib/parse-page.mjs';
+import parsePolilineaObj from './lib/parse-polilinea-obj.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -26,6 +27,8 @@ const CONFIG = {
   pub: {
     tilesDzi: (id, tiles) => `/tiles/${id}/${tiles}.dzi`,
     model: (id, model) => `/models/${id}/${withGlb(model)}`,
+    // Polilínea de recorrido: junto al modelo, con su extensión tal cual (.obj).
+    pathObj: (id, file) => `/models/${id}/${file}`,
     photo: (id, file) => `/photos/${id}/${file}`,
     diagram: (id, image) => `/diagrams/${id}/${image}`,
     // Carrusel: la ruta cuelga de la CARPETA del bloque, no del id del monumento.
@@ -69,7 +72,7 @@ function parseCarouselOptions(raw) {
   return opts;
 }
 
-const slugByType = { article: 'article', deepzoom: 'deepzoom', model3d: 'model3d', gallery: 'gallery', diagram: 'diagram', carousel: 'carousel' };
+const slugByType = { article: 'article', deepzoom: 'deepzoom', model3d: 'model3d', object3d: 'object3d', path3d: 'path3d', gallery: 'gallery', diagram: 'diagram', carousel: 'carousel' };
 
 let hadError = false;
 const fail = (file, msg) => { hadError = true; console.error(`\n✗ ${basename(file)}: ${msg}`); };
@@ -122,7 +125,81 @@ function sanitizeCamera(cam, file, vid) {
   return Object.keys(out).length ? out : undefined;
 }
 
-// Asigna ids estables a las vistas: usa 'id:' si el autor lo puso, si no el tipo
+// --- [VISOR OBJETO]: cámara (paneo en plano frontal) y luz rasante. Validación
+// BLANDA: descarta lo mal formado con aviso, nunca detiene. ---
+function sanitizeObjectCamera(cam, file, vid) {
+  if (!cam) return undefined;
+  const out = {};
+  if (vec3(cam.center)) out.center = cam.center;
+  if (vec3(cam.position)) out.position = cam.position;
+  if (pair(cam.limitX)) out.limitX = cam.limitX;
+  if (pair(cam.limitY)) out.limitY = cam.limitY;
+  if (Number.isFinite(cam.focal)) out.focal = cam.focal;            // lente inicial (mm)
+  if (pair(cam.focalRange)) out.focalRange = cam.focalRange;        // rango de zoom (mm)
+  return Object.keys(out).length ? out : undefined;
+}
+
+function sanitizeLight(light) {
+  if (!light) return undefined;
+  const out = {};
+  if (Number.isFinite(light.azimuth)) out.azimuth = light.azimuth;
+  if (Number.isFinite(light.elevation)) out.elevation = light.elevation;
+  if (Number.isFinite(light.intensity)) out.intensity = light.intensity;
+  if (Number.isFinite(light.ambient)) out.ambient = light.ambient;
+  return Object.keys(out).length ? out : undefined;
+}
+
+// --- Corrección de color (VISOR 3D / VISOR OBJETO / VISOR RECORRIDO): gain y
+// gamma por canal RGB sobre el albedo horneado. Validación BLANDA: descarta
+// tripletes mal formados con aviso, nunca detiene el build. Clamps generosos
+// para evitar valores absurdos (posición de coma / cero accidental) sin
+// impedir correcciones fuertes intencionadas. ---
+const clampVec3 = (a, lo, hi) => (vec3(a) ? a.map((n) => Math.min(Math.max(n, lo), hi)) : null);
+
+function sanitizeColor(c, file, vid) {
+  if (!c) return undefined;
+  const out = {};
+  if (c.gain) {
+    const g = clampVec3(c.gain, 0.2, 3.0);
+    if (g) out.gain = g;
+    else console.warn(`  · aviso: "${vid}" 'color gain' necesita 3 números; se ignora.`);
+  }
+  if (c.gamma) {
+    const g = clampVec3(c.gamma, 0.3, 3.0);
+    if (g) out.gamma = g;
+    else console.warn(`  · aviso: "${vid}" 'color gamma' necesita 3 números; se ignora.`);
+  }
+  return Object.keys(out).length ? out : undefined;
+}
+
+// --- [VISOR RECORRIDO]: parámetros de cámara sobre raíl. Validación BLANDA con
+// valores por defecto sensatos; nunca detiene el build (el asset sí lo hace). ---
+function sanitizePath(p, file, vid) {
+  p = p || {};
+  const out = {};
+  out.axis = (p.axis === 'auto' || p.axis === undefined) ? 'auto' : (vec3(p.axis) || 'auto');
+  out.side = (p.side === '+' || p.side === '-') ? p.side : 'auto';
+  out.look = ['arriba', 'tangente', 'radial'].includes(p.look) ? p.look : 'arriba';
+  out.lookInit = pair(p.lookInit) || [0, 0];
+  out.lookLimits = pair(p.lookLimits) || [60, 45];
+  out.height = pair(p.height) || [1.5, 3.0];
+  out.advance = pair(p.advance) || [0, 1];
+  out.smooth = (p.smooth !== false);
+  out.focal = Number.isFinite(p.focal) ? p.focal : 35;
+  out.focalRange = pair(p.focalRange) || [24, 85];
+  out.console = (p.console === 'atenua') ? 'atenua' : 'fija';
+  // Clamps de los valores iniciales dentro de su rango.
+  const lo = Math.min(...out.height), hi = Math.max(...out.height);
+  const hInit = Number.isFinite(p.heightInit) ? p.heightInit : lo;
+  out.heightInit = Math.min(Math.max(hInit, lo), hi);
+  const aInit = Number.isFinite(p.advanceInit) ? p.advanceInit : 0;
+  out.advanceInit = Math.min(Math.max(aInit, 0), 1);
+  if (out.lookInit[0] > out.lookLimits[0] || out.lookInit[1] > out.lookLimits[1]) {
+    console.warn(`  · aviso: [VISOR RECORRIDO] "${vid}" 'mirada inicial' excede 'mirada limites'; se recortará en el visor.`);
+  }
+  return out;
+}
+
 // (con sufijo -2, -3… si se repite). Devuelve una función resolveId(view).
 function makeIdAssigner() {
   const used = new Set();
@@ -181,7 +258,67 @@ function transform(page, file) {
       const out = { id: vid, type: 'model3d', label, model: CONFIG.pub.model(id, model), options: { unlit: true } };
       const camera = sanitizeCamera(v.camera, file, vid);
       if (camera) out.camera = camera;
+      const color = sanitizeColor(v.color, file, vid);
+      if (color) out.color = color;
       views.push(out);
+
+    } else if (v.type === 'object3d') {
+      // Visor de objeto: relieve con normal map e iluminación (NO unlit).
+      const model = v.model || id;
+      checkAsset(file, CONFIG.pub.model(id, model));
+      const out = { id: vid, type: 'object3d', label, model: CONFIG.pub.model(id, model), options: { unlit: false } };
+      // 'mapa normal: no' -> apaga el relieve del normal map para comparar
+      // (queda el mismo material, solo sin esa textura). Por defecto encendido.
+      if (v.options?.normalMap === false) out.options.normalMap = false;
+      // 'mapa normal fuerza: <n>' -> multiplicador de normalScale, para
+      // diagnosticar en un extremo si hay señal real en el mapa (def. 1).
+      if (Number.isFinite(v.options?.normalStrength)) {
+        out.options.normalStrength = Math.min(10, Math.max(0, v.options.normalStrength));
+      }
+      // 'mapa normal desenfoque: <n>' -> radio (en texeles) de un desenfoque
+      // hecho en GPU sobre el normal map (def. 1 = sin cambio). Difumina el
+      // ruido fino de la captura conservando el relieve grueso.
+      if (Number.isFinite(v.options?.normalBlur)) {
+        out.options.normalBlur = Math.min(8, Math.max(1, v.options.normalBlur));
+      }
+      const camera = sanitizeObjectCamera(v.camera, file, vid);
+      const light = sanitizeLight(v.light);
+      if (camera) out.camera = camera;
+      if (light) out.light = light;
+      const color = sanitizeColor(v.color, file, vid);
+      if (color) out.color = color;
+      views.push(out);
+
+    } else if (v.type === 'path3d') {
+      // Visor de recorrido: cámara sobre raíl, albedo horneado (unlit, como model3d).
+      const model = v.model || id;
+      checkAsset(file, CONFIG.pub.model(id, model));
+      if (!v.recorrido) { fail(file, `[VISOR RECORRIDO] "${vid}" sin 'recorrido'`); continue; }
+      const objPub = CONFIG.pub.pathObj(id, v.recorrido);
+      const objAbs = join(CONFIG.publicDir, objPub.replace(/^\//, ''));
+      if (!existsSync(objAbs)) { fail(file, `falta asset, se esperaba public${objPub}`); continue; }
+      // El .obj se LEE en el build: la polilínea se hornea como puntos en el JSON
+      // (el cliente no descarga el .obj; consume los puntos ya ordenados).
+      let points = null;
+      try {
+        const res = parsePolilineaObj(readFileSync(objAbs, 'utf8'), { id: vid });
+        points = res.puntos;
+        if (res.aviso) console.warn(`  · aviso: [VISOR RECORRIDO] "${vid}" ${res.aviso}`);
+      } catch (e) {
+        fail(file, `[VISOR RECORRIDO] "${vid}" trayectoria ilegible: ${e.message}`);
+        continue;
+      }
+      const pathColor = sanitizeColor(v.color, file, vid);
+      views.push({
+        id: vid,
+        type: 'path3d',
+        label,
+        model: CONFIG.pub.model(id, model),
+        points,
+        path: sanitizePath(v.path, file, vid),
+        options: { unlit: true },
+        ...(pathColor ? { color: pathColor } : {}),
+      });
 
     } else if (v.type === 'gallery') {
       const images = (v.photos || []).map((p) => {

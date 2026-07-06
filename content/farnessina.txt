@@ -1,42 +1,72 @@
 [TITULO]
-es: Loggia Galtea en Villa Farnessina
+es: Loggia Galatea en Villa Farnessina
+it: Loggia di Galatea a Villa Farnesina
+en: Loggia of Galatea at Villa Farnesina
 [TEXTO]
 titulo:
 	es: Fresco el triunfo de Galatea
+	it: Affresco Il trionfo di Galatea
+	en: Fresco The Triumph of Galatea
 
 	es: La Logia de Galatea es una de las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512.
+	it: La Loggia di Galatea è una delle gallerie decorate più spettacolari dell'Alto Rinascimento, situata nella Villa Farnesina di Roma (Italia). Deve il suo nome al celebre affresco Il trionfo di Galatea che Raffaello vi dipinse intorno al 1512.
+	en: The Loggia of Galatea is one of the most spectacular decorated galleries of the High Renaissance, located in the Villa Farnesina in Rome, Italy. It takes its name from the famous fresco The Triumph of Galatea, which Raphael painted there around 1512.
 
 [VISOR 2D]
 tiles: galatea
-titulo: desplegable del techo
-punto:0.5, 0.5  
+titulo:
+	es: desplegable del techo
+	it: distesa del soffitto
+	en: unfolded ceiling
+punto:0.495, 0.46
 info visor: 
-	es :Titulo de la información 1
+	es : Lo que viene a ser el medio
+	it : Quello che viene a essere il centro
+	en : What amounts to the center
 info anotaciones:
-	es: Texto en el centro de la imagen, este texto es claramente mas largo
-punto:0.3, 0.5  
+	es: Se descubre rápidamente que es el motivo central por su posición, en todo el medio.
+	it: Si scopre rapidamente che è il motivo centrale per la sua posizione, proprio nel mezzo.
+	en: It quickly becomes clear that this is the central motif, given its position right in the middle.
+punto:0.41, 0.465
 info visor: 
-	es :Titulo de la información 2
+	es :Vaca simpática
+	it :Mucca simpatica
+	en :Charming cow
 info anotaciones:
-	es: las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512.
+	es: Rafael pintaba las vacas mas simpáticas del Renacimiento.
+	it: Raffaello dipingeva le mucche più simpatiche del Rinascimento.
+	en: Raphael painted the most charming cows of the Renaissance.
 
 [CARRUSEL]
-titulo: Galeria de fotos 
+titulo:
+	es: Galeria de fotos
+	it: Galleria fotografica
+	en: Photo gallery
 carpeta: galatea_detalles
 imagen: 01.jpg
 	pie:
 		es: Detalle 1 texto largo
+		it: Dettaglio 1 testo lungo
+		en: Detail 1 long text
 imagen: 02.jpg
 	pie:
 		es: DEtalle 2 pie de foto
+		it: Dettaglio 2 didascalia
+		en: Detail 2 photo caption
 imagen: 03.jpg
 	pie:
 		es: DEtalle 3 pie de foto
+		it: Dettaglio 3 didascalia
+		en: Detail 3 photo caption
 imagen: 04.jpg
 	pie:
 		es: DEtalle 4 pie de foto
+		it: Dettaglio 4 didascalia
+		en: Detail 4 photo caption
 imagen: 05.jpg
 	pie:
 		es: DEtalle 5 pie de foto
+		it: Dettaglio 5 didascalia
+		en: Detail 5 photo caption
 
 opciones: ajuste=contain, autoplay=0, bucle, miniaturas

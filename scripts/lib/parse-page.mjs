@@ -32,6 +32,8 @@ const BLOCK_TYPES = {
   'TEXTO': 'article',
   'VISOR 2D': 'deepzoom',
   'VISOR 3D': 'model3d',
+  'VISOR OBJETO': 'object3d',
+  'VISOR RECORRIDO': 'path3d',
   'GALERIA': 'gallery',
   'ESQUEMA': 'diagram',
   'CARRUSEL': 'carousel',
@@ -43,6 +45,14 @@ const POINT_RE = /^([0-9]*\.?[0-9]+)\s*,\s*([0-9]*\.?[0-9]+)\s*(?:->\s*(\S+))?$/
 //   "1.2, 3, -4" | "1.2 3 -4" | "15 105  # comentario" -> [..]
 const numList = (v) =>
   String(v).split('#')[0].split(/[\s,]+/).map((s) => parseFloat(s)).filter((n) => !Number.isNaN(n));
+
+// Booleano del formato (sí/no). Devuelve undefined si no reconoce el valor.
+const parseBool = (v) => {
+  const s = String(v).split('#')[0].trim().toLowerCase();
+  if (['si', 'sí', 'true', '1', 'yes'].includes(s)) return true;
+  if (['no', 'false', '0'].includes(s)) return false;
+  return undefined;
+};
 
 export function parsePage(text, { id = null } = {}) {
   const warnings = [];
@@ -105,6 +115,20 @@ function parseBlock(block, warn) {
   let blockId = null; // 'id:' opcional, para defaultView / destinos de '-> '
   // [VISOR 3D] cámara: órbita (inicial opcional) y eye-level (si hay 'ojo').
   const cam = { orbit: {}, eyeLevel: {} };
+  // [VISOR OBJETO] cámara (paneo en plano frontal, coords del glB Y-up) y luz.
+  // options.normalMap: toggle para comparar CON/SIN relieve del normal map
+  // (deja el mismo MeshStandardMaterial pero sin esa textura -> superficie plana).
+  // options.normalStrength: multiplicador de normalScale (def. 1) — para
+  // diagnosticar en un extremo absurdo (p.ej. 5) si hay señal real en el mapa.
+  // options.normalBlur: radio (en texeles) de un desenfoque en GPU del normal
+  // map (def. 1 = sin cambio) — difumina el ruido fino de la captura
+  // conservando el relieve grueso.
+  const obj = { camera: {}, light: {}, options: {} };
+  // [VISOR RECORRIDO] cámara sobre raíl (recorrido = polilínea, altura libre).
+  const path = {};
+  // Corrección de color (gain/gamma por canal RGB). Compartida entre VISOR 3D,
+  // VISOR OBJETO y VISOR RECORRIDO — se aplica sobre el albedo horneado.
+  const color = {};
 
   // Campo por defecto al que van las sub-líneas es:/it:/en: sin marca previa.
   const defaultTarget = type === 'article' ? body : title;
@@ -274,6 +298,102 @@ function parseBlock(block, warn) {
         case 'lens range':
           cam.eyeLevel.focalRange = numList(value); break;
 
+        // --- [VISOR OBJETO] cámara (paneo en plano frontal) ---
+        case 'objeto centro':
+        case 'object center':
+          obj.camera.center = numList(value); break;
+        case 'camara':
+        case 'camera':
+          obj.camera.position = numList(value); break;
+        case 'limite x':
+        case 'limit x':
+          obj.camera.limitX = numList(value); break;
+        case 'limite y':
+        case 'limit y':
+          obj.camera.limitY = numList(value); break;
+        // 'lente' / 'lente limites' del objeto comparten clave con eye-level;
+        // se desambigua por el tipo de bloque en el ensamblado (abajo).
+        // --- [VISOR OBJETO] luz rasante ---
+        case 'luz azimut':
+        case 'light azimuth': {
+          const n = parseFloat(value); if (!Number.isNaN(n)) obj.light.azimuth = n; break;
+        }
+        case 'luz elevacion':
+        case 'light elevation': {
+          const n = parseFloat(value); if (!Number.isNaN(n)) obj.light.elevation = n; break;
+        }
+        case 'luz intensidad':
+        case 'light intensity': {
+          const n = parseFloat(value); if (!Number.isNaN(n)) obj.light.intensity = n; break;
+        }
+        case 'luz ambiente':
+        case 'light ambient': {
+          const n = parseFloat(value); if (!Number.isNaN(n)) obj.light.ambient = n; break;
+        }
+        case 'mapa normal':
+        case 'normal map': {
+          const b = parseBool(value); if (b !== undefined) obj.options.normalMap = b; break;
+        }
+        case 'mapa normal fuerza':
+        case 'normal map strength': {
+          const n = parseFloat(value); if (!Number.isNaN(n)) obj.options.normalStrength = n; break;
+        }
+        case 'mapa normal desenfoque':
+        case 'normal map blur': {
+          const n = parseFloat(value); if (!Number.isNaN(n)) obj.options.normalBlur = n; break;
+        }
+
+        // --- [VISOR RECORRIDO] cámara sobre raíl ---
+        // 'modelo' (la bóveda) y 'lente'/'lente limites' se reutilizan de arriba.
+        case 'recorrido':
+        case 'path':
+          path.recorrido = value; break;            // fichero .obj de la polilínea
+        case 'arco eje':
+        case 'arc axis':
+          path.axis = value.toLowerCase() === 'auto' ? 'auto' : numList(value); break;
+        case 'arco lado':
+        case 'arc side':
+          path.side = value.trim(); break;           // auto | + | -
+        case 'mirada':
+        case 'look':
+          path.look = value.trim().toLowerCase(); break; // arriba | tangente | radial
+        case 'mirada inicial':
+        case 'look init':
+          path.lookInit = numList(value); break;     // [yaw, pitch] grados
+        case 'mirada limites':
+        case 'look limits':
+          path.lookLimits = numList(value); break;   // [±yaw, ±pitch] grados
+        case 'altura':
+        case 'height':
+          path.height = numList(value); break;        // [min, max]
+        case 'altura inicial':
+        case 'height init': {
+          const n = parseFloat(value); if (!Number.isNaN(n)) path.heightInit = n; break;
+        }
+        case 'avance':
+        case 'advance':
+          path.advance = numList(value); break;       // [min, max] fracción de arco
+        case 'avance inicial':
+        case 'advance init': {
+          const n = parseFloat(value); if (!Number.isNaN(n)) path.advanceInit = n; break;
+        }
+        case 'avance suave':
+        case 'advance smooth': {
+          const b = parseBool(value); if (b !== undefined) path.smooth = b; break;
+        }
+        case 'consola':
+        case 'console':
+          path.console = value.trim().toLowerCase(); break; // fija | atenua
+
+        // --- Corrección de color (VISOR 3D / VISOR OBJETO / VISOR RECORRIDO) ---
+        // Multiplicador y curva por canal RGB, sobre el albedo horneado (unlit).
+        case 'color gain':
+        case 'ganancia color':
+          color.gain = numList(value); break;   // [r, g, b] multiplicador, def. 1,1,1
+        case 'color gamma':
+        case 'gamma color':
+          color.gamma = numList(value); break;  // [r, g, b] curva, def. 1,1,1
+
         default:
           warn(`Clave desconocida "${key}" en línea ${no}; se ignora.`);
       }
@@ -314,6 +434,38 @@ function parseBlock(block, warn) {
     if (Object.keys(cam.orbit).length) camera.orbit = cam.orbit;
     if (cam.eyeLevel.eye) camera.eyeLevel = cam.eyeLevel;
     if (Object.keys(camera).length) view.camera = camera;
+    if (Object.keys(color).length) view.color = color;
+  }
+  if (type === 'object3d') {
+    view.model = model;
+    // 'lente'/'lente limites' caen en cam.eyeLevel.focal/focalRange (clave compartida).
+    if (Number.isFinite(cam.eyeLevel.focal)) obj.camera.focal = cam.eyeLevel.focal;
+    if (cam.eyeLevel.focalRange) obj.camera.focalRange = cam.eyeLevel.focalRange;
+    if (Object.keys(obj.camera).length) view.camera = obj.camera;
+    if (Object.keys(obj.light).length) view.light = obj.light;
+    if (Object.keys(obj.options).length) view.options = obj.options;
+    if (Object.keys(color).length) view.color = color;
+  }
+  if (type === 'path3d') {
+    view.model = model;
+    view.recorrido = path.recorrido;
+    const pcfg = {};
+    if (path.axis !== undefined) pcfg.axis = path.axis;
+    if (path.side !== undefined) pcfg.side = path.side;
+    if (path.look !== undefined) pcfg.look = path.look;
+    if (path.lookInit) pcfg.lookInit = path.lookInit;
+    if (path.lookLimits) pcfg.lookLimits = path.lookLimits;
+    if (path.height) pcfg.height = path.height;
+    if (Number.isFinite(path.heightInit)) pcfg.heightInit = path.heightInit;
+    if (path.advance) pcfg.advance = path.advance;
+    if (Number.isFinite(path.advanceInit)) pcfg.advanceInit = path.advanceInit;
+    if (typeof path.smooth === 'boolean') pcfg.smooth = path.smooth;
+    if (path.console !== undefined) pcfg.console = path.console;
+    // 'lente'/'lente limites' compartidas con eye-level.
+    if (Number.isFinite(cam.eyeLevel.focal)) pcfg.focal = cam.eyeLevel.focal;
+    if (cam.eyeLevel.focalRange) pcfg.focalRange = cam.eyeLevel.focalRange;
+    view.path = pcfg;
+    if (Object.keys(color).length) view.color = color;
   }
   if (type === 'gallery') view.photos = photos;
   if (type === 'diagram') { view.image = image; view.points = annotations.map(cleanAnno); }

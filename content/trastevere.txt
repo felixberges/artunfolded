@@ -1,20 +1,36 @@
 [TITULO]
 es: Santa Maria del Trastevere
+it: Santa Maria in Trastevere
+en: Santa Maria in Trastevere
 [TEXTO]
 titulo:
 	es: Cúpula del ábside
+	it: Cupola dell'abside
+	en: Apse dome
 
 	es: En la cúpula del ábside puede admirarse un mosaico del trono celestial, del siglo XII, adornado en su parte inferior con Historias de la Virgen, también en mosaico, obra de Pietro Cavallini (1291).
+	it: Nella cupola dell'abside si può ammirare un mosaico del trono celeste, del XII secolo, decorato nella parte inferiore con le Storie della Vergine, anch'esse a mosaico, opera di Pietro Cavallini (1291).
+	en: In the apse dome one can admire a twelfth-century mosaic of the celestial throne, adorned below with the Stories of the Virgin, also in mosaic, by Pietro Cavallini (1291).
 [VISOR 2D]
 tiles: trastevere
-titulo: desplegable de la cupula
+titulo:
+	es: desplegable de la cupula
+	it: distesa della cupola
+	en: unfolded dome
 punto:0.5, 0.5  
 info visor: 
 	es :Titulo de la información 1
+	it :Titolo dell'informazione 1
+	en :Info title 1
 info anotaciones:
 	es: Texto en el centro de la imagen, este texto es claramente mas largo
+	it: Testo al centro dell'immagine, questo testo è chiaramente più lungo
+	en: Text at the center of the image, this text is clearly longer
 [VISOR 3D]
-titulo: fotogrametría
+titulo:
+	es: fotogrametría
+	it: fotogrammetria
+	en: photogrammetry
 modelo: trastevere
 
 # --- Órbita (cámara inicial opcional) ---

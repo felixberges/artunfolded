@@ -1,8 +1,57 @@
 [
   {
+    "id": "escorial_biblioteca",
+    "title": {
+      "es": "Biblioteca del Monasterio de San Lorenzo de El Escorial",
+      "it": "Biblioteca del Monastero di San Lorenzo de El Escorial",
+      "en": "Library of the Monastery of San Lorenzo de El Escorial"
+    },
+    "location": {},
+    "thumb": "/thumbs/escorial_biblioteca.jpg",
+    "defaultView": "deepzoom",
+    "views": [
+      {
+        "id": "article",
+        "type": "article",
+        "label": {
+          "es": "Techo de la biblioteca del Monasterio de San Lorenzo de El Escorial",
+          "it": "Soffitto della biblioteca del Monastero di San Lorenzo de El Escorial",
+          "en": "Ceiling of the library of the Monastery of San Lorenzo de El Escorial"
+        },
+        "body": {
+          "es": "Los frescos de la bóveda de la Biblioteca del Monasterio de El Escorial fueron pintados por el artista milanés Pellegrino Tibaldi y sus colaboradores, entre los que destacó el pintor italiano Bartolomé Carducho (o Carducho). El programa iconográfico fue ideado por Juan de Herrera y el fray José de Sigüenza.",
+          "it": "Gli affreschi della volta della Biblioteca del Monastero dell'Escorial furono dipinti dall'artista milanese Pellegrino Tibaldi e dai suoi collaboratori, tra cui spiccò il pittore italiano Bartolomé Carducho (o Carducci). Il programma iconografico fu ideato da Juan de Herrera e da fray José de Sigüenza.",
+          "en": "The frescoes on the vault of the Library of the Monastery of El Escorial were painted by the Milanese artist Pellegrino Tibaldi and his collaborators, among whom the Italian painter Bartolomé Carducho (or Carducci) stood out. The iconographic program was devised by Juan de Herrera and Fray José de Sigüenza."
+        }
+      },
+      {
+        "id": "deepzoom",
+        "type": "deepzoom",
+        "label": {
+          "es": "desplegable del techo",
+          "it": "distesa del soffitto",
+          "en": "unfolded ceiling"
+        },
+        "sources": [
+          {
+            "id": "base",
+            "label": {
+              "es": "desplegable del techo",
+              "it": "distesa del soffitto",
+              "en": "unfolded ceiling"
+            },
+            "tileSource": "/tiles/escorial_biblioteca/biblioteca_escorial.dzi"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "farnessina",
     "title": {
-      "es": "Loggia Galtea en Villa Farnessina"
+      "es": "Loggia Galatea en Villa Farnessina",
+      "it": "Loggia di Galatea a Villa Farnesina",
+      "en": "Loggia of Galatea at Villa Farnesina"
     },
     "location": {},
     "thumb": "/thumbs/farnessina.jpg",
@@ -12,23 +61,31 @@
         "id": "article",
         "type": "article",
         "label": {
-          "es": "Fresco el triunfo de Galatea"
+          "es": "Fresco el triunfo de Galatea",
+          "it": "Affresco Il trionfo di Galatea",
+          "en": "Fresco The Triumph of Galatea"
         },
         "body": {
-          "es": "La Logia de Galatea es una de las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512."
+          "es": "La Logia de Galatea es una de las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512.",
+          "it": "La Loggia di Galatea è una delle gallerie decorate più spettacolari dell'Alto Rinascimento, situata nella Villa Farnesina di Roma (Italia). Deve il suo nome al celebre affresco Il trionfo di Galatea che Raffaello vi dipinse intorno al 1512.",
+          "en": "The Loggia of Galatea is one of the most spectacular decorated galleries of the High Renaissance, located in the Villa Farnesina in Rome, Italy. It takes its name from the famous fresco The Triumph of Galatea, which Raphael painted there around 1512."
         }
       },
       {
         "id": "deepzoom",
         "type": "deepzoom",
         "label": {
-          "*": "desplegable del techo"
+          "es": "desplegable del techo",
+          "it": "distesa del soffitto",
+          "en": "unfolded ceiling"
         },
         "sources": [
           {
             "id": "base",
             "label": {
-              "*": "desplegable del techo"
+              "es": "desplegable del techo",
+              "it": "distesa del soffitto",
+              "en": "unfolded ceiling"
             },
             "tileSource": "/tiles/farnessina/galatea.dzi",
             "overlays": [
@@ -42,24 +99,32 @@
                 },
                 "regions": [
                   {
-                    "x": 0.5,
-                    "y": 0.5,
+                    "x": 0.495,
+                    "y": 0.46,
                     "label": {
-                      "es": "Titulo de la información 1"
+                      "es": "Lo que viene a ser el medio",
+                      "it": "Quello che viene a essere il centro",
+                      "en": "What amounts to the center"
                     },
                     "text": {
-                      "es": "Texto en el centro de la imagen, este texto es claramente mas largo"
+                      "es": "Se descubre rápidamente que es el motivo central por su posición, en todo el medio.",
+                      "it": "Si scopre rapidamente che è il motivo centrale per la sua posizione, proprio nel mezzo.",
+                      "en": "It quickly becomes clear that this is the central motif, given its position right in the middle."
                     },
                     "mask": "/masks/farnessina/01.png"
                   },
                   {
-                    "x": 0.3,
-                    "y": 0.5,
+                    "x": 0.41,
+                    "y": 0.465,
                     "label": {
-                      "es": "Titulo de la información 2"
+                      "es": "Vaca simpática",
+                      "it": "Mucca simpatica",
+                      "en": "Charming cow"
                     },
                     "text": {
-                      "es": "las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512."
+                      "es": "Rafael pintaba las vacas mas simpáticas del Renacimiento.",
+                      "it": "Raffaello dipingeva le mucche più simpatiche del Rinascimento.",
+                      "en": "Raphael painted the most charming cows of the Renaissance."
                     },
                     "mask": "/masks/farnessina/02.png"
                   }
@@ -73,37 +138,49 @@
         "id": "carousel",
         "type": "carousel",
         "label": {
-          "*": "Galeria de fotos"
+          "es": "Galeria de fotos",
+          "it": "Galleria fotografica",
+          "en": "Photo gallery"
         },
         "images": [
           {
             "src": "/carrusel/galatea_detalles/01.jpg",
             "caption": {
-              "es": "Detalle 1 texto largo"
+              "es": "Detalle 1 texto largo",
+              "it": "Dettaglio 1 testo lungo",
+              "en": "Detail 1 long text"
             }
           },
           {
             "src": "/carrusel/galatea_detalles/02.jpg",
             "caption": {
-              "es": "DEtalle 2 pie de foto"
+              "es": "DEtalle 2 pie de foto",
+              "it": "Dettaglio 2 didascalia",
+              "en": "Detail 2 photo caption"
             }
           },
           {
             "src": "/carrusel/galatea_detalles/03.jpg",
             "caption": {
-              "es": "DEtalle 3 pie de foto"
+              "es": "DEtalle 3 pie de foto",
+              "it": "Dettaglio 3 didascalia",
+              "en": "Detail 3 photo caption"
             }
           },
           {
             "src": "/carrusel/galatea_detalles/04.jpg",
             "caption": {
-              "es": "DEtalle 4 pie de foto"
+              "es": "DEtalle 4 pie de foto",
+              "it": "Dettaglio 4 didascalia",
+              "en": "Detail 4 photo caption"
             }
           },
           {
             "src": "/carrusel/galatea_detalles/05.jpg",
             "caption": {
-              "es": "DEtalle 5 pie de foto"
+              "es": "DEtalle 5 pie de foto",
+              "it": "Dettaglio 5 didascalia",
+              "en": "Detail 5 photo caption"
             }
           }
         ],
@@ -117,9 +194,303 @@
     ]
   },
   {
+    "id": "giulia_techo",
+    "title": {
+      "es": "Villa Giulia — pasillo semicircular",
+      "it": "Villa Giulia — corridoio semicircolare",
+      "en": "Villa Giulia — semicircular corridor"
+    },
+    "location": {
+      "es": "Roma, Italia",
+      "it": "Roma, Italia",
+      "en": "Rome, Italy"
+    },
+    "thumb": "/thumbs/giulia_techo.jpg",
+    "defaultView": "article",
+    "views": [
+      {
+        "id": "article",
+        "type": "article",
+        "label": {
+          "*": "article"
+        },
+        "body": {
+          "es": "Recorre el arco del emiciclo y elevate hasta rozar la boveda renacentista.",
+          "it": "Percorri l'arco dell'emiciclo e sali fino a sfiorare la volta rinascimentale.",
+          "en": "Walk the arc of the semicircular corridor and rise until you brush the Renaissance vault."
+        }
+      },
+      {
+        "id": "path3d",
+        "type": "path3d",
+        "label": {
+          "*": "path3d"
+        },
+        "model": "/models/giulia_techo/villa_giulia.glb",
+        "points": [
+          [
+            12.921493,
+            0,
+            1.696909
+          ],
+          [
+            13.035477,
+            0,
+            -0.048764
+          ],
+          [
+            12.92149,
+            0,
+            -1.794436
+          ],
+          [
+            12.589466,
+            0,
+            -3.46886
+          ],
+          [
+            12.054295,
+            0,
+            -5.056683
+          ],
+          [
+            11.330869,
+            0,
+            -6.54255
+          ],
+          [
+            10.434081,
+            0,
+            -7.911109
+          ],
+          [
+            9.378825,
+            0,
+            -9.147006
+          ],
+          [
+            8.179994,
+            0,
+            -10.234889
+          ],
+          [
+            6.852478,
+            0,
+            -11.159402
+          ],
+          [
+            5.411172,
+            0,
+            -11.905194
+          ],
+          [
+            3.870969,
+            0,
+            -12.456912
+          ],
+          [
+            2.246761,
+            0,
+            -12.799202
+          ],
+          [
+            0.553441,
+            0,
+            -12.91671
+          ],
+          [
+            -1.139879,
+            0,
+            -12.799199
+          ],
+          [
+            -2.764087,
+            0,
+            -12.45691
+          ],
+          [
+            -4.30429,
+            0,
+            -11.905192
+          ],
+          [
+            -5.745596,
+            0,
+            -11.1594
+          ],
+          [
+            -7.073112,
+            0,
+            -10.234886
+          ],
+          [
+            -8.271945,
+            0,
+            -9.147005
+          ],
+          [
+            -9.327201,
+            0,
+            -7.911108
+          ],
+          [
+            -10.223989,
+            0,
+            -6.54255
+          ],
+          [
+            -10.947414,
+            0,
+            -5.056683
+          ],
+          [
+            -11.482586,
+            0,
+            -3.46886
+          ],
+          [
+            -11.81461,
+            0,
+            -1.794436
+          ],
+          [
+            -11.928595,
+            0,
+            -0.048764
+          ],
+          [
+            -12.026255,
+            0,
+            1.696909
+          ]
+        ],
+        "path": {
+          "axis": "auto",
+          "side": "auto",
+          "look": "tangente",
+          "lookInit": [
+            0,
+            44
+          ],
+          "lookLimits": [
+            60,
+            45
+          ],
+          "height": [
+            1.2,
+            4
+          ],
+          "advance": [
+            0,
+            1
+          ],
+          "smooth": true,
+          "focal": 24,
+          "focalRange": [
+            15,
+            70
+          ],
+          "console": "atenua",
+          "heightInit": 1.2,
+          "advanceInit": 0
+        },
+        "options": {
+          "unlit": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "leon_barberini",
+    "title": {
+      "es": "León romano",
+      "it": "Leone romano",
+      "en": "Roman lion"
+    },
+    "location": {},
+    "thumb": "/thumbs/leon_barberini.jpg",
+    "defaultView": "article",
+    "views": [
+      {
+        "id": "article",
+        "type": "article",
+        "label": {
+          "es": "Relieve del león",
+          "it": "Rilievo del leone",
+          "en": "Lion relief"
+        },
+        "body": {
+          "es": "Relieve romano en mármol conservado en el Museo Barberini. (Texto provisional — completar.)",
+          "it": "Rilievo romano in marmo conservato al Museo Barberini. (Testo provvisorio — da completare.)",
+          "en": "Roman marble relief held at the Museo Barberini. (Placeholder text — to be completed.)"
+        }
+      },
+      {
+        "id": "object3d",
+        "type": "object3d",
+        "label": {
+          "es": "relieve",
+          "it": "rilievo",
+          "en": "relief"
+        },
+        "model": "/models/leon_barberini/leon_barberini.glb",
+        "options": {
+          "unlit": false,
+          "normalStrength": 1,
+          "normalBlur": 4
+        },
+        "camera": {
+          "center": [
+            -0.33,
+            0.12,
+            0.12
+          ],
+          "position": [
+            3,
+            0.12,
+            0.12
+          ],
+          "limitX": [
+            -1.3,
+            1.3
+          ],
+          "limitY": [
+            -1.3,
+            1.3
+          ],
+          "focal": 35,
+          "focalRange": [
+            20,
+            200
+          ]
+        },
+        "light": {
+          "azimuth": 180,
+          "elevation": 0,
+          "intensity": 1.2,
+          "ambient": 0.3
+        },
+        "color": {
+          "gain": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "gamma": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      }
+    ]
+  },
+  {
     "id": "trastevere",
     "title": {
-      "es": "Santa Maria del Trastevere"
+      "es": "Santa Maria del Trastevere",
+      "it": "Santa Maria in Trastevere",
+      "en": "Santa Maria in Trastevere"
     },
     "location": {},
     "thumb": "/thumbs/trastevere.jpg",
@@ -129,23 +500,31 @@
         "id": "article",
         "type": "article",
         "label": {
-          "es": "Cúpula del ábside"
+          "es": "Cúpula del ábside",
+          "it": "Cupola dell'abside",
+          "en": "Apse dome"
         },
         "body": {
-          "es": "En la cúpula del ábside puede admirarse un mosaico del trono celestial, del siglo XII, adornado en su parte inferior con Historias de la Virgen, también en mosaico, obra de Pietro Cavallini (1291)."
+          "es": "En la cúpula del ábside puede admirarse un mosaico del trono celestial, del siglo XII, adornado en su parte inferior con Historias de la Virgen, también en mosaico, obra de Pietro Cavallini (1291).",
+          "it": "Nella cupola dell'abside si può ammirare un mosaico del trono celeste, del XII secolo, decorato nella parte inferiore con le Storie della Vergine, anch'esse a mosaico, opera di Pietro Cavallini (1291).",
+          "en": "In the apse dome one can admire a twelfth-century mosaic of the celestial throne, adorned below with the Stories of the Virgin, also in mosaic, by Pietro Cavallini (1291)."
         }
       },
       {
         "id": "deepzoom",
         "type": "deepzoom",
         "label": {
-          "*": "desplegable de la cupula"
+          "es": "desplegable de la cupula",
+          "it": "distesa della cupola",
+          "en": "unfolded dome"
         },
         "sources": [
           {
             "id": "base",
             "label": {
-              "*": "desplegable de la cupula"
+              "es": "desplegable de la cupula",
+              "it": "distesa della cupola",
+              "en": "unfolded dome"
             },
             "tileSource": "/tiles/trastevere/trastevere.dzi",
             "overlays": [
@@ -162,10 +541,14 @@
                     "x": 0.5,
                     "y": 0.5,
                     "label": {
-                      "es": "Titulo de la información 1"
+                      "es": "Titulo de la información 1",
+                      "it": "Titolo dell'informazione 1",
+                      "en": "Info title 1"
                     },
                     "text": {
-                      "es": "Texto en el centro de la imagen, este texto es claramente mas largo"
+                      "es": "Texto en el centro de la imagen, este texto es claramente mas largo",
+                      "it": "Testo al centro dell'immagine, questo testo è chiaramente più lungo",
+                      "en": "Text at the center of the image, this text is clearly longer"
                     }
                   }
                 ]
@@ -178,7 +561,9 @@
         "id": "model3d",
         "type": "model3d",
         "label": {
-          "*": "fotogrametría"
+          "es": "fotogrametría",
+          "it": "fotogrammetria",
+          "en": "photogrammetry"
         },
         "model": "/models/trastevere/trastevere.glb",
         "options": {

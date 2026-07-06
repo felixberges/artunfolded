@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
-<image xmlns="http://www.vips.ecs.soton.ac.uk//dzsave" date="2026-06-19T12:59:57.343590+02" version="8.18.3">
+<image xmlns="http://www.vips.ecs.soton.ac.uk//dzsave" date="2026-07-06T15:48:22.446012+02" version="8.18.3">
   <properties>
     <property>
       <name>width</name>
-      <value type="gint">16000</value>
+      <value type="gint">35039</value>
     </property>
     <property>
       <name>height</name>
-      <value type="gint">3848</value>
+      <value type="gint">13606</value>
     </property>
     <property>
       <name>bands</name>
-      <value type="gint">4</value>
+      <value type="gint">3</value>
     </property>
     <property>
       <name>xoffset</name>
@@ -23,23 +23,23 @@
     </property>
     <property>
       <name>xres</name>
-      <value type="gdouble">2.8339996850393705</value>
+      <value type="gdouble">2.8346456692913389</value>
     </property>
     <property>
       <name>yres</name>
-      <value type="gdouble">2.8339996850393705</value>
+      <value type="gdouble">2.8346456692913389</value>
     </property>
     <property>
       <name>vips-loader</name>
-      <value type="VipsRefString">pngload</value>
+      <value type="VipsRefString">jpegload</value>
     </property>
     <property>
-      <name>bits-per-sample</name>
-      <value type="gint">8</value>
+      <name>jpeg-multiscan</name>
+      <value type="gint">0</value>
     </property>
     <property>
-      <name>resolution-unit</name>
-      <value type="VipsRefString">in</value>
+      <name>jpeg-chroma-subsample</name>
+      <value type="VipsRefString">4:2:0</value>
     </property>
     <property>
       <name>vips-sequential</name>

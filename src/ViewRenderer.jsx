@@ -4,6 +4,8 @@
 import { useT } from './i18n';
 import { ui } from './strings';
 import ModelViewer from './ModelViewer';
+import ObjectViewer from './ObjectViewer';
+import PathViewer from './PathViewer';
 import DeepZoomViewer from './DeepZoomViewer';
 import Carousel from './Carousel';
 import Gallery from './Gallery';
@@ -16,7 +18,11 @@ export default function ViewRenderer({ view, onNavigateView, activeAnno = null, 
 
   switch (view.type) {
     case 'model3d':
-      return <ModelViewer model={view.model} options={view.options} camera={view.camera} />;
+      return <ModelViewer model={view.model} options={view.options} camera={view.camera} color={view.color} />;
+    case 'object3d':
+      return <ObjectViewer model={view.model} camera={view.camera} light={view.light} color={view.color} options={view.options} />;
+    case 'path3d':
+      return <PathViewer model={view.model} points={view.points} path={view.path} color={view.color} />;
     case 'deepzoom':
       return (
         <DeepZoomViewer

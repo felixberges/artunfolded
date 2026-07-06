@@ -1,0 +1,22 @@
+[TITULO]
+es: Biblioteca del Monasterio de San Lorenzo de El Escorial
+it: Biblioteca del Monastero di San Lorenzo de El Escorial
+en: Library of the Monastery of San Lorenzo de El Escorial
+[TEXTO]
+titulo:
+	es: Techo de la biblioteca del Monasterio de San Lorenzo de El Escorial
+	it: Soffitto della biblioteca del Monastero di San Lorenzo de El Escorial
+	en: Ceiling of the library of the Monastery of San Lorenzo de El Escorial
+	
+
+	es: Los frescos de la bóveda de la Biblioteca del Monasterio de El Escorial fueron pintados por el artista milanés Pellegrino Tibaldi y sus colaboradores, entre los que destacó el pintor italiano Bartolomé Carducho (o Carducho). El programa iconográfico fue ideado por Juan de Herrera y el fray José de Sigüenza. 
+	it: Gli affreschi della volta della Biblioteca del Monastero dell'Escorial furono dipinti dall'artista milanese Pellegrino Tibaldi e dai suoi collaboratori, tra cui spiccò il pittore italiano Bartolomé Carducho (o Carducci). Il programma iconografico fu ideato da Juan de Herrera e da fray José de Sigüenza.
+	en: The frescoes on the vault of the Library of the Monastery of El Escorial were painted by the Milanese artist Pellegrino Tibaldi and his collaborators, among whom the Italian painter Bartolomé Carducho (or Carducci) stood out. The iconographic program was devised by Juan de Herrera and Fray José de Sigüenza.
+	
+
+[VISOR 2D]
+tiles: biblioteca_escorial
+titulo:
+	es: desplegable del techo
+	it: distesa del soffitto
+	en: unfolded ceiling

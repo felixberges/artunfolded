@@ -1,0 +1,111 @@
+# ============================================================================
+#  Art Unfolded — content/villa_giulia.txt
+#  Pasillo semicircular de Villa Giulia (emiciclo) — VISOR RECORRIDO (path3d).
+#
+#  Las lineas que empiezan por # son comentarios y el parser las ignora
+#  (tambien ignora lo que vaya despues de un # dentro de una linea).
+#
+#  CONVENCION DE CARPETAS: manda el id del fichero .txt.
+#  Este fichero es villa_giulia.txt  ->  id = villa_giulia, por tanto:
+#      public/models/villa_giulia/villa_giulia.glb   (la boveda)
+#      public/models/villa_giulia/trayectoria01.obj  (la polilinea)
+#
+#  RECORDATORIO: altura, mirada inicial y lente son solo el ARRANQUE. Afina en
+#  vivo con los controles y luego hornea el valor:  node scripts/build-monuments.mjs
+# ============================================================================
+
+
+# --- Cabecera de la pagina ---------------------------------------------------
+[TITULO]
+titulo:
+es: Villa Giulia — pasillo semicircular
+it: Villa Giulia — corridoio semicircolare
+en: Villa Giulia — semicircular corridor
+ubicacion:
+es: Roma, Italia
+it: Roma, Italia
+en: Rome, Italy
+
+
+# --- Texto de la pagina (i18n; rellena es: y luego se traduce IT/EN) ---------
+[TEXTO]
+es: Recorre el arco del emiciclo y elevate hasta rozar la boveda renacentista.
+it: Percorri l'arco dell'emiciclo e sali fino a sfiorare la volta rinascimentale.
+en: Walk the arc of the semicircular corridor and rise until you brush the Renaissance vault.
+
+
+# --- El visor de recorrido ---------------------------------------------------
+[VISOR RECORRIDO]
+
+# .glb de la boveda (albedo horneado, se renderiza SIN iluminar). Solo el
+# nombre; la carpeta la deduce el id.
+modelo: villa_giulia
+
+# OBJ con la polilinea ABIERTA = posicion EN PLANTA (el rail del slider de
+# avance). La altura NO sale de aqui; la pone el usuario con el slider lateral.
+recorrido: trayectoria01.obj
+
+# Eje "hacia el techo".
+#   auto  -> normal del plano del recorrido (aqui sale Y, la traj. es plana en Y=0).
+#   x,y,z -> forzarlo, p.ej. "arco eje: 0,1,0".
+arco eje: auto
+
+# De que lado del plano cae el techo (resuelve el signo de la normal).
+#   auto  -> mira hacia donde esta la masa de la malla (aqui acierta: +Y).
+#   + / - -> forzarlo si entraras mirando al suelo.
+arco lado: auto
+
+# Direccion BASE de la mirada (la cabeza luego se mueve libre con el raton).
+#   arriba   -> hacia la boveda (lo que quieres aqui).
+#   tangente -> mirar al frente, en el sentido del avance.
+#   radial   -> hacia el centro del arco.
+mirada: tangente
+
+# Mirada al cargar, en grados: yaw,pitch (sobre la base). Aqui 12 de cabeceo
+# hacia arriba. Debe caber dentro de "mirada limites" (si no, se recorta).
+mirada inicial: 0,44
+
+# Topes de la cabeza libre con el raton: +-yaw, +-pitch en grados.
+# Sube estos numeros si quieres mirar mas alrededor; bajalos para acotar mas.
+mirada limites: 60,45
+
+# Banda del slider de ALTURA: distancia sobre el plano del recorrido hacia el
+# techo, EN METROS (la escena esta a escala real). La corona de la boveda esta
+# a ~7,8 m sobre el camino. min,max
+#   · si no llegas a rozar el techo -> sube el max
+#   · si atraviesas la boveda       -> baja el max
+altura: 1.2,4.0
+
+# Altura de partida (altura de paseo).
+altura inicial: 1.2
+
+# Fraccion del arco navegable: 0,1 = todo el recorrido. Recorta (p.ej. 0.05,0.95)
+# si los extremos de la fotogrametria estan sucios y no quieres llegar a ellos.
+avance: 0,1
+
+# Donde arrancas en el arco (0 = un extremo, 1 = el otro).
+avance inicial: 0.0
+
+# Interpolar con Catmull-Rom entre los 27 puntos (movimiento fluido).  si | no
+avance suave: si
+
+# Campo de vision en mm (zoom de lente, con la RUEDA). Secundario: el
+# acercamiento de verdad es la ALTURA, no la lente.
+lente: 24
+
+# Topes del zoom de lente en mm.  min,max
+lente limites: 15,70
+
+# Marco de controles.
+#   fija   -> siempre visible y fino (lo del mockup).
+#   atenua -> se desvanece al estar quieto, vuelve al moverte (max inmersion).
+consola: atenua
+
+
+# ----------------------------------------------------------------------------
+#  AJUSTES QUE NO ESTAN EN ESTE .TXT (viven en src/PathViewer.jsx):
+#   · Sensibilidad del arrastre -> constante SENS (ahora 0.0026).
+#   · Sentido del arrastre invertido -> signo en las lineas
+#     "c.yaw = ... - dx*SENS" y "c.pitch = ... - dy*SENS".
+#  Si quieres tocar eso, avisame y lo cambio en el componente.
+# ----------------------------------------------------------------------------

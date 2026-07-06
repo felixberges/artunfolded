@@ -1,0 +1,96 @@
+/* objectviewer.css — visor de objeto (object3d)
+   Consola que ENMARCA el lienzo: azimut abajo, altura a la derecha — igual
+   patrón que pathviewer.css. Mover luz / Inicio / bolita / zoom se quedan
+   flotando SOBRE el lienzo (no estorban al relieve); solo los sliders de
+   órbita de la cámara salen fuera. */
+
+.objectviewer {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  grid-template-rows: 1fr 56px;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  background: #1a1714;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  /* tokens locales (misma paleta cálida que pathviewer.css) */
+  --bronze: #b08953;
+  --track: #2c2419;
+  --panel: #15110d;
+  --ink: #d8b988;
+  --ink-soft: #8a795f;
+}
+
+/* --- Lienzo 3D: los botones flotantes van dentro (position:absolute) --- */
+.ov-stage {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  background: #0f0d0b;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.ov-stage canvas { display: block; width: 100%; height: 100%; }
+
+/* --- Raíl lateral: slider de ALTURA --- */
+.ov-rail {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  background: var(--panel);
+  border-radius: 8px;
+}
+.ov-rail-cap {
+  font: 500 10px/1 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+.ov-height {
+  flex: 1;
+  writing-mode: vertical-lr;
+  direction: rtl;      /* arriba = ángulo positivo (mirando desde más alto) */
+  width: 6px;
+  margin: 4px 0;
+  accent-color: var(--bronze);
+  background: transparent;
+  cursor: ns-resize;
+}
+
+/* --- Franja inferior: slider de AZIMUT --- */
+.ov-bottom {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  background: var(--panel);
+  border-radius: 8px;
+}
+.ov-azimuth {
+  flex: 1;
+  accent-color: var(--bronze);
+  cursor: ew-resize;
+}
+
+/* Lecturas numéricas (mono, bronce) — mismo estilo que pv-val */
+.ov-val {
+  flex: 0 0 auto;
+  min-width: 34px;
+  text-align: center;
+  font: 500 11px/1 'IBM Plex Mono', ui-monospace, monospace;
+  color: var(--ink);
+}
+
+/* Móvil estrecho: raíl un poco más fino */
+@media (max-width: 520px) {
+  .objectviewer { grid-template-columns: 1fr 48px; }
+}

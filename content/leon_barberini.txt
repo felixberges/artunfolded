@@ -1,0 +1,44 @@
+[TITULO]
+es: León romano
+it: Leone romano
+en: Roman lion
+
+[TEXTO]
+titulo:
+	es: Relieve del león
+	it: Rilievo del leone
+	en: Lion relief
+
+	es: Relieve romano en mármol conservado en el Museo Barberini. (Texto provisional — completar.)
+	it: Rilievo romano in marmo conservato al Museo Barberini. (Testo provvisorio — da completare.)
+	en: Roman marble relief held at the Museo Barberini. (Placeholder text — to be completed.)
+
+[VISOR OBJETO]
+titulo:
+	es: relieve
+	it: rilievo
+	en: relief
+modelo: leon_barberini
+
+# --- Cámara: paneo en plano frontal ---
+# La cara del relieve mira al eje X; la cámara se separa en X y mira al centro.
+objeto centro: -0.33, 0.12, 0.12      # centro aproximado (de la bbox)
+camara: 3, 0.12, 0.12                 # cámara en +X, de frente al relieve
+limite x: -1.3, 1.3                   # deslizamiento HORIZONTAL de pantalla
+limite y: -1.3, 1.3                   # deslizamiento VERTICAL de pantalla
+lente: 35                             # mm, lente inicial
+lente limites: 20, 200                # mm, zoom
+
+# --- Luz rasante ---
+luz azimut: 	180
+luz elevacion: 0
+luz intensidad: 1.2
+luz ambiente: 0.3
+
+
+color gamma: 1.1 1.1 1.1
+color gain: 1.5 1.5 1.5
+
+mapa normal: si
+mapa normal fuerza: 1
+mapa normal desenfoque: 4

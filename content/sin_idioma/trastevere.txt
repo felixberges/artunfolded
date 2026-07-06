@@ -1,0 +1,33 @@
+[TITULO]
+es: Santa Maria del Trastevere
+[TEXTO]
+titulo:
+	es: Cúpula del ábside
+
+	es: En la cúpula del ábside puede admirarse un mosaico del trono celestial, del siglo XII, adornado en su parte inferior con Historias de la Virgen, también en mosaico, obra de Pietro Cavallini (1291).
+[VISOR 2D]
+tiles: trastevere
+titulo: desplegable de la cupula
+punto:0.5, 0.5  
+info visor: 
+	es :Titulo de la información 1
+info anotaciones:
+	es: Texto en el centro de la imagen, este texto es claramente mas largo
+[VISOR 3D]
+titulo: fotogrametría
+modelo: trastevere
+
+# --- Órbita (cámara inicial opcional) ---
+# Si no pones nada, sigue el auto-encuadre actual (Bounds + Center).
+orbita ojo: 0.0, 14, 60.0     # x, y, z — posición inicial de la cámara
+orbita objetivo: 0, 14, 0    # x, y, z — punto al que mira / centro de órbita
+orbita lente: 30                # opcional
+orbita lente limites: 15, 105
+
+# --- Eye-level (si está 'ojo', aparece el toggle) ---
+ojo: 0, 2.5, 5           # x, y, z — punto fijo de cámara
+objetivo: 0, 5.0, -3      # x, y, z — a dónde mira de inicio (define el "frente")
+pan: -70, 70                  # grados, giro horizontal
+tilt: -40, 65                 # grados, vertical (+ = hacia la bóveda)
+lente: 15                       # opcional, FOV inicial
+lente limites: 10, 95           # opcional, rango de la rueda

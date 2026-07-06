@@ -1,0 +1,160 @@
+/* pathviewer.css — visor de recorrido (path3d)
+   Consola que ENMARCA el lienzo: avance abajo, altura a la derecha.
+   Sobre el render no va nada (la bóveda es la protagonista). */
+
+.pathviewer {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  grid-template-rows: 1fr 56px;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  background: #1a1714;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  /* tokens locales (paleta cálida de museo) */
+  --bronze: #b08953;
+  --bronze-dim: #6e5535;
+  --track: #2c2419;
+  --panel: #15110d;
+  --ink: #d8b988;
+  --ink-soft: #8a795f;
+}
+
+/* --- Lienzo 3D: limpio, sin chrome encima --- */
+.pv-stage {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  background: #0f0d0b;
+  border-radius: 8px;
+  overflow: hidden;
+  touch-action: none;      /* el arrastre es nuestro, no scroll del navegador */
+  cursor: grab;
+}
+.pv-stage:active { cursor: grabbing; }
+.pv-stage canvas { display: block; width: 100%; height: 100%; }
+
+/* Pista que se desvanece tras el primer gesto */
+.pv-hint {
+  position: absolute;
+  left: 50%; bottom: 16px;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 11px;
+  font: 500 12px/1 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  color: #c9b48f;
+  background: rgba(15, 13, 11, 0.55);
+  border: 0.5px solid rgba(176, 137, 83, 0.35);
+  border-radius: 999px;
+  pointer-events: none;
+  animation: pv-fade-in 0.4s ease both;
+}
+.pv-hint-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--bronze);
+}
+@keyframes pv-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- Raíl lateral: altura + inicio --- */
+.pv-rail {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  background: var(--panel);
+  border-radius: 8px;
+}
+.pv-rail-cap {
+  font: 500 10px/1 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+/* Slider vertical de altura */
+.pv-height {
+  flex: 1;
+  writing-mode: vertical-lr;
+  direction: rtl;          /* arriba = máximo (hacia el techo) */
+  width: 6px;
+  margin: 4px 0;
+  accent-color: var(--bronze);
+  background: transparent;
+  cursor: ns-resize;
+}
+
+/* Slider horizontal de avance */
+.pv-bottom {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  background: var(--panel);
+  border-radius: 8px;
+}
+.pv-advance {
+  flex: 1;
+  accent-color: var(--bronze);
+  cursor: ew-resize;
+}
+
+/* Lecturas numéricas (mono, bronce) */
+.pv-val {
+  flex: 0 0 auto;
+  min-width: 34px;
+  text-align: center;
+  font: 500 11px/1 'IBM Plex Mono', ui-monospace, monospace;
+  color: var(--ink);
+}
+
+/* Botón Inicio */
+.pv-home {
+  flex: 0 0 auto;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; line-height: 1;
+  color: var(--bronze);
+  background: transparent;
+  border: 0.5px solid rgba(176, 137, 83, 0.45);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.pv-home:hover { background: rgba(176, 137, 83, 0.12); }
+.pv-home:active { transform: scale(0.96); }
+
+/* Modo consola: atenua (se desvanece al estar quieto) */
+.pathviewer.is-dim .pv-rail,
+.pathviewer.is-dim .pv-bottom {
+  opacity: 0.12;
+  transition: opacity 0.6s ease;
+}
+.pathviewer .pv-rail,
+.pathviewer .pv-bottom {
+  transition: opacity 0.25s ease;
+}
+
+/* Móvil estrecho: raíl un poco más fino */
+@media (max-width: 520px) {
+  .pathviewer { grid-template-columns: 1fr 48px; }
+}
+
+/* --- Contenido del panel de afinado (el contenedor lo pone .debug-panel) --- */
+.pv-tune-block {
+  margin: 0;
+  white-space: pre;
+}
+.pv-tune-note {
+  margin-top: 7px;
+  font: 400 9.5px/1.3 'IBM Plex Mono', ui-monospace, monospace;
+  color: var(--ink-soft);
+}

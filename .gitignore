@@ -21,3 +21,11 @@ node_modules/
 # editor/SO
 .vscode/
 .DS_Store
+
+public/models/**/*.original.glb
+**/tmp_*.glb
+**/*.original.glb
+assets/
+*.blend
+*.blend1
+backup-artunfolded.git/
