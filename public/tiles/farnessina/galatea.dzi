@@ -2,10 +2,10 @@
 <Image xmlns="http://schemas.microsoft.com/deepzoom/2008"
   Format="jpg"
   Overlap="1"
-  TileSize="512"
+  TileSize="256"
   >
   <Size 
-    Height="13606"
-    Width="35039"
+    Height="9345"
+    Width="18640"
   />
 </Image>

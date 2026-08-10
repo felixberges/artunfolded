@@ -11,6 +11,17 @@
 //     en runtime calando el agujero con esa máscara (destination-out). Un único
 //     velo reutilizable, no uno por punto. Fuente de verdad: region.mask, que
 //     escribe build-monuments si /masks/{id}/NN.png existe (NN = orden del punto).
+//   - GIRO DE VISTA (rotate CW/CCW): algunos desplegables no quedan "derechos"
+//     a la vista por cómo se orientó la captura. Los botones giran el
+//     viewport de OSD alrededor de su CENTRO ACTUAL (sin tocar el zoom, para
+//     no marear). Los PINES se añaden con rotationMode: NO_ROTATION (nativo
+//     de OSD): su POSICIÓN sigue la rotación (quedan anclados al punto real
+//     de la imagen) pero su CONTENIDO no gira, así el rótulo es siempre
+//     legible. El velo de foco (scrim) usa el modo por defecto (EXACT): debe
+//     girar junto con la imagen porque está calado sobre ella. El botón Home
+//     nativo de OSD no restaura la rotación (comportamiento conocido de la
+//     librería), así que el evento 'home' del viewer se engancha para
+//     forzarla a 0.
 
 import { useEffect, useRef, useState } from 'react';
 import OpenSeadragon from 'openseadragon';
@@ -19,6 +30,9 @@ import { ui } from './strings';
 import './annotations.css';
 
 const OSD_PREFIX = '/openseadragon/images/';
+
+// Paso de giro por click, en grados. CCW = negativo, CW = positivo.
+const ROTATE_STEP = 15;
 
 // Umbrales de revelado, en ratio zoom/zoom-de-ajuste (home).
 //   < REVEAL_MIN  -> ocultos;  > REVEAL_MAX -> del todo visibles.
@@ -59,6 +73,9 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
   const spotTokenRef = useRef(0);         // anti-carrera al cambiar de selección
   const spotIndexRef = useRef(null);      // índice con foco activo (o null)
   const applySpotlightRef = useRef(() => {});
+
+  // --- refs del giro de vista ---
+  const rotateByRef = useRef(() => {});   // expone la función de giro al JSX
 
   const imageOverlays = (active?.overlays ?? []).filter((o) => o.type === 'image');
   const regions = (active?.overlays ?? []).find((o) => o.type === 'annotations')?.regions ?? [];
@@ -119,6 +136,16 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
       }
     };
     revealRef.current = updateReveal;
+
+    // Gira el viewport desde su centro actual, sin cambiar el zoom.
+    const rotateBy = (deltaDeg) => {
+      const v = viewerRef.current;
+      if (!v) return;
+      const vp = v.viewport;
+      const current = vp.getRotation();
+      vp.setRotation(current + deltaDeg, vp.getCenter(true));
+    };
+    rotateByRef.current = rotateBy;
 
     // Ruta de la máscara de cobertura para la región i. La escribe
     // build-monuments en region.mask si /masks/{id}/NN.png existe; si no, null.
@@ -220,7 +247,12 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
 
         el.addEventListener('pointerdown', (e) => e.stopPropagation());
         el.addEventListener('click', (e) => { e.stopPropagation(); onSelectRef.current?.(i); });
-        viewer.addOverlay({ element: el, location: pt, placement: OpenSeadragon.Placement.CENTER });
+        viewer.addOverlay({
+          element: el,
+          location: pt,
+          placement: OpenSeadragon.Placement.CENTER,
+          rotationMode: OpenSeadragon.OverlayRotationMode.NO_ROTATION,
+        });
 
         pinsRef.current[i] = el;
         labelsRef.current[i] = lab;
@@ -237,9 +269,16 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
       applySpotlight(activeAnnoRef.current);
     };
 
+    // El botón Home nativo de OSD no restaura la rotación por sí solo
+    // (comportamiento conocido de la librería) — la forzamos a 0 aquí.
+    const onHome = () => {
+      viewerRef.current?.viewport.setRotation(0, viewerRef.current.viewport.getCenter(true));
+    };
+
     viewer.addHandler('open', onOpen);
     viewer.addHandler('zoom', updateReveal);
     viewer.addHandler('animation', updateReveal);
+    viewer.addHandler('home', onHome);
 
     return () => {
       viewer.destroy();
@@ -250,6 +289,7 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
       scrimRef.current = null;
       scrimCanvasRef.current = null;
       spotIndexRef.current = null;
+      rotateByRef.current = () => {};
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active?.id]);
@@ -289,7 +329,32 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
 
   return (
     <div className="deepzoom">
-      <div className="deepzoom-stage" ref={containerRef} />
+      <div className="deepzoom-stage-wrap" style={stageWrap}>
+        <div className="deepzoom-stage" ref={containerRef} />
+
+        <div style={wrapTR}>
+          <button
+            type="button"
+            onClick={() => rotateByRef.current(-ROTATE_STEP)}
+            style={zbtn}
+            className="ov-zbtn"
+            title="Girar antihorario"
+            aria-label="Girar antihorario"
+          >
+            ↺
+          </button>
+          <button
+            type="button"
+            onClick={() => rotateByRef.current(ROTATE_STEP)}
+            style={zbtn}
+            className="ov-zbtn"
+            title="Girar horario"
+            aria-label="Girar horario"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
 
       {hasControls && (
         <aside className="deepzoom-controls">
@@ -329,3 +394,12 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
     </div>
   );
 }
+
+// --- estilos inline (coherentes con ObjectViewer/ModelViewer) ---
+const stageWrap = { position: 'relative', width: '100%', height: '100%' };
+const wrapTR = { position: 'absolute', top: 20, right: 20, zIndex: 11, display: 'flex', flexDirection: 'column', gap: 6 };
+const zbtn = {
+  width: 40, height: 40, fontFamily: "'IBM Plex Mono', monospace", fontSize: '1.2rem', lineHeight: 1,
+  color: '#e9e7e2', background: 'rgba(20, 18, 16, 0.72)', border: '1px solid rgba(233, 231, 226, 0.25)',
+  borderRadius: 4, cursor: 'pointer', backdropFilter: 'blur(6px)',
+};
