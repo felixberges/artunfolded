@@ -1,0 +1,80 @@
+/* team.css — página "Quiénes somos". Usa los mismos tokens y familias
+   tipográficas que unfolded-ui.css (--au-display/Sora para nombres,
+   --au-body/Inter para las bios, --au-mono/IBM Plex Mono para eyebrow/rol;
+   ink/accent/muted con los mismos fallbacks) para sentirse parte del mismo
+   sistema, no una página aparte. */
+
+.team {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.2rem 1.4rem 3rem;
+  box-sizing: border-box;
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.team-eyebrow {
+  font-family: var(--au-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent, var(--au-accent));
+  margin: 0 0 0.8rem;
+}
+.team-intro {
+  font-family: var(--au-body);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ink, var(--au-ink));
+  max-width: 62ch;
+  margin: 0 auto;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+@media (min-width: 700px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.team-photo {
+  width: 11rem;
+  height: 11rem;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--line, var(--au-line));
+  margin-bottom: 1rem;
+}
+.team-name {
+  font-family: var(--au-display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  color: var(--ink, var(--au-ink));
+  margin: 0 0 0.3rem;
+}
+.team-role {
+  font-family: var(--au-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--accent, var(--au-accent));
+  margin: 0 0 1rem;
+}
+.team-bio {
+  font-family: var(--au-body);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  text-align: left;
+  color: var(--ink, var(--au-ink));
+  margin: 0;
+}

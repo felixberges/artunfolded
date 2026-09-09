@@ -14,6 +14,7 @@ import LanguageSelector from './LanguageSelector';
 import ViewSwitcher from './ViewSwitcher';
 import ViewRenderer from './ViewRenderer';
 import Article from './Article';
+import Team from './Team';
 
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
 const roman = (n) => ROMAN[n] ?? String(n);
@@ -163,25 +164,37 @@ function MonumentDetail({ monument }) {
 function AppInner() {
   const t = useT();
   const [selectedId, setSelectedId] = useState(null);
+  const [showAbout, setShowAbout] = useState(false);
   const monument = monuments.find((m) => m.id === selectedId) ?? null;
 
+  const goHome = () => { setSelectedId(null); setShowAbout(false); };
+  const openAbout = () => { setSelectedId(null); setShowAbout(true); };
+  const selectMonument = (id) => { setSelectedId(id); setShowAbout(false); };
+
   return (
-    <div className={'app' + (monument ? ' is-detail' : '')}>
+    <div className={'app' + (monument || showAbout ? ' is-detail' : '')}>
       <header className="app-bar">
         <div className="app-bar-left">
-          {monument && (
-            <button type="button" className="back-button" onClick={() => setSelectedId(null)}>
+          {(monument || showAbout) && (
+            <button type="button" className="back-button" onClick={goHome}>
               <span className="arrow" aria-hidden="true">←</span> {t(ui.back)}
             </button>
           )}
           <span className="app-mark">Art Unfolded</span>
         </div>
-        <LanguageSelector />
+        <div className="app-bar-right">
+          {!showAbout && (
+            <button type="button" className="about-link" onClick={openAbout}>{t(ui.aboutNav)}</button>
+          )}
+          <LanguageSelector />
+        </div>
       </header>
 
-      {monument
-        ? <MonumentDetail monument={monument} />
-        : <Archive onSelect={setSelectedId} />}
+      {showAbout
+        ? <Team />
+        : monument
+          ? <MonumentDetail monument={monument} />
+          : <Archive onSelect={selectMonument} />}
     </div>
   );
 }
