@@ -1,0 +1,32 @@
+/* notes.css — pestaña "Historia" de cada lámina.
+   Tono de cuaderno de trabajo: monoespaciado, más íntimo que el texto artístico.
+   Usa los mismos tokens que unfolded-ui.css.
+
+   La lámina no hace scroll de página (ver .monument en unfolded-ui.css): la
+   pestaña vive dentro de .stage-viewer, que tiene una altura fija. Por eso
+   .notes es su propio contenedor de scroll y ocupa todo el alto y el ancho
+   del visor (así la rueda funciona en cualquier punto, no solo sobre el
+   texto). La columna de lectura estrecha la marca .notes-body. */
+
+.notes {
+  box-sizing: border-box;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.4rem 1rem 2rem 0;   /* margen derecho para que la barra no pise el texto */
+}
+
+.notes-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 64ch;
+}
+
+.notes-body p {
+  margin: 0;
+  font-family: var(--au-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--ink-dim, var(--au-muted));
+}

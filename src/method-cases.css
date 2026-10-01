@@ -1,0 +1,90 @@
+/* method-cases.css — sección del visor (y caso de estudio) de Metodología.
+   Mismos tokens que el resto (tema museo oscuro). Va aparte de method.css
+   para no tocar el diseño de los pasos. */
+
+/* ---- caso de estudio --------------------------------------------------- */
+.method-case {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.4rem 5rem;
+}
+.method-case-text {
+  max-width: 38rem;
+  margin: 0 auto 2.2rem;
+  font-family: var(--au-body);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink, var(--au-ink));
+}
+.method-case-text h2 {
+  margin: 0 0 0.9rem;
+  font-family: var(--au-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+.method-case-text p { margin: 0 0 1.3rem; }
+
+/* pareja de imágenes a la misma altura: cada figura crece según su ratio */
+.method-case-pair { display: flex; gap: 0.9rem; }
+.method-case-fig { flex-basis: 0; min-width: 0; margin: 0; }
+.method-case-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line, var(--au-line));
+}
+.method-case-fig figcaption {
+  margin-top: 0.5rem;
+  font-family: var(--au-body);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--ink-dim, var(--au-muted));
+}
+
+/* ---- bloques tras el texto del caso (extra) ----------------------------
+   Subtítulo y párrafos en la columna de lectura; las filas de imágenes salen
+   al ancho completo del caso, como la pareja. */
+.method-case-extra {
+  margin-top: 3.6rem;
+  padding-top: 2.6rem;
+  border-top: 1px solid var(--line, var(--au-line));
+}
+.method-case-sub,
+.method-case-p {
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--ink, var(--au-ink));
+}
+.method-case-sub {
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+  font-family: var(--au-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+.method-case-p {
+  margin-top: 0;
+  margin-bottom: 1.3rem;
+  font-family: var(--au-body);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+.method-case-row { margin: 2.2rem 0 2.6rem; }
+.method-case-row > figcaption {
+  max-width: 38rem;
+  margin: 0.6rem auto 0;
+  font-family: var(--au-body);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--ink-dim, var(--au-muted));
+}
+
+@media (max-width: 700px) {
+  .method-case-sub { font-size: 1.3rem; }
+  .method-case-extra { margin-top: 2.6rem; padding-top: 2rem; }
+  .method-case-text h2 { font-size: 1.3rem; }
+  .method-case-pair { flex-direction: column; gap: 1.4rem; }
+}

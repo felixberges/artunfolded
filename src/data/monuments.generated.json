@@ -40,9 +40,108 @@
               "it": "distesa del soffitto",
               "en": "unfolded ceiling"
             },
-            "tileSource": "/tiles/escorial_biblioteca/biblioteca_escorial.dzi"
+            "tileSource": "/tiles/escorial_biblioteca/biblioteca_escorial.dzi",
+            "overlays": [
+              {
+                "id": "notes",
+                "type": "annotations",
+                "label": {
+                  "es": "Anotaciones",
+                  "it": "Annotazioni",
+                  "en": "Annotations"
+                },
+                "regions": [
+                  {
+                    "x": 0.2321,
+                    "y": 0.2084,
+                    "text": {
+                      "es": "TEOLOGIA: San Ambrosio, San Gregorio Magno, San Agustín y San Jerónimo —los cuatro grandes Padres de la Iglesia latina— flanquean la alegoría de la Teología. Debajo, el Concilio de Nicea: Osio de Córdoba arroja al fuego los escritos de Arrio."
+                    },
+                    "mask": "/masks/escorial_biblioteca/01.png"
+                  },
+                  {
+                    "x": 0.7691,
+                    "y": 0.2079,
+                    "text": {
+                      "es": "FILOSOFIA: Aristóteles, Platón, Séneca y Sócrates rodean la alegoría de la Filosofía. Debajo, la Escuela de Atenas: Sócrates y los académicos, Zenón y los estoicos."
+                    },
+                    "mask": "/masks/escorial_biblioteca/02.png"
+                  },
+                  {
+                    "x": 0.0853,
+                    "y": 0.5,
+                    "text": {
+                      "es": "ASTROLOGIA: Ptoloméo, Alfonso X el Sabio, Diodoro Sículo, Juan de Sacrobosco, Euclides, Teodoro de Cirene y Alcabitio ilustran esta arte. Dos escenas: Dionisio Areopagita observa el eclipse de sol del día en que murió Jesucristo, y Yavé retrocede el tiempo para prolongar quince años la vida del rey Ezequías."
+                    },
+                    "mask": "/masks/escorial_biblioteca/03.png"
+                  },
+                  {
+                    "x": 0.2146,
+                    "y": 0.5,
+                    "text": {
+                      "es": "GEOMETRIA: Juan de Monterreggio, Arquímedes, Aristarco de Samos y Miseno protagonizan esta arte. Los sacerdotes egipcios calculan las crecidas periódicas del Nilo, y Arquímedes, absorto en sus cálculos, no advierte que vienen a prenderle."
+                    },
+                    "mask": "/masks/escorial_biblioteca/04.png"
+                  },
+                  {
+                    "x": 0.3568,
+                    "y": 0.5,
+                    "text": {
+                      "es": "MUSICA: Mercurio, Jubal, Pitágoras, Pan, Orfeo y Anfión ilustran el poder de la música. David expulsa con su cítara a los demonios que atormentan a Saúl, y Orfeo libera a Eurídice del inframundo adormeciendo al Cancerbero con su arpa."
+                    },
+                    "mask": "/masks/escorial_biblioteca/05.png"
+                  },
+                  {
+                    "x": 0.4999,
+                    "y": 0.5,
+                    "text": {
+                      "es": "ARITMETICA: Boecio, Arquitas de Tarento, Jenócrates y Jordán representan esta arte. Salomón resuelve los enigmas de la Reina de Saba —todo tiene número, peso y medida— y los gimnosofistas llevan los números a Egipto, vínculo entre el número y el alma."
+                    },
+                    "mask": "/masks/escorial_biblioteca/06.png"
+                  },
+                  {
+                    "x": 0.6428,
+                    "y": 0.5,
+                    "text": {
+                      "es": "DIALECTICA: Meliso, Zenón de Elea, Orígenes y Protágoras ilustran el arte del razonamiento. Zenón señala las puertas de la Verdad y la Falsedad, desconfiando de las apariencias, y San Agustín y San Ambrosio debaten cuestiones de fe mientras Santa Mónica reza por la conversión de su hijo."
+                    },
+                    "mask": "/masks/escorial_biblioteca/07.png"
+                  },
+                  {
+                    "x": 0.785,
+                    "y": 0.5,
+                    "text": {
+                      "es": "RETORICA: Homero, Demóstenes, Isócrates, Píndaro, Quintiliano y Cicerón representan el arte de la elocuencia. Cicerón salva con su defensa la vida del senador Cayo Rabirio, y Hércules Gálico arrastra a la muchedumbre con el poder de la palabra."
+                    },
+                    "mask": "/masks/escorial_biblioteca/08.png"
+                  },
+                  {
+                    "x": 0.9154,
+                    "y": 0.5,
+                    "text": {
+                      "es": "GRAMATICA: Sexto Pomponio, Marco Terencio Varrón, Antonio de Nebrija y Elio Donato ilustran el arte de la gramática. Dios castiga en la Torre de Babel la soberbia de los hombres confundiendo sus lenguas, y los niños hebreos, con Daniel, vencen en sabiduría a los caldeos."
+                    },
+                    "mask": "/masks/escorial_biblioteca/09.png"
+                  }
+                ]
+              }
+            ]
           }
         ]
+      },
+      {
+        "id": "notes",
+        "type": "notes",
+        "label": {
+          "es": "Historia",
+          "it": "Storia",
+          "en": "Behind the lens"
+        },
+        "body": {
+          "es": "Esta lámina es, en cierto modo, el origen de Art Unfolded. Magoga la hizo hace más de diez años, por el placer de trabajar sobre uno de sus espacios favoritos y como regalo para una buena amiga.\n\nNo es una reproducción literal de la bóveda. Los carteles con inscripciones no existen en la biblioteca: Magoga los creó siguiendo el estilo de la época para que no desentonaran con la pintura original. Además, algunas partes se han girado respecto a su orientación real, para que el conjunto resulte más agradable de mirar sobre un plano.\n\nLas láminas que vinieron después parten de la misma idea: mirar una obra entera y con calma, como no puede verse desde el suelo.",
+          "it": "Questa tavola è, in un certo senso, l'origine di Art Unfolded. Magoga l'ha realizzata più di dieci anni fa, per il piacere di lavorare su uno dei suoi luoghi preferiti e come regalo per una cara amica.\n\nNon è una riproduzione letterale della volta. I cartigli con le iscrizioni non esistono nella biblioteca: Magoga li ha creati nello stile dell'epoca perché non stonassero con la pittura originale. Inoltre alcune parti sono state ruotate rispetto al loro orientamento reale, perché l'insieme risultasse più gradevole da guardare su un piano.\n\nLe tavole venute dopo partono dalla stessa idea: guardare un'opera per intero e con calma, come dal basso non è possibile.",
+          "en": "In a sense, this plate is where Art Unfolded began. Magoga made it more than ten years ago, for the pleasure of working on one of her favourite places and as a gift for a close friend.\n\nIt is not a literal reproduction of the vault. The inscribed panels do not exist in the library: Magoga created them in the style of the period so that they would sit naturally with the original painting. Some parts have also been rotated from their actual orientation, so that the whole is more pleasing to look at on a flat surface.\n\nThe plates that came later start from the same idea: looking at a work whole and unhurried, in a way that is not possible from the floor."
+        }
       }
     ]
   },
@@ -99,34 +198,323 @@
                 },
                 "regions": [
                   {
-                    "x": 0.495,
-                    "y": 0.46,
+                    "x": 0.5824,
+                    "y": 0.185,
                     "label": {
-                      "es": "Lo que viene a ser el medio",
-                      "it": "Quello che viene a essere il centro",
-                      "en": "What amounts to the center"
+                      "es": "Júpiter y Europa",
+                      "it": "Giove e Europa",
+                      "en": "Jupiter and Europa"
                     },
                     "text": {
-                      "es": "Se descubre rápidamente que es el motivo central por su posición, en todo el medio.",
-                      "it": "Si scopre rapidamente che è il motivo centrale per la sua posizione, proprio nel mezzo.",
-                      "en": "It quickly becomes clear that this is the central motif, given its position right in the middle."
+                      "es": "Júpiter rapta a Europa transformado en toro. Signos del zodíaco: Júpiter en Aries y Tauro.",
+                      "it": "Giove rapisce Europa sotto forma di toro. Segno zodiacale: Giove in Ariete e Toro.",
+                      "en": "Jupiter carries off Europa in the form of a bull. Signs of the zodiac: Jupiter in Aries and Taurus."
                     },
                     "mask": "/masks/farnessina/01.png"
                   },
                   {
-                    "x": 0.41,
-                    "y": 0.465,
+                    "x": 0.4949,
+                    "y": 0.1989,
                     "label": {
-                      "es": "Vaca simpática",
-                      "it": "Mucca simpatica",
-                      "en": "Charming cow"
+                      "es": "Constelación de Erídano",
+                      "it": "Costellazione di Eridano",
+                      "en": "Constellation of Eridanus"
                     },
                     "text": {
-                      "es": "Rafael pintaba las vacas mas simpáticas del Renacimiento.",
-                      "it": "Raffaello dipingeva le mucche più simpatiche del Rinascimento.",
-                      "en": "Raphael painted the most charming cows of the Renaissance."
+                      "es": "La constelación de Erídano, el río celeste.",
+                      "it": "La costellazione di Eridano, il fiume celeste.",
+                      "en": "The constellation of Eridanus, the celestial river."
                     },
                     "mask": "/masks/farnessina/02.png"
+                  },
+                  {
+                    "x": 0.4165,
+                    "y": 0.187,
+                    "label": {
+                      "es": "Leda y el cisne",
+                      "it": "Leda e il cigno",
+                      "en": "Leda and the Swan"
+                    },
+                    "text": {
+                      "es": "Leda y el cisne. Signo del zodíaco: Géminis.",
+                      "it": "Leda e il cigno. Segno zodiacale: Gemelli.",
+                      "en": "Leda and the swan. Sign of the zodiac: Gemini."
+                    },
+                    "mask": "/masks/farnessina/03.png"
+                  },
+                  {
+                    "x": 0.326,
+                    "y": 0.1987,
+                    "label": {
+                      "es": "Constelación del Auriga",
+                      "it": "Costellazione dell'Auriga",
+                      "en": "Constellation of Auriga"
+                    },
+                    "text": {
+                      "es": "La constelación del Auriga, el cochero celeste.",
+                      "it": "La costellazione dell'Auriga, il cocchiere celeste.",
+                      "en": "The constellation of Auriga, the celestial charioteer."
+                    },
+                    "mask": "/masks/farnessina/04.png"
+                  },
+                  {
+                    "x": 0.2435,
+                    "y": 0.1925,
+                    "label": {
+                      "es": "Hércules y la Hidra",
+                      "it": "Ercole e l'Idra",
+                      "en": "Hercules and the Hydra"
+                    },
+                    "text": {
+                      "es": "Hércules y la Hidra de Lerna. Signo del zodíaco: Cáncer.",
+                      "it": "Ercole e l'Idra di Lerna. Segno zodiacale: Cancro.",
+                      "en": "Hercules and the Lernaean Hydra. Sign of the zodiac: Cancer."
+                    },
+                    "mask": "/masks/farnessina/05.png"
+                  },
+                  {
+                    "x": 0.1343,
+                    "y": 0.2756,
+                    "label": {
+                      "es": "Constelación de Argo",
+                      "it": "Costellazione di Argo",
+                      "en": "Constellation of Argus"
+                    },
+                    "text": {
+                      "es": "La constelación de Argo y la constelación del Can.",
+                      "it": "La costellazione di Argo e la costellazione del Cane.",
+                      "en": "The constellation of Argus and the constellation of Canis."
+                    },
+                    "mask": "/masks/farnessina/06.png"
+                  },
+                  {
+                    "x": 0.1223,
+                    "y": 0.4376,
+                    "label": {
+                      "es": "Hércules y el León",
+                      "it": "Ercole e il Leone",
+                      "en": "Hercules and the Lion"
+                    },
+                    "text": {
+                      "es": "Hércules y el León de Nemea. Signo del zodíaco: Leo.",
+                      "it": "Ercole e il Leone Nemeo. Segno zodiacale: Leone.",
+                      "en": "Hercules and the Nemean Lion. Sign of the zodiac: Leo."
+                    },
+                    "mask": "/masks/farnessina/07.png"
+                  },
+                  {
+                    "x": 0.1646,
+                    "y": 0.6758,
+                    "label": {
+                      "es": "Serpiente, Cuervo y Crátera",
+                      "it": "Serpe, Corvo e Cratere",
+                      "en": "Serpens, Corvus and Crater"
+                    },
+                    "text": {
+                      "es": "Las constelaciones de la Serpiente y el Cuervo, y la constelación de la Crátera.",
+                      "it": "Le costellazioni del Serpe e del Corvo e la costellazione del Cratere.",
+                      "en": "The constellations of Serpens and Corvus, and the constellation of Crater."
+                    },
+                    "mask": "/masks/farnessina/08.png"
+                  },
+                  {
+                    "x": 0.2555,
+                    "y": 0.6824,
+                    "label": {
+                      "es": "Diana y Erígone",
+                      "it": "Diana ed Erigone",
+                      "en": "Diana and Erigone"
+                    },
+                    "text": {
+                      "es": "Diana cazadora y Erígone. Signo del zodíaco: Luna en Virgo.",
+                      "it": "Diana cacciatrice ed Erigone. Segno zodiacale: Luna in Vergine.",
+                      "en": "Diana the Huntress and Erigone. Sign of the zodiac: Moon in Virgo."
+                    },
+                    "mask": "/masks/farnessina/09.png"
+                  },
+                  {
+                    "x": 0.3338,
+                    "y": 0.6995,
+                    "label": {
+                      "es": "Baco y Ariadna",
+                      "it": "Bacco e Arianna",
+                      "en": "Bacchus and Ariadne"
+                    },
+                    "text": {
+                      "es": "Baco y Ariadna. La constelación de la Corona.",
+                      "it": "Bacco e Arianna. La costellazione della Corona.",
+                      "en": "Bacchus and Ariadne. The constellation of Corona."
+                    },
+                    "mask": "/masks/farnessina/10.png"
+                  },
+                  {
+                    "x": 0.4202,
+                    "y": 0.6824,
+                    "label": {
+                      "es": "Mercurio y Marte",
+                      "it": "Mercurio e Marte",
+                      "en": "Mercury and Mars"
+                    },
+                    "text": {
+                      "es": "Mercurio y Marte. Signos del zodíaco: Marte en Libra y Mercurio en Escorpio.",
+                      "it": "Mercurio e Marte. Segno zodiacale: Marte in Bilancia e Mercurio in Scorpione.",
+                      "en": "Mercury and Mars. Signs of the zodiac: Mars in Libra and Mercury in Scorpio."
+                    },
+                    "mask": "/masks/farnessina/11.png"
+                  },
+                  {
+                    "x": 0.5021,
+                    "y": 0.681,
+                    "label": {
+                      "es": "Constelación del Altar",
+                      "it": "Costellazione dell'Ara",
+                      "en": "Constellation of Ara"
+                    },
+                    "text": {
+                      "es": "La constelación del Altar.",
+                      "it": "La costellazione dell'Ara.",
+                      "en": "The constellation of Ara."
+                    }
+                  },
+                  {
+                    "x": 0.5838,
+                    "y": 0.683,
+                    "label": {
+                      "es": "Apolo y el Centauro",
+                      "it": "Apollo e il Centauro",
+                      "en": "Apollo and the Centaur"
+                    },
+                    "text": {
+                      "es": "Apolo y un Centauro. Signo del zodíaco: Sol en Sagitario.",
+                      "it": "Apollo e un Centauro. Segno zodiacale: Sole in Sagittario.",
+                      "en": "Apollo and a Centaur. Sign of the zodiac: Sun in Sagittarius."
+                    }
+                  },
+                  {
+                    "x": 0.6708,
+                    "y": 0.6988,
+                    "label": {
+                      "es": "Apolo y la Lira",
+                      "it": "Apollo e la Lira",
+                      "en": "Apollo and the Lyre"
+                    },
+                    "text": {
+                      "es": "Apolo. Signo del zodíaco: La constelación de la Lira.",
+                      "it": "Apollo. Segno zodiacale: La costellazione della Lira.",
+                      "en": "Apollo. Sign of the zodiac: The constellation of Lyra."
+                    }
+                  },
+                  {
+                    "x": 0.7487,
+                    "y": 0.6774,
+                    "label": {
+                      "es": "Venus en Capricornio",
+                      "it": "Venere in Capricorno",
+                      "en": "Venus in Capricorn"
+                    },
+                    "text": {
+                      "es": "Venus. Signo del zodíaco: Venus en Capricornio.",
+                      "it": "Venere. Segno zodiacale: Venere in Capricorno.",
+                      "en": "Venus. Sign of the zodiac: Venus in Capricorn."
+                    }
+                  },
+                  {
+                    "x": 0.8652,
+                    "y": 0.7275,
+                    "label": {
+                      "es": "Saeta y Delfín",
+                      "it": "Freccia e Delfino",
+                      "en": "Sagitta and Delphinus"
+                    },
+                    "text": {
+                      "es": "La constelación de la Saeta y la constelación del Delfín.",
+                      "it": "La costellazione della Freccia e la costellazione del Delfino.",
+                      "en": "The constellation of Sagitta and the constellation of Delphinus."
+                    }
+                  },
+                  {
+                    "x": 0.8741,
+                    "y": 0.41,
+                    "label": {
+                      "es": "Rapto de Ganímedes",
+                      "it": "Ratto di Ganimede",
+                      "en": "Rape of Ganymede"
+                    },
+                    "text": {
+                      "es": "El rapto de Ganímedes. Signo del zodíaco: Acuario.",
+                      "it": "Il ratto di Ganimede. Segno zodiacale: Acquario.",
+                      "en": "The rape of Ganymede. Sign of the zodiac: Aquarius."
+                    }
+                  },
+                  {
+                    "x": 0.8772,
+                    "y": 0.2508,
+                    "label": {
+                      "es": "Cisne y Pegaso",
+                      "it": "Cigno e Pegaso",
+                      "en": "Cygnus and Pegasus"
+                    },
+                    "text": {
+                      "es": "La constelación del Cisne y la constelación de Pegaso.",
+                      "it": "La costellazione del Cigno e la costellazione di Pegaso.",
+                      "en": "The constellation of Cygnus and the constellation of Pegasus."
+                    }
+                  },
+                  {
+                    "x": 0.7464,
+                    "y": 0.1832,
+                    "label": {
+                      "es": "Venus, Amor y Saturno",
+                      "it": "Venere, Amore e Saturno",
+                      "en": "Venus, Cupid and Saturn"
+                    },
+                    "text": {
+                      "es": "Venus, Amor y Saturno. Signo del zodíaco: Saturno en Piscis.",
+                      "it": "Venere, Amore e Saturno. Segno zodiacale: Saturno in Pesci.",
+                      "en": "Venus, Cupid and Saturn. Sign of the zodiac: Saturn in Pisces."
+                    }
+                  },
+                  {
+                    "x": 0.6653,
+                    "y": 0.1948,
+                    "label": {
+                      "es": "Constelación del Triángulo",
+                      "it": "Costellazione del Triangolo",
+                      "en": "Constellation of Triangulum"
+                    },
+                    "text": {
+                      "es": "La constelación del Triángulo.",
+                      "it": "La costellazione del Triangolo.",
+                      "en": "The constellation of Triangulum."
+                    }
+                  },
+                  {
+                    "x": 0.6795,
+                    "y": 0.4007,
+                    "label": {
+                      "es": "Perseo y la Gorgona",
+                      "it": "Perseo e la Gorgone",
+                      "en": "Perseus and the Gorgon"
+                    },
+                    "text": {
+                      "es": "El mito de Perseo y la Gorgona, y la Fama.",
+                      "it": "Il mito di Perseo e della Gorgone e la Fama.",
+                      "en": "The myth of Perseus and the Gorgon, and Fame."
+                    }
+                  },
+                  {
+                    "x": 0.3349,
+                    "y": 0.4047,
+                    "label": {
+                      "es": "Calisto y la Osa Mayor",
+                      "it": "Callisto e l'Orsa Maggiore",
+                      "en": "Callisto and Ursa Major"
+                    },
+                    "text": {
+                      "es": "Calisto transformada en la Osa Mayor.",
+                      "it": "Callisto trasformata in Orsa Maggiore.",
+                      "en": "Callisto transformed into Ursa Major."
+                    }
                   }
                 ]
               }
@@ -135,60 +523,17 @@
         ]
       },
       {
-        "id": "carousel",
-        "type": "carousel",
+        "id": "notes",
+        "type": "notes",
         "label": {
-          "es": "Galeria de fotos",
-          "it": "Galleria fotografica",
-          "en": "Photo gallery"
+          "es": "Historia",
+          "it": "Storia",
+          "en": "Behind the lens"
         },
-        "images": [
-          {
-            "src": "/carrusel/galatea_detalles/01.jpg",
-            "caption": {
-              "es": "Detalle 1 texto largo",
-              "it": "Dettaglio 1 testo lungo",
-              "en": "Detail 1 long text"
-            }
-          },
-          {
-            "src": "/carrusel/galatea_detalles/02.jpg",
-            "caption": {
-              "es": "DEtalle 2 pie de foto",
-              "it": "Dettaglio 2 didascalia",
-              "en": "Detail 2 photo caption"
-            }
-          },
-          {
-            "src": "/carrusel/galatea_detalles/03.jpg",
-            "caption": {
-              "es": "DEtalle 3 pie de foto",
-              "it": "Dettaglio 3 didascalia",
-              "en": "Detail 3 photo caption"
-            }
-          },
-          {
-            "src": "/carrusel/galatea_detalles/04.jpg",
-            "caption": {
-              "es": "DEtalle 4 pie de foto",
-              "it": "Dettaglio 4 didascalia",
-              "en": "Detail 4 photo caption"
-            }
-          },
-          {
-            "src": "/carrusel/galatea_detalles/05.jpg",
-            "caption": {
-              "es": "DEtalle 5 pie de foto",
-              "it": "Dettaglio 5 didascalia",
-              "en": "Detail 5 photo caption"
-            }
-          }
-        ],
-        "options": {
-          "fit": "contain",
-          "autoplay": 0,
-          "loop": true,
-          "thumbnails": true
+        "body": {
+          "es": "Fotografías realizadas en marzo de 2026 durante una visita turística a Villa Farnessina.\n\nEl objetivo de esta lámina era probar el método desde el principio hasta el final con medios de aficionado: demostrar que el proceso funciona incluso con material básico y sin condiciones ideales.\n\nEl resultado es, ya de por sí, una imagen con muchísimo detalle (200 megapíxeles). Con una cámara profesional, trípode y el tiempo adecuado, podríamos multiplicar por cuatro la resolución final.\n\nCámara Nikon compacta, a mano y sin trípode, con unos 16 megapíxeles y una focal equivalente a 50mm. Todo el trabajo de captura se hizo en poco más de media hora, sin molestar a los numerosos turistas que compartían el espacio.",
+          "it": "Fotografie realizzate nel marzo 2026 durante una visita turistica a Villa Farnesina.\n\nL'obiettivo di questa tavola era testare il metodo dall'inizio alla fine con mezzi da appassionato: dimostrare che il processo funziona anche con attrezzatura di base e senza condizioni ideali.\n\nIl risultato è già di per sé un'immagine con un dettaglio straordinario (200 megapixel). Con una fotocamera professionale, treppiede e il tempo adeguato, potremmo moltiplicare per quattro la risoluzione finale.\n\nFotocamera Nikon compatta, a mano e senza treppiede, con circa 16 megapixel e una focale equivalente a 50mm. L'intera sessione fotografica si è svolta in poco più di mezz'ora, senza disturbare i numerosi turisti presenti.",
+          "en": "Photographs taken in March 2026 during a tourist visit to Villa Farnesina.\n\nThe aim of this plate was to test the method from start to finish with amateur equipment: to show that the process works even with basic gear and less-than-ideal conditions.\n\nThe result is, in itself, an image of extraordinary detail (200 megapixels). With a professional camera, a tripod and the right time, we could achieve four times the final resolution.\n\nCompact Nikon camera, handheld without a tripod, at roughly 16 megapixels and a focal length equivalent to 50mm. The entire shoot took just over half an hour, without disturbing the many other tourists in the space."
         }
       }
     ]
@@ -212,12 +557,14 @@
         "id": "article",
         "type": "article",
         "label": {
-          "*": "article"
+          "es": "Texto",
+          "it": "Testo",
+          "en": "Text"
         },
         "body": {
-          "es": "Recorre el arco del emiciclo y elevate hasta rozar la boveda renacentista.",
-          "it": "Percorri l'arco dell'emiciclo e sali fino a sfiorare la volta rinascimentale.",
-          "en": "Walk the arc of the semicircular corridor and rise until you brush the Renaissance vault."
+          "es": "Pórtico semicircular de la villa de Julio III (Roma, 1551–1555), obra de Vignola, Vasari y Ammannati. Su bóveda está pintada como un emparrado de vides, pájaros y putti abierto al cielo. La curvatura impide verla de un vistazo. Aquí puede recorrerse de extremo a extremo.",
+          "it": "Portico semicircolare della villa di Giulio III (Roma, 1551–1555), opera di Vignola, Vasari e Ammannati. La sua volta è dipinta come un pergolato di viti, uccelli e putti aperto sul cielo. La curvatura impedisce di abbracciarla con un solo sguardo. Qui si può percorrere da un capo all'altro.",
+          "en": "Semicircular portico of Pope Julius III's villa (Rome, 1551–1555), designed by Vignola, Vasari and Ammannati. Its vault is painted as a vine pergola with birds and putti, open to the sky. Its curve makes it impossible to take in at a glance. Here it can be walked from end to end."
         }
       },
       {
@@ -374,7 +721,7 @@
           ],
           "lookLimits": [
             60,
-            45
+            90
           ],
           "height": [
             1.2,
@@ -396,6 +743,20 @@
         },
         "options": {
           "unlit": true
+        }
+      },
+      {
+        "id": "notes",
+        "type": "notes",
+        "label": {
+          "es": "Historia",
+          "it": "Storia",
+          "en": "Behind the lens"
+        },
+        "body": {
+          "es": "En marzo de 2026, la bóveda de este pórtico se fotografió con un iPhone 17, a mano, caminando despacio bajo el techo entre los demás visitantes de Villa Giulia. Sin trípode, sin pértiga y sin luz añadida: solo el teléfono y la luz natural del pórtico.\n\nLa pregunta era sencilla: ¿basta el teléfono que casi todo el mundo lleva en el bolsillo para reconstruir en tres dimensiones una bóveda curva y pintada? Esta lámina es la respuesta.\n\nDe aquellas fotografías sale un modelo fotogramétrico continuo de unos 43 metros de bóveda en arco, que puede recorrerse de un extremo a otro. Su textura suma más de 130 megapíxeles, suficientes para leer la pintura de cerca a lo largo de toda la curva.\n\nUn teléfono tiene sus límites: el sensor es pequeño y el techo queda lejos. Con una cámara profesional y una pértiga para acercarnos a la bóveda, el detalle de la pintura crecería varias veces.",
+          "it": "Nel marzo 2026 la volta di questo portico è stata fotografata con un iPhone 17, a mano, camminando lentamente sotto il soffitto tra gli altri visitatori di Villa Giulia. Senza treppiede, senza asta e senza luce aggiuntiva: solo il telefono e la luce naturale del portico.\n\nLa domanda era semplice: basta il telefono che quasi tutti portano in tasca per ricostruire in tre dimensioni una volta curva e dipinta? Questa tavola è la risposta.\n\nDa quelle fotografie nasce un modello fotogrammetrico continuo di circa 43 metri di volta ad arco, percorribile da un capo all'altro. La sua texture supera i 130 megapixel, abbastanza per leggere la pittura da vicino lungo tutta la curva.\n\nUn telefono ha i suoi limiti: il sensore è piccolo e il soffitto è lontano. Con una fotocamera professionale e un'asta per avvicinarsi alla volta, il dettaglio della pittura crescerebbe di diverse volte.",
+          "en": "In March 2026, the vault of this portico was photographed with an iPhone 17, handheld, walking slowly beneath the ceiling among the other visitors to Villa Giulia. No tripod, no pole, no added lighting: just the phone and the natural light of the portico.\n\nThe question was simple: is the phone almost everyone carries in their pocket enough to reconstruct a curved, painted vault in three dimensions? This plate is the answer.\n\nThose photographs produced a continuous photogrammetric model of some 43 metres of arched vault, which can be walked from one end to the other. Its texture adds up to more than 130 megapixels, enough to read the painting up close along the entire curve.\n\nA phone has its limits: the sensor is small and the ceiling is far away. With a professional camera and a pole to get closer to the vault, the detail of the painting would increase several times over."
         }
       }
     ]
@@ -494,68 +855,21 @@
     },
     "location": {},
     "thumb": "/thumbs/trastevere.jpg",
-    "defaultView": "deepzoom",
+    "defaultView": "article",
     "views": [
       {
         "id": "article",
         "type": "article",
         "label": {
-          "es": "Cúpula del ábside",
-          "it": "Cupola dell'abside",
-          "en": "Apse dome"
+          "es": "Bóveda del ábside",
+          "it": "Catino absidale",
+          "en": "Apse vault"
         },
         "body": {
-          "es": "En la cúpula del ábside puede admirarse un mosaico del trono celestial, del siglo XII, adornado en su parte inferior con Historias de la Virgen, también en mosaico, obra de Pietro Cavallini (1291).",
-          "it": "Nella cupola dell'abside si può ammirare un mosaico del trono celeste, del XII secolo, decorato nella parte inferiore con le Storie della Vergine, anch'esse a mosaico, opera di Pietro Cavallini (1291).",
-          "en": "In the apse dome one can admire a twelfth-century mosaic of the celestial throne, adorned below with the Stories of the Virgin, also in mosaic, by Pietro Cavallini (1291)."
+          "es": "Mosaico del ábside de Santa Maria in Trastevere (Roma), realizado hacia 1140–1143 bajo el papa Inocencio II. En la bóveda, Cristo y la Virgen aparecen sentados en un mismo trono, rodeados de santos y papas; debajo, las Historias de la Virgen de Pietro Cavallini (1291). El altar mayor y la distancia impiden verlo entero desde la nave. El visor ofrece dos maneras de mirarlo: desde el suelo de la nave, como lo ve el visitante, o como un objeto tridimensional que puede girarse y observarse de cerca desde cualquier ángulo.",
+          "it": "Mosaico absidale di Santa Maria in Trastevere (Roma), realizzato intorno al 1140–1143 sotto papa Innocenzo II. Nel catino, Cristo e la Vergine siedono sullo stesso trono, circondati da santi e papi; più in basso, le Storie della Vergine di Pietro Cavallini (1291). L'altare maggiore e la distanza impediscono di vederlo per intero dalla navata. Il visore offre due modi di guardarlo: dal pavimento della navata, come lo vede il visitatore, oppure come un oggetto tridimensionale da ruotare e osservare da vicino da qualsiasi angolazione.",
+          "en": "Apse mosaic of Santa Maria in Trastevere (Rome), made around 1140–1143 under Pope Innocent II. In the vault, Christ and the Virgin sit on a single throne, surrounded by saints and popes; below are Pietro Cavallini's Stories of the Virgin (1291). The high altar and the distance make it impossible to see in full from the nave. The viewer offers two ways of looking at it: from the floor of the nave, as a visitor sees it, or as a three-dimensional object that can be turned and examined up close from any angle."
         }
-      },
-      {
-        "id": "deepzoom",
-        "type": "deepzoom",
-        "label": {
-          "es": "desplegable de la cupula",
-          "it": "distesa della cupola",
-          "en": "unfolded dome"
-        },
-        "sources": [
-          {
-            "id": "base",
-            "label": {
-              "es": "desplegable de la cupula",
-              "it": "distesa della cupola",
-              "en": "unfolded dome"
-            },
-            "tileSource": "/tiles/trastevere/trastevere.dzi",
-            "overlays": [
-              {
-                "id": "notes",
-                "type": "annotations",
-                "label": {
-                  "es": "Anotaciones",
-                  "it": "Annotazioni",
-                  "en": "Annotations"
-                },
-                "regions": [
-                  {
-                    "x": 0.5,
-                    "y": 0.5,
-                    "label": {
-                      "es": "Titulo de la información 1",
-                      "it": "Titolo dell'informazione 1",
-                      "en": "Info title 1"
-                    },
-                    "text": {
-                      "es": "Texto en el centro de la imagen, este texto es claramente mas largo",
-                      "it": "Testo al centro dell'immagine, questo testo è chiaramente più lungo",
-                      "en": "Text at the center of the image, this text is clearly longer"
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
       },
       {
         "id": "model3d",
@@ -612,6 +926,20 @@
               95
             ]
           }
+        }
+      },
+      {
+        "id": "notes",
+        "type": "notes",
+        "label": {
+          "es": "Historia",
+          "it": "Storia",
+          "en": "Behind the lens"
+        },
+        "body": {
+          "es": "Fotografías realizadas en marzo de 2026, en el mismo viaje que Villa Farnesina y con el mismo equipo: cámara Nikon compacta, a mano y sin trípode.\n\nLa principal dificultad fue la posición. Un altar de gran tamaño tapa buena parte de la bóveda, y los puntos desde los que un visitante puede fotografiar están muy restringidos. Para cubrirla entera hubo que hacer un gran número de fotografías de detalle, cada una desde el ángulo que permitía el espacio disponible, y reconstruir el conjunto a partir de ellas.\n\nInvertimos también un buen puñado de euros en iluminar la bóveda. Creemos que los turistas que coincidieron con nosotros quedaron muy contentos.",
+          "it": "Fotografie realizzate nel marzo 2026, nello stesso viaggio di Villa Farnesina e con la stessa attrezzatura: fotocamera Nikon compatta, a mano e senza treppiede.\n\nLa difficoltà principale è stata la posizione. Un altare di grandi dimensioni copre buona parte del catino absidale, e i punti da cui un visitatore può fotografare sono molto limitati. Per coprirlo interamente è stato necessario scattare un gran numero di fotografie di dettaglio, ognuna dall'angolazione consentita dallo spazio disponibile, e ricostruire l'insieme a partire da esse.\n\nAbbiamo anche investito una bella manciata di euro per illuminare il catino absidale. Crediamo che i turisti presenti in quel momento ne siano stati molto contenti.",
+          "en": "Photographs taken in March 2026, on the same trip as Villa Farnesina and with the same equipment: a compact Nikon camera, handheld, without a tripod.\n\nThe main difficulty was position. A large altar blocks much of the vault, and the spots from which a visitor is allowed to take photographs are very limited. Covering it in full meant taking a great many detail shots, each from whatever angle the available space allowed, and rebuilding the whole from them.\n\nWe also spent a fair handful of euros lighting the vault. We believe the tourists who were there at the same time were very pleased."
         }
       }
     ]

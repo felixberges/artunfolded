@@ -12,6 +12,8 @@
   --au-display: 'Sora', system-ui, sans-serif;
   --au-body: 'Inter', system-ui, sans-serif;
   --au-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* altura de la app-bar (padding 0.8rem × 2 + fuente ~1.5rem + border ≈ 56px) */
+  --app-bar-h: 56px;
 }
 
 /* ---- app bar (fija arriba) ------------------------------------------- */
@@ -24,7 +26,7 @@
   border-bottom: 1px solid var(--line, var(--au-line));
 }
 .app-bar-left { display: flex; align-items: center; gap: 1.2rem; min-width: 0; }
-.app-bar-right { display: flex; align-items: center; gap: 1rem; }
+.app-bar-right { display: flex; align-items: center; gap: 1.4rem; }
 .app-mark {
   font-family: var(--au-display);
   font-size: 1.5rem; font-weight: 600; letter-spacing: 0.01em;
@@ -41,13 +43,19 @@
 .back-button .arrow { font-size: 1.35rem; line-height: 1; }
 .back-button:hover { color: var(--accent, var(--au-accent)); }
 
-/* ---- enlace a "Quiénes somos" (mismo patrón que .back-button, sin flecha) */
+/* ---- botones de nav secundaria (Metodología, Quiénes somos) ----------- */
 .about-link {
   font-family: var(--au-body); font-size: 0.86rem; font-weight: 500;
-  color: var(--ink, var(--au-ink));
+  color: var(--ink-dim, var(--au-muted));
   background: none; border: none; cursor: pointer; padding: 0.15rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
 }
-.about-link:hover { color: var(--accent, var(--au-accent)); }
+.about-link:hover { color: var(--ink, var(--au-ink)); }
+.about-link.is-active {
+  color: var(--ink, var(--au-ink));
+  border-bottom-color: var(--accent, var(--au-accent));
+}
 
 /* ---- language selector ------------------------------------------------ */
 .lang-selector { display: inline-flex; gap: 0.15rem; }
@@ -69,6 +77,11 @@
 .monument-header {
   display: grid; gap: 0.6rem;
   padding: 1.2rem 1.4rem 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex-shrink: 0;
+  /* máximo que puede ocupar el header antes de hacer scroll propio */
+  max-height: 40vh;
 }
 .monument-title {
   font-family: var(--au-display); font-weight: 500; font-size: 1.9rem; margin: 0;
@@ -102,20 +115,37 @@
 }
 
 /* ---- stage: visor + panel de anotaciones (dos columnas) -------------- */
+
+/* La vista de monumento ocupa exactamente el espacio disponible entre la
+   app-bar y el borde inferior de la ventana — sin scroll de página.
+   El header (título + texto + tabs) ocupa lo que necesita; el stage
+   (visor + panel) llena el resto con flex:1. Así cada área tiene su
+   propio scroll interno y no se mezclan. */
+.monument {
+  display: flex;
+  flex-direction: column;
+  height: calc(100svh - var(--app-bar-h, 56px));
+  overflow: hidden;
+}
+
 .monument-stage {
-  padding: 1.2rem 1.4rem 2rem;
+  padding: 1.2rem 1.4rem 1.2rem;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.2rem;
+  flex: 1;
+  min-height: 0;  /* imprescindible en flex para que el grid no se desborde */
 }
 @media (min-width: 900px) {
   .monument-stage { grid-template-columns: minmax(0, 1fr) 18rem; }
 }
 .stage-viewer {
   min-width: 0;
-  /* alto fijo del visor: conserva su tamaño aunque el texto de arriba crezca.
-     Ajusta este valor si lo quieres más alto/bajo. */
-  height: min(74vh, 820px);
+  min-height: 0;
+  /* En el layout antiguo (scroll de página) se usaba height fijo.
+     Ahora el stage tiene flex:1 y reparte el espacio con el panel, así
+     que height:100% es suficiente — el grid item llena lo disponible. */
+  height: 100%;
 }
 .view-empty { color: var(--ink-dim, var(--au-muted)); font-family: var(--au-mono); padding: 2rem; }
 
@@ -129,7 +159,7 @@
 .anno-panel-empty { margin: 0; font-family: var(--au-mono); font-size: 0.72rem; color: var(--ink-dim, var(--au-muted)); }
 
 /* lista de puntos en el panel */
-.anno-panel { overflow: auto; }
+.anno-panel { overflow: auto; overscroll-behavior: contain; min-height: 0; }
 .anno-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.3rem; }
 .anno-item {
   width: 100%; display: flex; gap: 0.6rem; align-items: flex-start; text-align: left;
@@ -238,10 +268,11 @@
 .hotspot:hover .hotspot-label { opacity: 1; }
 
 /* ======================================================================
-   La página de monumento FLUYE y hace scroll normal de página: el visor
-   tiene alto fijo (.stage-viewer) para conservar su tamaño aunque el texto
-   de arriba crezca; te desplazas para centrarlo. El panel de anotaciones se
-   estira al alto del visor.
+   La vista de monumento ya NO hace scroll de página: ocupa exactamente
+   el espacio entre la app-bar y el borde inferior (height: calc(100svh -
+   --app-bar-h)). El header tiene overflow-y:auto propio (max-height: 40vh)
+   y el stage (visor + panel de anotaciones) llena el resto con flex:1.
+   Cada área gestiona su propio scroll de forma independiente.
    ====================================================================== */
 
 @media (prefers-reduced-motion: reduce) {

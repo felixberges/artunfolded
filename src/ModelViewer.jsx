@@ -2,6 +2,9 @@
 // Visor 3D "unlit" para fotogrametría (albedo horneado).
 // Render: MeshBasicMaterial + THREE.DoubleSide, sin luces (Canvas flat).
 // Soporta texturas KTX2 (KHR_texture_basisu) vía KTX2Loader, y geometría Draco.
+// Texturas con filtrado trilineal + anisotrópico: sin él, al ver el modelo
+// pequeño o en ángulo (bóvedas) la GPU elige un mipmap demasiado reducido y la
+// textura se ve borrosa hasta que haces zoom.
 //
 // DOS MODOS DE CÁMARA (prop `camera`, viene de monuments.generated.json):
 //   · Órbita: OrbitControls. Si camera.orbit trae eye/target/fov, arranca ahí;
@@ -19,6 +22,7 @@ import { Canvas, useThree, useFrame } from '@react-three/fiber';
 import { useGLTF, Bounds, Center, AdaptiveDpr, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { KTX2Loader } from 'three-stdlib'; // misma fuente que usa drei internamente
+import HelpOverlay from './HelpOverlay';
 
 // --- Rutas de decodificadores (offline-first) --------------------------------
 const BASIS_PATH = '/basis/';
@@ -50,12 +54,20 @@ function Model({ url }) {
 
   // Conversión a unlit: la iluminación ya está horneada en el albedo.
   const prepared = useMemo(() => {
+    const maxAniso = gl.capabilities.getMaxAnisotropy(); // normalmente 16
     scene.traverse((obj) => {
       if (!obj.isMesh) return;
       const src = obj.material;
       const map = src && src.map ? src.map : null;
       if (map) {
         map.colorSpace = THREE.SRGBColorSpace;
+        // Nitidez a distancia y en ángulo: trilineal (solo si hay mipmaps; una
+        // KTX2 sin mipmaps con este filtro saldría negra) + anisotrópico.
+        const hasMips = map.isCompressedTexture ? (map.mipmaps?.length ?? 0) > 1 : map.generateMipmaps;
+        if (hasMips) map.minFilter = THREE.LinearMipmapLinearFilter;
+        map.magFilter = THREE.LinearFilter;
+        map.anisotropy = maxAniso;
+        map.needsUpdate = true;
         obj.material = new THREE.MeshBasicMaterial({
           map,
           side: THREE.DoubleSide,
@@ -68,7 +80,7 @@ function Model({ url }) {
       }
     });
     return scene;
-  }, [scene]);
+  }, [scene, gl]);
 
   return <primitive object={prepared} />;
 }
@@ -412,13 +424,15 @@ export default function ModelViewer({ model, options, camera }) {
         </div>
       )}
 
-      {hasCamera && (
-        <div className="model-home" style={homeWrapStyle}>
+      {/* Arriba a la derecha: Inicio (si hay cámara) + ayuda, en la misma fila */}
+      <div className="model-home" style={homeWrapStyle}>
+        {hasCamera && (
           <button type="button" onClick={goHome} style={toggleBtnStyle(false)} title="Volver a la posición inicial">
             ⌂ Inicio
           </button>
-        </div>
-      )}
+        )}
+        <HelpOverlay type="model3d" corner="inline" />
+      </div>
 
       <Canvas flat dpr={[1, 2]} camera={initialCam}>
         <Suspense fallback={null}>
@@ -479,7 +493,10 @@ const homeWrapStyle = {
   position: 'absolute',
   top: 20,
   right: 20,
-  zIndex: 11,
+  zIndex: 12, // por encima del resto de controles: el panel de ayuda cae sobre ellos
+  display: 'flex',
+  alignItems: 'stretch',
+  gap: 6,
 };
 const zoomWrapStyle = {
   position: 'absolute',

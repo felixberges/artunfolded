@@ -4,28 +4,13 @@ it: Santa Maria in Trastevere
 en: Santa Maria in Trastevere
 [TEXTO]
 titulo:
-	es: Cúpula del ábside
-	it: Cupola dell'abside
-	en: Apse dome
+	es: Bóveda del ábside
+	it: Catino absidale
+	en: Apse vault
 
-	es: En la cúpula del ábside puede admirarse un mosaico del trono celestial, del siglo XII, adornado en su parte inferior con Historias de la Virgen, también en mosaico, obra de Pietro Cavallini (1291).
-	it: Nella cupola dell'abside si può ammirare un mosaico del trono celeste, del XII secolo, decorato nella parte inferiore con le Storie della Vergine, anch'esse a mosaico, opera di Pietro Cavallini (1291).
-	en: In the apse dome one can admire a twelfth-century mosaic of the celestial throne, adorned below with the Stories of the Virgin, also in mosaic, by Pietro Cavallini (1291).
-[VISOR 2D]
-tiles: trastevere
-titulo:
-	es: desplegable de la cupula
-	it: distesa della cupola
-	en: unfolded dome
-punto:0.5, 0.5  
-info visor: 
-	es :Titulo de la información 1
-	it :Titolo dell'informazione 1
-	en :Info title 1
-info anotaciones:
-	es: Texto en el centro de la imagen, este texto es claramente mas largo
-	it: Testo al centro dell'immagine, questo testo è chiaramente più lungo
-	en: Text at the center of the image, this text is clearly longer
+	es: Mosaico del ábside de Santa Maria in Trastevere (Roma), realizado hacia 1140–1143 bajo el papa Inocencio II. En la bóveda, Cristo y la Virgen aparecen sentados en un mismo trono, rodeados de santos y papas; debajo, las Historias de la Virgen de Pietro Cavallini (1291). El altar mayor y la distancia impiden verlo entero desde la nave. El visor ofrece dos maneras de mirarlo: desde el suelo de la nave, como lo ve el visitante, o como un objeto tridimensional que puede girarse y observarse de cerca desde cualquier ángulo.
+	it: Mosaico absidale di Santa Maria in Trastevere (Roma), realizzato intorno al 1140–1143 sotto papa Innocenzo II. Nel catino, Cristo e la Vergine siedono sullo stesso trono, circondati da santi e papi; più in basso, le Storie della Vergine di Pietro Cavallini (1291). L'altare maggiore e la distanza impediscono di vederlo per intero dalla navata. Il visore offre due modi di guardarlo: dal pavimento della navata, come lo vede il visitatore, oppure come un oggetto tridimensionale da ruotare e osservare da vicino da qualsiasi angolazione.
+	en: Apse mosaic of Santa Maria in Trastevere (Rome), made around 1140–1143 under Pope Innocent II. In the vault, Christ and the Virgin sit on a single throne, surrounded by saints and popes; below are Pietro Cavallini's Stories of the Virgin (1291). The high altar and the distance make it impossible to see in full from the nave. The viewer offers two ways of looking at it: from the floor of the nave, as a visitor sees it, or as a three-dimensional object that can be turned and examined up close from any angle.
 [VISOR 3D]
 titulo:
 	es: fotogrametría
@@ -47,3 +32,16 @@ pan: -70, 70                  # grados, giro horizontal
 tilt: -40, 65                 # grados, vertical (+ = hacia la bóveda)
 lente: 15                       # opcional, FOV inicial
 lente limites: 10, 95           # opcional, rango de la rueda
+
+[HISTORIA]
+	es: Fotografías realizadas en marzo de 2026, en el mismo viaje que Villa Farnesina y con el mismo equipo: cámara Nikon compacta, a mano y sin trípode.
+	it: Fotografie realizzate nel marzo 2026, nello stesso viaggio di Villa Farnesina e con la stessa attrezzatura: fotocamera Nikon compatta, a mano e senza treppiede.
+	en: Photographs taken in March 2026, on the same trip as Villa Farnesina and with the same equipment: a compact Nikon camera, handheld, without a tripod.
+
+	es: La principal dificultad fue la posición. Un altar de gran tamaño tapa buena parte de la bóveda, y los puntos desde los que un visitante puede fotografiar están muy restringidos. Para cubrirla entera hubo que hacer un gran número de fotografías de detalle, cada una desde el ángulo que permitía el espacio disponible, y reconstruir el conjunto a partir de ellas.
+	it: La difficoltà principale è stata la posizione. Un altare di grandi dimensioni copre buona parte del catino absidale, e i punti da cui un visitatore può fotografare sono molto limitati. Per coprirlo interamente è stato necessario scattare un gran numero di fotografie di dettaglio, ognuna dall'angolazione consentita dallo spazio disponibile, e ricostruire l'insieme a partire da esse.
+	en: The main difficulty was position. A large altar blocks much of the vault, and the spots from which a visitor is allowed to take photographs are very limited. Covering it in full meant taking a great many detail shots, each from whatever angle the available space allowed, and rebuilding the whole from them.
+
+	es: Invertimos también un buen puñado de euros en iluminar la bóveda. Creemos que los turistas que coincidieron con nosotros quedaron muy contentos.
+	it: Abbiamo anche investito una bella manciata di euro per illuminare il catino absidale. Crediamo che i turisti presenti in quel momento ne siano stati molto contenti.
+	en: We also spent a fair handful of euros lighting the vault. We believe the tourists who were there at the same time were very pleased.

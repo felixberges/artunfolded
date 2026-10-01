@@ -1,0 +1,138 @@
+/* method.css — página "Metodología".
+   Usa los tokens de unfolded-ui.css (--au-ink, --au-accent, etc.)
+   y las mismas familias tipográficas (Sora, Inter, IBM Plex Mono). */
+
+.method {
+  --bronze: var(--accent, var(--au-accent));
+  /* --ink no se redefine aquí: «--ink: var(--ink, …)» se referencia a sí
+     misma, el navegador la anula y todo lo que usa var(--ink) dentro de la
+     página caía en --au-ink (oscuro). Se hereda tal cual del tema global. */
+  --muted:  var(--ink-dim, var(--au-muted));
+  --line:   rgba(176, 137, 83, 0.18);
+}
+
+/* ── hero ── */
+.method-hero {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 3.5rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0;
+}
+.method-hero h1 {
+  font-family: var(--au-display);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.method-hero p {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 56ch;
+  margin-top: 1.4rem;
+}
+
+/* ── pasos ── */
+.method-step {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding-top: 2.8rem;
+  padding-bottom: 2.8rem;
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 720px) {
+  .method-step {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .method-step--flip { direction: rtl; }
+  .method-step--flip > * { direction: ltr; }
+}
+
+.method-step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  justify-content: center;
+}
+.method-num {
+  font-family: var(--au-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--bronze);
+  margin-bottom: 0.2rem;
+}
+.method-step-text h2 {
+  font-family: var(--au-display);
+  font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.method-step-text p {
+  font-family: var(--au-body);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 48ch;
+}
+
+.method-step-img {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.method-step-img img {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+  border: 1px solid var(--line);
+}
+.method-caption {
+  font-family: var(--au-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  padding-left: 2px;
+}
+
+/* ── resultado: texto centrado + imagen a todo ancho ── */
+.method-result {
+  padding-top: 3rem;
+}
+.method-result-text {
+  max-width: 1080px;
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+.method-result-text h2 {
+  font-family: var(--au-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.method-result-text p {
+  font-family: var(--au-body);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 54ch;
+  margin: 0 auto;
+}
+.method-result-fullwidth {
+  width: 100%;
+  border-top: 1px solid var(--line);
+}
+.method-result-fullwidth img {
+  width: 100%;
+  display: block;
+}

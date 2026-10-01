@@ -27,6 +27,7 @@ import { Canvas, useThree } from '@react-three/fiber';
 import { useGLTF, AdaptiveDpr } from '@react-three/drei';
 import * as THREE from 'three';
 import { KTX2Loader } from 'three-stdlib';
+import HelpOverlay from './HelpOverlay';
 import './objectviewer.css';
 
 const BASIS_PATH = '/basis/';
@@ -612,6 +613,7 @@ export default function ObjectViewer({ model, camera, light, color, options }) {
         </div>
         <div style={wrapTR}>
           <button type="button" onClick={goHome} style={btn(false)} className="ov-btn" title="Volver a la vista inicial">⌂ Inicio</button>
+          <HelpOverlay type="object3d" corner="inline" />
         </div>
 
         <Canvas
@@ -692,7 +694,8 @@ export default function ObjectViewer({ model, camera, light, color, options }) {
 
 // --- estilos inline (coherentes con ModelViewer) ---
 const wrapTL = { position: 'absolute', top: 20, left: 20, zIndex: 11, display: 'flex', gap: 6 };
-const wrapTR = { position: 'absolute', top: 20, right: 20, zIndex: 11 };
+// zIndex 12: el panel de ayuda cae por encima del resto de controles.
+const wrapTR = { position: 'absolute', top: 20, right: 20, zIndex: 12, display: 'flex', alignItems: 'stretch', gap: 6 };
 const wrapBL = { position: 'absolute', bottom: 20, left: 20, zIndex: 11, width: 80, height: 80, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(233,231,226,0.18)', background: 'rgba(20,18,16,0.55)', backdropFilter: 'blur(6px)' };
 const wrapBR = { position: 'absolute', bottom: 20, right: 20, zIndex: 11, display: 'flex', flexDirection: 'column', gap: 6 };
 const btn = (active) => ({

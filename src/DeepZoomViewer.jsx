@@ -22,11 +22,15 @@
 //     nativo de OSD no restaura la rotación (comportamiento conocido de la
 //     librería), así que el evento 'home' del viewer se engancha para
 //     forzarla a 0.
+//   - AYUDA: <HelpOverlay type="deepzoom"/> es HERMANO del div de OSD (no
+//     hijo), para que la rueda/doble clic sobre el panel no lleguen al visor.
+//     Se apila en la columna de la derecha, bajo los botones de giro.
 
 import { useEffect, useRef, useState } from 'react';
 import OpenSeadragon from 'openseadragon';
 import { useT, useLang } from './i18n';
 import { ui } from './strings';
+import HelpOverlay from './HelpOverlay';
 import './annotations.css';
 
 const OSD_PREFIX = '/openseadragon/images/';
@@ -45,11 +49,17 @@ const smoothstep = (a, b, x) => {
 
 // --- FOCO (spotlight) ---------------------------------------------------------
 // Opacidad del velo oscuro FUERA de la zona (0..1). La zona queda al 100%.
-const SPOTLIGHT_DARKNESS = 0.6;
+const SPOTLIGHT_DARKNESS = 0.3;
 // Fundido de entrada/salida del velo, en ms.
 const SPOTLIGHT_FADE_MS = 220;
 
-export default function DeepZoomViewer({ sources = [], activeAnno = null, onSelectAnno }) {
+// Modo autor: activo cuando la URL contiene ?author=1 (o ?author=true).
+// En producción (sin ese parámetro) es completamente invisible.
+// Uso: abre la web con ?author=1, haz clic sobre la imagen -> la consola
+// imprime la línea 'punto: x, y' lista para pegar en el .txt.
+const AUTHOR_MODE = new URLSearchParams(window.location.search).get('author') === '1';
+
+export default function DeepZoomViewer({ sources = [], activeAnno = null, onSelectAnno, options = {} }) {
   const t = useT();
   const { lang } = useLang();
   const [activeId, setActiveId] = useState(sources[0]?.id);
@@ -72,7 +82,9 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
   const maskCacheRef = useRef(new Map()); // url -> Promise<HTMLImageElement>
   const spotTokenRef = useRef(0);         // anti-carrera al cambiar de selección
   const spotIndexRef = useRef(null);      // índice con foco activo (o null)
+  const spotMaskImgRef = useRef(null);    // imagen de máscara cargada (para repintar)
   const applySpotlightRef = useRef(() => {});
+  const updateMaskPositionRef = useRef(() => {});
 
   // --- refs del giro de vista ---
   const rotateByRef = useRef(() => {});   // expone la función de giro al JSX
@@ -89,6 +101,7 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
   };
 
   const [opacities, setOpacities] = useState({});
+  const [authorPoints, setAuthorPoints] = useState([]); // modo autor: puntos acumulados
 
   useEffect(() => {
     if (!active || !containerRef.current) return;
@@ -123,16 +136,17 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
       const home = v.viewport.getHomeZoom();
       const ratio = home ? v.viewport.getZoom(true) / home : 1;
       const base = smoothstep(REVEAL_MIN, REVEAL_MAX, ratio);
+      const hasActive = activeAnnoRef.current != null;
       pinsRef.current.forEach((el, i) => {
         if (!el) return;
-        const op = i === activeAnnoRef.current ? 1 : base;
+        // Con selección: solo el pin activo visible. Sin selección: todos con zoom.
+        const op = hasActive ? (i === activeAnnoRef.current ? 1 : 0) : base;
         el.style.opacity = String(op);
         el.style.pointerEvents = op < 0.05 ? 'none' : 'auto';
       });
-      // Velo del foco: visible solo si hay punto enfocado, modulado por zoom.
+      // Velo: siempre al 70% al seleccionar, sin depender del zoom.
       if (scrimRef.current) {
-        const on = spotIndexRef.current != null;
-        scrimRef.current.style.opacity = on ? String(base) : '0';
+        scrimRef.current.style.opacity = spotIndexRef.current != null ? '1' : '0';
       }
     };
     revealRef.current = updateReveal;
@@ -167,57 +181,98 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
 
     // Velo oscuro a marco completo (overlay alineado a la imagen). Se calará el
     // agujero al seleccionar un punto. Pines por encima (se añaden después).
+    // Sistema de velo con DOS CAPAS CSS fuera de OSD — sin canvas, sin overlay OSD.
+    // El overlay de OSD se mueve con la imagen (correcto para pins), pero para el
+    // velo necesitamos cubrir el VIEWPORT completo, no la imagen. Por eso usamos
+    // un div CSS position:absolute sobre el contenedor del viewer.
+    //
+    // Capa 1: div oscuro uniforme (el velo)
+    // Capa 2: <img> de la máscara PNG con mix-blend-mode:screen — donde la máscara
+    //         es blanca, 'screen' contra el negro del velo = negro (sin efecto).
+    //         Donde la máscara es negra/transparente, el velo oscuro se ve completo.
+    //         Así el "agujero" es donde la máscara es blanca/opaca: justo lo que queremos.
+    //
+    // La máscara se posiciona como overlay de OSD (sobre la imagen) para que
+    // se mueva y escale con el zoom — solo la capa oscura es fija sobre el viewport.
+
     const addScrim = () => {
-      const item = viewer.world.getItemAt(0);
-      if (!item) return;
-      const el = document.createElement('div');
-      el.className = 'au-spotlight';
-      el.style.pointerEvents = 'none';
-      el.style.opacity = '0';
-      el.style.transition = `opacity ${SPOTLIGHT_FADE_MS}ms ease`;
-      el.style.willChange = 'opacity';
+      const container = containerRef.current;
+      if (!container) return;
+      container.style.position = 'relative';
       const canvas = document.createElement('canvas');
-      canvas.className = 'au-spotlight-canvas';
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      canvas.style.display = 'block';
-      el.appendChild(canvas);
-      scrimRef.current = el;
+      canvas.style.cssText = `position:absolute;inset:0;z-index:5;
+        pointer-events:none;opacity:0;
+        transition:opacity ${SPOTLIGHT_FADE_MS}ms ease;will-change:opacity;`;
+      container.appendChild(canvas);
+      scrimRef.current = canvas;
       scrimCanvasRef.current = canvas;
-      viewer.addOverlay({ element: el, location: item.getBounds() });
     };
 
-    // Prepara el velo para el índice i (o lo apaga si i==null o no hay máscara).
-    // La opacidad final la pone updateReveal (modulada por zoom): aquí solo se
-    // dibuja el agujero y se registra qué punto está enfocado.
     const applySpotlight = (i) => {
-      const scrim = scrimRef.current;
-      const canvas = scrimCanvasRef.current;
-      if (!scrim || !canvas) return;
-      const token = ++spotTokenRef.current; // invalida cargas anteriores en vuelo
+      if (!scrimRef.current) return;
+      const token = ++spotTokenRef.current;
       const url = i != null ? maskUrl(i) : null;
-      if (!url) { spotIndexRef.current = null; updateReveal(); return; }
-      loadMask(url)
-        .then((img) => {
-          if (token !== spotTokenRef.current) return; // la selección ya cambió
-          const w = img.naturalWidth, h = img.naturalHeight;
-          canvas.width = w; canvas.height = h;
-          const ctx = canvas.getContext('2d');
-          ctx.clearRect(0, 0, w, h);
-          // 1) velo uniforme oscuro
-          ctx.globalCompositeOperation = 'source-over';
-          ctx.fillStyle = `rgba(0,0,0,${SPOTLIGHT_DARKNESS})`;
-          ctx.fillRect(0, 0, w, h);
-          // 2) calar el agujero donde la máscara es opaca (borde plumeado -> suave)
-          ctx.globalCompositeOperation = 'destination-out';
-          ctx.drawImage(img, 0, 0, w, h);
-          ctx.globalCompositeOperation = 'source-over';
-          spotIndexRef.current = i;
-          updateReveal();
-        })
-        .catch(() => { if (token === spotTokenRef.current) { spotIndexRef.current = null; updateReveal(); } });
+      if (!url) { spotIndexRef.current = null; spotMaskImgRef.current = null; updateReveal(); return; }
+      loadMask(url).then((img) => {
+        if (token !== spotTokenRef.current) return;
+        spotMaskImgRef.current = img;
+        spotIndexRef.current = i;
+        paintScrim();
+        updateReveal();
+      }).catch(() => {
+        if (token === spotTokenRef.current) { spotIndexRef.current = null; spotMaskImgRef.current = null; updateReveal(); }
+      });
     };
     applySpotlightRef.current = applySpotlight;
+
+    // Pinta el velo + agujero de máscara en el canvas, con rotación real de OSD.
+    const paintScrim = () => {
+      const canvas = scrimCanvasRef.current;
+      const img = spotMaskImgRef.current;
+      const v = viewerRef.current;
+      const container = containerRef.current;
+      if (!canvas || !v || !container) return;
+      const cw = container.offsetWidth;
+      const ch = container.offsetHeight;
+      if (!cw || !ch) return;
+      canvas.width = cw;
+      canvas.height = ch;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, cw, ch);
+      // Pintar siempre el velo oscuro, con o sin máscara.
+      ctx.fillStyle = `rgba(0,0,0,${SPOTLIGHT_DARKNESS})`;
+      ctx.fillRect(0, 0, cw, ch);
+      if (!img || spotIndexRef.current == null) return;
+
+      const item = v.world.getItemAt(0);
+      if (!item) return;
+
+      // Obtener los 4 vértices de la imagen en coordenadas del elemento viewer
+      // (píxeles relativos al div contenedor) — funciona con cualquier versión de OSD.
+      const imgSize = item.getContentSize();
+      const toEl = (ix, iy) => {
+        const vp = item.imageToViewportCoordinates(ix, iy);
+        return v.viewport.viewportToViewerElementCoordinates(vp);
+      };
+      const tl = toEl(0, 0);
+      const tr = toEl(imgSize.x, 0);
+      const bl = toEl(0, imgSize.y);
+
+      // Construir la matriz de transformación 2D que mapea coordenadas de imagen
+      // a coordenadas del canvas (incluye zoom, paneo y rotación).
+      const ax = tr.x - tl.x, ay = tr.y - tl.y;
+      const bx = bl.x - tl.x, by = bl.y - tl.y;
+
+      ctx.save();
+      ctx.transform(ax / imgSize.x, ay / imgSize.x,
+                    bx / imgSize.y, by / imgSize.y,
+                    tl.x, tl.y);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.drawImage(img, 0, 0, imgSize.x, imgSize.y);
+      ctx.restore();
+      ctx.globalCompositeOperation = 'source-over';
+    };
+    updateMaskPositionRef.current = paintScrim;
 
     const addPins = () => {
       pinsRef.current = [];
@@ -276,9 +331,29 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
     };
 
     viewer.addHandler('open', onOpen);
-    viewer.addHandler('zoom', updateReveal);
-    viewer.addHandler('animation', updateReveal);
+    const onZoomOrPan = () => { updateReveal(); updateMaskPositionRef.current(); };
+    viewer.addHandler('zoom', onZoomOrPan);
+    viewer.addHandler('animation', onZoomOrPan);
     viewer.addHandler('home', onHome);
+    viewer.addHandler('rotate', onZoomOrPan);
+
+    // --- Modo autor: doble clic -> añade punto al panel superpuesto -----------
+    if (AUTHOR_MODE) {
+      const container = containerRef.current;
+      if (container) container.style.cursor = 'crosshair';
+
+      const onAuthorClick = (event) => {
+        const item = viewer.world.getItemAt(0);
+        if (!item) return;
+        const size = item.getContentSize();
+        const vpPoint = viewer.viewport.pointFromPixel(event.position);
+        const img = viewer.viewport.viewportToImageCoordinates(vpPoint);
+        const x = (img.x / size.x).toFixed(4);
+        const y = (img.y / size.y).toFixed(4);
+        setAuthorPoints((prev) => [...prev, `punto:${x}, ${y}`]);
+      };
+      viewer.addHandler('canvas-double-click', onAuthorClick);
+    }
 
     return () => {
       viewer.destroy();
@@ -286,13 +361,15 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
       pinsRef.current = [];
       labelsRef.current = [];
       pointsRef.current = [];
+      if (scrimRef.current?.parentNode) scrimRef.current.parentNode.removeChild(scrimRef.current);
       scrimRef.current = null;
       scrimCanvasRef.current = null;
       spotIndexRef.current = null;
+      spotMaskImgRef.current = null;
       rotateByRef.current = () => {};
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active?.id]);
+  }, [activeId]);
 
   // Reescribe los rótulos al cambiar de idioma SIN reinicializar el visor
   // (los pines se montan de forma imperativa y su efecto no depende de lang).
@@ -308,7 +385,20 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
 
   // Resalta el pin seleccionado, lo fuerza visible, enciende el foco y centra.
   useEffect(() => {
-    pinsRef.current.forEach((el, i) => el && el.classList.toggle('is-active', i === activeAnno));
+    pinsRef.current.forEach((el, i) => {
+      if (!el) return;
+      el.classList.toggle('is-active', i === activeAnno);
+      if (activeAnno != null) {
+        el.style.opacity = i === activeAnno ? '1' : '0';
+        el.style.pointerEvents = i === activeAnno ? 'auto' : 'none';
+      }
+    });
+    // Mostrar el scrim inmediatamente al seleccionar (sin esperar a loadMask).
+    // applySpotlight pintará el agujero cuando la máscara cargue; si no hay
+    // máscara quedará el velo sólido, que también es válido.
+    if (scrimRef.current) {
+      scrimRef.current.style.opacity = activeAnno != null ? '1' : '0';
+    }
     revealRef.current();
     applySpotlightRef.current(activeAnno);
     if (activeAnno != null && pointsRef.current[activeAnno] && viewerRef.current) {
@@ -332,28 +422,68 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
       <div className="deepzoom-stage-wrap" style={stageWrap}>
         <div className="deepzoom-stage" ref={containerRef} />
 
-        <div style={wrapTR}>
-          <button
-            type="button"
-            onClick={() => rotateByRef.current(-ROTATE_STEP)}
-            style={zbtn}
-            className="ov-zbtn"
-            title="Girar antihorario"
-            aria-label="Girar antihorario"
-          >
-            ↺
-          </button>
-          <button
-            type="button"
-            onClick={() => rotateByRef.current(ROTATE_STEP)}
-            style={zbtn}
-            className="ov-zbtn"
-            title="Girar horario"
-            aria-label="Girar horario"
-          >
-            ↻
-          </button>
-        </div>
+        {AUTHOR_MODE && (
+          <div style={authorPanel}>
+            <div style={authorHeader}>
+              <span>✎ AUTOR — doble clic = punto</span>
+              <div style={{ display: 'flex', gap: 6 }}>
+                <button
+                  type="button"
+                  style={authorBtn}
+                  onClick={() => {
+                    navigator.clipboard?.writeText(authorPoints.join('\n'));
+                  }}
+                  title="Copiar todo al portapapeles"
+                >
+                  copiar
+                </button>
+                <button
+                  type="button"
+                  style={authorBtn}
+                  onClick={() => setAuthorPoints([])}
+                  title="Limpiar lista"
+                >
+                  limpiar
+                </button>
+              </div>
+            </div>
+            <pre style={authorPre}>
+              {authorPoints.length === 0
+                ? '(doble clic sobre la imagen)'
+                : authorPoints.map((p, i) => `${i + 1}. ${p}`).join('\n')}
+            </pre>
+          </div>
+        )}
+
+        {options.rotate !== false && (
+          <div style={wrapTR}>
+            <button
+              type="button"
+              onClick={() => rotateByRef.current(-ROTATE_STEP)}
+              style={zbtn}
+              className="ov-zbtn"
+              title="Girar antihorario"
+              aria-label="Girar antihorario"
+            >
+              ↺
+            </button>
+            <button
+              type="button"
+              onClick={() => rotateByRef.current(ROTATE_STEP)}
+              style={zbtn}
+              className="ov-zbtn"
+              title="Girar horario"
+              aria-label="Girar horario"
+            >
+              ↻
+            </button>
+          </div>
+        )}
+
+        <HelpOverlay
+          type="deepzoom"
+          style={options.rotate !== false ? helpBelowRotate : helpTR}
+        />
       </div>
 
       {hasControls && (
@@ -397,7 +527,37 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
 
 // --- estilos inline (coherentes con ObjectViewer/ModelViewer) ---
 const stageWrap = { position: 'relative', width: '100%', height: '100%' };
+// Ayuda en la misma columna que los botones de giro (2 × 40px + 2 × 6px de gap).
+const helpTR = { top: 20, right: 20 };
+const helpBelowRotate = { top: 20 + 2 * 40 + 2 * 6, right: 20 };
 const wrapTR = { position: 'absolute', top: 20, right: 20, zIndex: 11, display: 'flex', flexDirection: 'column', gap: 6 };
+const authorPanel = {
+  position: 'absolute', bottom: 16, left: 16, zIndex: 20,
+  width: 280, maxHeight: 220,
+  display: 'flex', flexDirection: 'column',
+  background: 'rgba(20,10,5,0.92)', border: '1px solid rgba(176,137,83,0.5)',
+  borderRadius: 6, backdropFilter: 'blur(8px)', overflow: 'hidden',
+};
+const authorHeader = {
+  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+  padding: '6px 10px',
+  fontFamily: "'IBM Plex Mono',monospace", fontSize: '0.68rem',
+  letterSpacing: '0.08em', color: '#b08953',
+  borderBottom: '1px solid rgba(176,137,83,0.25)',
+};
+const authorBtn = {
+  fontFamily: "'IBM Plex Mono',monospace", fontSize: '0.65rem',
+  padding: '2px 7px', borderRadius: 3, cursor: 'pointer',
+  background: 'rgba(176,137,83,0.18)', border: '1px solid rgba(176,137,83,0.4)',
+  color: '#d8b988',
+};
+const authorPre = {
+  margin: 0, padding: '8px 10px',
+  fontFamily: "'IBM Plex Mono',monospace", fontSize: '0.7rem',
+  lineHeight: 1.6, color: '#e9e7e2',
+  overflowY: 'auto', flex: 1,
+  whiteSpace: 'pre-wrap', wordBreak: 'break-all',
+};
 const zbtn = {
   width: 40, height: 40, fontFamily: "'IBM Plex Mono', monospace", fontSize: '1.2rem', lineHeight: 1,
   color: '#e9e7e2', background: 'rgba(20, 18, 16, 0.72)', border: '1px solid rgba(233, 231, 226, 0.25)',

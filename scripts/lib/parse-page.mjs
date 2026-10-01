@@ -30,6 +30,7 @@ const BLOCK_RE = /^\[(.+?)\]$/;
 const BLOCK_TYPES = {
   'TITULO': 'title',
   'TEXTO': 'article',
+  'HISTORIA': 'notes',
   'VISOR 2D': 'deepzoom',
   'VISOR 3D': 'model3d',
   'VISOR OBJETO': 'object3d',
@@ -131,7 +132,7 @@ function parseBlock(block, warn) {
   const color = {};
 
   // Campo por defecto al que van las sub-líneas es:/it:/en: sin marca previa.
-  const defaultTarget = type === 'article' ? body : title;
+  const defaultTarget = (type === 'article' || type === 'notes') ? body : title;
 
   let currentTarget = defaultTarget; // mapa localizado activo
   let capture = null; // { target, lang } si hay captura multilínea abierta
@@ -156,7 +157,14 @@ function parseBlock(block, warn) {
       const lang = mLang[1];
       const value = mLang[2].trim();
       if (value !== '') {
-        currentTarget[lang] = value; // valor de una línea
+        // Si el target ya tiene valor para este idioma, acumula como párrafo nuevo
+        // (separado por doble salto de línea, igual que en [TEXTO] multilínea).
+        // Esto permite escribir varios es:/it:/en: consecutivos en [HISTORIA].
+        if (currentTarget[lang]) {
+          currentTarget[lang] += '\n\n' + value;
+        } else {
+          currentTarget[lang] = value;
+        }
         endCapture();
       } else {
         currentTarget[lang] = ''; // abre multilínea
@@ -426,6 +434,7 @@ function parseBlock(block, warn) {
   const view = { type, title: clean(title) || {} };
   if (blockId) view.id = blockId;
   if (type === 'article') view.body = clean(body) || {};
+  if (type === 'notes') view.body = clean(body) || {};
   if (type === 'deepzoom') { view.tiles = tiles; view.annotations = annotations.map(cleanAnno); }
   if (type === 'model3d') {
     view.model = model;

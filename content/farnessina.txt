@@ -18,55 +18,242 @@ titulo:
 	es: desplegable del techo
 	it: distesa del soffitto
 	en: unfolded ceiling
-punto:0.495, 0.46
-info visor: 
-	es : Lo que viene a ser el medio
-	it : Quello che viene a essere il centro
-	en : What amounts to the center
-info anotaciones:
-	es: Se descubre rápidamente que es el motivo central por su posición, en todo el medio.
-	it: Si scopre rapidamente che è il motivo centrale per la sua posizione, proprio nel mezzo.
-	en: It quickly becomes clear that this is the central motif, given its position right in the middle.
-punto:0.41, 0.465
-info visor: 
-	es :Vaca simpática
-	it :Mucca simpatica
-	en :Charming cow
-info anotaciones:
-	es: Rafael pintaba las vacas mas simpáticas del Renacimiento.
-	it: Raffaello dipingeva le mucche più simpatiche del Rinascimento.
-	en: Raphael painted the most charming cows of the Renaissance.
 
-[CARRUSEL]
-titulo:
-	es: Galeria de fotos
-	it: Galleria fotografica
-	en: Photo gallery
-carpeta: galatea_detalles
-imagen: 01.jpg
-	pie:
-		es: Detalle 1 texto largo
-		it: Dettaglio 1 testo lungo
-		en: Detail 1 long text
-imagen: 02.jpg
-	pie:
-		es: DEtalle 2 pie de foto
-		it: Dettaglio 2 didascalia
-		en: Detail 2 photo caption
-imagen: 03.jpg
-	pie:
-		es: DEtalle 3 pie de foto
-		it: Dettaglio 3 didascalia
-		en: Detail 3 photo caption
-imagen: 04.jpg
-	pie:
-		es: DEtalle 4 pie de foto
-		it: Dettaglio 4 didascalia
-		en: Detail 4 photo caption
-imagen: 05.jpg
-	pie:
-		es: DEtalle 5 pie de foto
-		it: Dettaglio 5 didascalia
-		en: Detail 5 photo caption
+punto:0.5824, 0.185
+info visor:
+	es: Júpiter y Europa
+	it: Giove e Europa
+	en: Jupiter and Europa
+info anotaciones:
+	es: Júpiter rapta a Europa transformado en toro. Signos del zodíaco: Júpiter en Aries y Tauro.
+	it: Giove rapisce Europa sotto forma di toro. Segno zodiacale: Giove in Ariete e Toro.
+	en: Jupiter carries off Europa in the form of a bull. Signs of the zodiac: Jupiter in Aries and Taurus.
+
+punto:0.4949, 0.1989
+info visor:
+	es: Constelación de Erídano
+	it: Costellazione di Eridano
+	en: Constellation of Eridanus
+info anotaciones:
+	es: La constelación de Erídano, el río celeste.
+	it: La costellazione di Eridano, il fiume celeste.
+	en: The constellation of Eridanus, the celestial river.
+
+punto:0.4165, 0.187
+info visor:
+	es: Leda y el cisne
+	it: Leda e il cigno
+	en: Leda and the Swan
+info anotaciones:
+	es: Leda y el cisne. Signo del zodíaco: Géminis.
+	it: Leda e il cigno. Segno zodiacale: Gemelli.
+	en: Leda and the swan. Sign of the zodiac: Gemini.
+
+punto:0.326, 0.1987
+info visor:
+	es: Constelación del Auriga
+	it: Costellazione dell'Auriga
+	en: Constellation of Auriga
+info anotaciones:
+	es: La constelación del Auriga, el cochero celeste.
+	it: La costellazione dell'Auriga, il cocchiere celeste.
+	en: The constellation of Auriga, the celestial charioteer.
+
+punto:0.2435, 0.1925
+info visor:
+	es: Hércules y la Hidra
+	it: Ercole e l'Idra
+	en: Hercules and the Hydra
+info anotaciones:
+	es: Hércules y la Hidra de Lerna. Signo del zodíaco: Cáncer.
+	it: Ercole e l'Idra di Lerna. Segno zodiacale: Cancro.
+	en: Hercules and the Lernaean Hydra. Sign of the zodiac: Cancer.
+
+punto:0.1343, 0.2756
+info visor:
+	es: Constelación de Argo
+	it: Costellazione di Argo
+	en: Constellation of Argus
+info anotaciones:
+	es: La constelación de Argo y la constelación del Can.
+	it: La costellazione di Argo e la costellazione del Cane.
+	en: The constellation of Argus and the constellation of Canis.
+
+punto:0.1223, 0.4376
+info visor:
+	es: Hércules y el León
+	it: Ercole e il Leone
+	en: Hercules and the Lion
+info anotaciones:
+	es: Hércules y el León de Nemea. Signo del zodíaco: Leo.
+	it: Ercole e il Leone Nemeo. Segno zodiacale: Leone.
+	en: Hercules and the Nemean Lion. Sign of the zodiac: Leo.
+
+punto:0.1646, 0.6758
+info visor:
+	es: Serpiente, Cuervo y Crátera
+	it: Serpe, Corvo e Cratere
+	en: Serpens, Corvus and Crater
+info anotaciones:
+	es: Las constelaciones de la Serpiente y el Cuervo, y la constelación de la Crátera.
+	it: Le costellazioni del Serpe e del Corvo e la costellazione del Cratere.
+	en: The constellations of Serpens and Corvus, and the constellation of Crater.
+
+punto:0.2555, 0.6824
+info visor:
+	es: Diana y Erígone
+	it: Diana ed Erigone
+	en: Diana and Erigone
+info anotaciones:
+	es: Diana cazadora y Erígone. Signo del zodíaco: Luna en Virgo.
+	it: Diana cacciatrice ed Erigone. Segno zodiacale: Luna in Vergine.
+	en: Diana the Huntress and Erigone. Sign of the zodiac: Moon in Virgo.
+
+punto:0.3338, 0.6995
+info visor:
+	es: Baco y Ariadna
+	it: Bacco e Arianna
+	en: Bacchus and Ariadne
+info anotaciones:
+	es: Baco y Ariadna. La constelación de la Corona.
+	it: Bacco e Arianna. La costellazione della Corona.
+	en: Bacchus and Ariadne. The constellation of Corona.
+
+punto:0.4202, 0.6824
+info visor:
+	es: Mercurio y Marte
+	it: Mercurio e Marte
+	en: Mercury and Mars
+info anotaciones:
+	es: Mercurio y Marte. Signos del zodíaco: Marte en Libra y Mercurio en Escorpio.
+	it: Mercurio e Marte. Segno zodiacale: Marte in Bilancia e Mercurio in Scorpione.
+	en: Mercury and Mars. Signs of the zodiac: Mars in Libra and Mercury in Scorpio.
+
+punto:0.5021, 0.681
+info visor:
+	es: Constelación del Altar
+	it: Costellazione dell'Ara
+	en: Constellation of Ara
+info anotaciones:
+	es: La constelación del Altar.
+	it: La costellazione dell'Ara.
+	en: The constellation of Ara.
+
+punto:0.5838, 0.683
+info visor:
+	es: Apolo y el Centauro
+	it: Apollo e il Centauro
+	en: Apollo and the Centaur
+info anotaciones:
+	es: Apolo y un Centauro. Signo del zodíaco: Sol en Sagitario.
+	it: Apollo e un Centauro. Segno zodiacale: Sole in Sagittario.
+	en: Apollo and a Centaur. Sign of the zodiac: Sun in Sagittarius.
+
+punto:0.6708, 0.6988
+info visor:
+	es: Apolo y la Lira
+	it: Apollo e la Lira
+	en: Apollo and the Lyre
+info anotaciones:
+	es: Apolo. Signo del zodíaco: La constelación de la Lira.
+	it: Apollo. Segno zodiacale: La costellazione della Lira.
+	en: Apollo. Sign of the zodiac: The constellation of Lyra.
+
+punto:0.7487, 0.6774
+info visor:
+	es: Venus en Capricornio
+	it: Venere in Capricorno
+	en: Venus in Capricorn
+info anotaciones:
+	es: Venus. Signo del zodíaco: Venus en Capricornio.
+	it: Venere. Segno zodiacale: Venere in Capricorno.
+	en: Venus. Sign of the zodiac: Venus in Capricorn.
+
+punto:0.8652, 0.7275
+info visor:
+	es: Saeta y Delfín
+	it: Freccia e Delfino
+	en: Sagitta and Delphinus
+info anotaciones:
+	es: La constelación de la Saeta y la constelación del Delfín.
+	it: La costellazione della Freccia e la costellazione del Delfino.
+	en: The constellation of Sagitta and the constellation of Delphinus.
+
+punto:0.8741, 0.41
+info visor:
+	es: Rapto de Ganímedes
+	it: Ratto di Ganimede
+	en: Rape of Ganymede
+info anotaciones:
+	es: El rapto de Ganímedes. Signo del zodíaco: Acuario.
+	it: Il ratto di Ganimede. Segno zodiacale: Acquario.
+	en: The rape of Ganymede. Sign of the zodiac: Aquarius.
+
+punto:0.8772, 0.2508
+info visor:
+	es: Cisne y Pegaso
+	it: Cigno e Pegaso
+	en: Cygnus and Pegasus
+info anotaciones:
+	es: La constelación del Cisne y la constelación de Pegaso.
+	it: La costellazione del Cigno e la costellazione di Pegaso.
+	en: The constellation of Cygnus and the constellation of Pegasus.
+
+punto:0.7464, 0.1832
+info visor:
+	es: Venus, Amor y Saturno
+	it: Venere, Amore e Saturno
+	en: Venus, Cupid and Saturn
+info anotaciones:
+	es: Venus, Amor y Saturno. Signo del zodíaco: Saturno en Piscis.
+	it: Venere, Amore e Saturno. Segno zodiacale: Saturno in Pesci.
+	en: Venus, Cupid and Saturn. Sign of the zodiac: Saturn in Pisces.
+
+punto:0.6653, 0.1948
+info visor:
+	es: Constelación del Triángulo
+	it: Costellazione del Triangolo
+	en: Constellation of Triangulum
+info anotaciones:
+	es: La constelación del Triángulo.
+	it: La costellazione del Triangolo.
+	en: The constellation of Triangulum.
+
+punto:0.6795, 0.4007
+info visor:
+	es: Perseo y la Gorgona
+	it: Perseo e la Gorgone
+	en: Perseus and the Gorgon
+info anotaciones:
+	es: El mito de Perseo y la Gorgona, y la Fama.
+	it: Il mito di Perseo e della Gorgone e la Fama.
+	en: The myth of Perseus and the Gorgon, and Fame.
+
+punto:0.3349, 0.4047
+info visor:
+	es: Calisto y la Osa Mayor
+	it: Callisto e l'Orsa Maggiore
+	en: Callisto and Ursa Major
+info anotaciones:
+	es: Calisto transformada en la Osa Mayor.
+	it: Callisto trasformata in Orsa Maggiore.
+	en: Callisto transformed into Ursa Major.
 
 opciones: ajuste=contain, autoplay=0, bucle, miniaturas
+
+[HISTORIA]
+	es: Fotografías realizadas en marzo de 2026 durante una visita turística a Villa Farnessina.
+	it: Fotografie realizzate nel marzo 2026 durante una visita turistica a Villa Farnesina.
+	en: Photographs taken in March 2026 during a tourist visit to Villa Farnesina.
+
+	es: El objetivo de esta lámina era probar el método desde el principio hasta el final con medios de aficionado: demostrar que el proceso funciona incluso con material básico y sin condiciones ideales.
+	it: L'obiettivo di questa tavola era testare il metodo dall'inizio alla fine con mezzi da appassionato: dimostrare che il processo funziona anche con attrezzatura di base e senza condizioni ideali.
+	en: The aim of this plate was to test the method from start to finish with amateur equipment: to show that the process works even with basic gear and less-than-ideal conditions.
+
+	es: El resultado es, ya de por sí, una imagen con muchísimo detalle (200 megapíxeles). Con una cámara profesional, trípode y el tiempo adecuado, podríamos multiplicar por cuatro la resolución final.
+	it: Il risultato è già di per sé un'immagine con un dettaglio straordinario (200 megapixel). Con una fotocamera professionale, treppiede e il tempo adeguato, potremmo moltiplicare per quattro la risoluzione finale.
+	en: The result is, in itself, an image of extraordinary detail (200 megapixels). With a professional camera, a tripod and the right time, we could achieve four times the final resolution.
+
+	es: Cámara Nikon compacta, a mano y sin trípode, con unos 16 megapíxeles y una focal equivalente a 50mm. Todo el trabajo de captura se hizo en poco más de media hora, sin molestar a los numerosos turistas que compartían el espacio.
+	it: Fotocamera Nikon compatta, a mano e senza treppiede, con circa 16 megapixel e una focale equivalente a 50mm. L'intera sessione fotografica si è svolta in poco più di mezz'ora, senza disturbare i numerosi turisti presenti.
+	en: Compact Nikon camera, handheld without a tripod, at roughly 16 megapixels and a focal length equivalent to 50mm. The entire shoot took just over half an hour, without disturbing the many other tourists in the space.

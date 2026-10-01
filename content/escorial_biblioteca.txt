@@ -15,8 +15,58 @@ titulo:
 	
 
 [VISOR 2D]
+rotar: no
 tiles: biblioteca_escorial
 titulo:
 	es: desplegable del techo
 	it: distesa del soffitto
 	en: unfolded ceiling
+
+punto:0.2321, 0.2084
+
+info anotaciones:
+	es: TEOLOGIA: San Ambrosio, San Gregorio Magno, San Agustín y San Jerónimo —los cuatro grandes Padres de la Iglesia latina— flanquean la alegoría de la Teología. Debajo, el Concilio de Nicea: Osio de Córdoba arroja al fuego los escritos de Arrio.
+punto:0.7691, 0.2079
+info anotaciones:
+	es: FILOSOFIA: Aristóteles, Platón, Séneca y Sócrates rodean la alegoría de la Filosofía. Debajo, la Escuela de Atenas: Sócrates y los académicos, Zenón y los estoicos.
+
+punto:0.0853, 0.5
+info anotaciones:
+	es: ASTROLOGIA: Ptoloméo, Alfonso X el Sabio, Diodoro Sículo, Juan de Sacrobosco, Euclides, Teodoro de Cirene y Alcabitio ilustran esta arte. Dos escenas: Dionisio Areopagita observa el eclipse de sol del día en que murió Jesucristo, y Yavé retrocede el tiempo para prolongar quince años la vida del rey Ezequías.
+	punto:0.2146, 0.5
+info anotaciones:
+	es: GEOMETRIA: Juan de Monterreggio, Arquímedes, Aristarco de Samos y Miseno protagonizan esta arte. Los sacerdotes egipcios calculan las crecidas periódicas del Nilo, y Arquímedes, absorto en sus cálculos, no advierte que vienen a prenderle.
+
+punto:0.3568, 0.5
+info anotaciones:
+	es: MUSICA: Mercurio, Jubal, Pitágoras, Pan, Orfeo y Anfión ilustran el poder de la música. David expulsa con su cítara a los demonios que atormentan a Saúl, y Orfeo libera a Eurídice del inframundo adormeciendo al Cancerbero con su arpa.
+punto:0.4999, 0.5
+info anotaciones:
+	es: ARITMETICA: Boecio, Arquitas de Tarento, Jenócrates y Jordán representan esta arte. Salomón resuelve los enigmas de la Reina de Saba —todo tiene número, peso y medida— y los gimnosofistas llevan los números a Egipto, vínculo entre el número y el alma.
+	
+punto:0.6428, 0.5
+info anotaciones:
+	es: DIALECTICA: Meliso, Zenón de Elea, Orígenes y Protágoras ilustran el arte del razonamiento. Zenón señala las puertas de la Verdad y la Falsedad, desconfiando de las apariencias, y San Agustín y San Ambrosio debaten cuestiones de fe mientras Santa Mónica reza por la conversión de su hijo.
+
+
+punto:0.7850, 0.5
+info anotaciones:
+	es: RETORICA: Homero, Demóstenes, Isócrates, Píndaro, Quintiliano y Cicerón representan el arte de la elocuencia. Cicerón salva con su defensa la vida del senador Cayo Rabirio, y Hércules Gálico arrastra a la muchedumbre con el poder de la palabra.
+
+punto:0.9154, 0.5
+
+info anotaciones:
+	es: GRAMATICA: Sexto Pomponio, Marco Terencio Varrón, Antonio de Nebrija y Elio Donato ilustran el arte de la gramática. Dios castiga en la Torre de Babel la soberbia de los hombres confundiendo sus lenguas, y los niños hebreos, con Daniel, vencen en sabiduría a los caldeos.
+
+[HISTORIA]
+	es: Esta lámina es, en cierto modo, el origen de Art Unfolded. Magoga la hizo hace más de diez años, por el placer de trabajar sobre uno de sus espacios favoritos y como regalo para una buena amiga.
+	it: Questa tavola è, in un certo senso, l'origine di Art Unfolded. Magoga l'ha realizzata più di dieci anni fa, per il piacere di lavorare su uno dei suoi luoghi preferiti e come regalo per una cara amica.
+	en: In a sense, this plate is where Art Unfolded began. Magoga made it more than ten years ago, for the pleasure of working on one of her favourite places and as a gift for a close friend.
+
+	es: No es una reproducción literal de la bóveda. Los carteles con inscripciones no existen en la biblioteca: Magoga los creó siguiendo el estilo de la época para que no desentonaran con la pintura original. Además, algunas partes se han girado respecto a su orientación real, para que el conjunto resulte más agradable de mirar sobre un plano.
+	it: Non è una riproduzione letterale della volta. I cartigli con le iscrizioni non esistono nella biblioteca: Magoga li ha creati nello stile dell'epoca perché non stonassero con la pittura originale. Inoltre alcune parti sono state ruotate rispetto al loro orientamento reale, perché l'insieme risultasse più gradevole da guardare su un piano.
+	en: It is not a literal reproduction of the vault. The inscribed panels do not exist in the library: Magoga created them in the style of the period so that they would sit naturally with the original painting. Some parts have also been rotated from their actual orientation, so that the whole is more pleasing to look at on a flat surface.
+
+	es: Las láminas que vinieron después parten de la misma idea: mirar una obra entera y con calma, como no puede verse desde el suelo.
+	it: Le tavole venute dopo partono dalla stessa idea: guardare un'opera per intero e con calma, come dal basso non è possibile.
+	en: The plates that came later start from the same idea: looking at a work whole and unhurried, in a way that is not possible from the floor.

@@ -72,7 +72,7 @@ function parseCarouselOptions(raw) {
   return opts;
 }
 
-const slugByType = { article: 'article', deepzoom: 'deepzoom', model3d: 'model3d', object3d: 'object3d', path3d: 'path3d', gallery: 'gallery', diagram: 'diagram', carousel: 'carousel' };
+const slugByType = { article: 'article', notes: 'notes', deepzoom: 'deepzoom', model3d: 'model3d', object3d: 'object3d', path3d: 'path3d', gallery: 'gallery', diagram: 'diagram', carousel: 'carousel' };
 
 let hadError = false;
 const fail = (file, msg) => { hadError = true; console.error(`\n✗ ${basename(file)}: ${msg}`); };
@@ -219,9 +219,18 @@ function transform(page, file) {
 
   for (const v of page.views) {
     const vid = assignId(v);
-    const label = v.title && Object.keys(v.title).length ? v.title : { '*': v.type };
+    const defaultLabels = {
+      notes:    { es: 'Historia', it: 'Storia', en: 'Behind the lens' },
+      article:  { es: 'Texto',    it: 'Testo',  en: 'Text' },
+    };
+    const label = v.title && Object.keys(v.title).length
+      ? v.title
+      : (defaultLabels[v.type] || { '*': v.type });
 
-    if (v.type === 'article') {
+    if (v.type === 'notes') {
+      views.push({ id: vid, type: 'notes', label, body: v.body || {} });
+
+    } else if (v.type === 'article') {
       views.push({ id: vid, type: 'article', label, body: v.body || {} });
 
     } else if (v.type === 'deepzoom') {

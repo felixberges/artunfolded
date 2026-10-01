@@ -1,0 +1,117 @@
+/* project.css — página "El proyecto". Mismos tokens que unfolded-ui.css /
+   index.css (tema museo oscuro + bronce). Arriba, una tira de detalles más
+   ancha que el texto; debajo, una sola columna de lectura. */
+
+.project {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1.4rem 5rem;
+}
+
+.project-title {
+  max-width: 38rem;
+  margin: 0 auto 2.4rem;
+  font-family: var(--au-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--ink, var(--au-ink));
+}
+
+/* ---- tira de detalles -------------------------------------------------- */
+.project-details {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 0 0 3.2rem;
+}
+.project-detail { margin: 0; }
+.project-detail img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--line, var(--au-line));
+}
+.project-detail figcaption {
+  margin-top: 0.5rem;
+  font-family: var(--au-body);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--ink-dim, var(--au-muted));
+}
+
+/* ---- pareja del proceso (modelo -> desplegado) ------------------------
+   Sale al ancho de la tira. Cada item crece en proporción a su ratio
+   (flex-grow en línea), así las dos imágenes quedan a la misma altura. */
+.project-process {
+  display: flex;
+  gap: 0.9rem;
+  margin: 1.4rem 0 2.8rem;
+}
+.project-process-item { flex-basis: 0; min-width: 0; }
+.project-detail.is-natural img { aspect-ratio: auto; height: auto; }
+
+/* ---- texto ------------------------------------------------------------- */
+.project-body {
+  max-width: 38rem;          /* ~65 caracteres por línea */
+  margin: 0 auto;
+  font-family: var(--au-body);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink, var(--au-ink));
+}
+.project-body p { margin: 0 0 1.3rem; }
+.project-lead { font-size: 1.16rem; line-height: 1.6; }
+
+/* ---- catálogo de tipos de trabajo --------------------------------------
+   Dentro de la columna de lectura. Sin numeración: no es una secuencia.
+   Cada entrada lleva una línea fina encima y el título en la display. */
+.project-catalog { margin: 2rem 0 2.6rem; }
+.project-cat {
+  padding: 1.1rem 0 0.2rem;
+  border-top: 1px solid var(--line, var(--au-line));
+}
+.project-cat:last-child { border-bottom: 1px solid var(--line, var(--au-line)); padding-bottom: 0.3rem; }
+.project-cat-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--au-display);
+  font-weight: 500;
+  font-size: 1.22rem;
+  line-height: 1.3;
+  color: var(--ink, var(--au-ink));
+}
+.project-body .project-cat p { margin: 0 0 1rem; color: var(--ink-dim, var(--au-muted)); }
+
+/* ---- figuras dentro del texto ----------------------------------------- */
+.project-figure { margin: 2.2rem 0 2.4rem; }
+.project-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line, var(--au-line));
+}
+.project-figure figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--au-body);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--ink-dim, var(--au-muted));
+}
+
+/* con cuatro detalles, en anchos medios pasan a 2 × 2 */
+@media (max-width: 1000px) {
+  .project-details { grid-template-columns: repeat(min(var(--n, 3), 2), minmax(0, 1fr)); }
+}
+
+/* ---- pantallas estrechas ---------------------------------------------- */
+@media (max-width: 700px) {
+  .project { padding-top: 2rem; }
+  .project-title { margin-bottom: 1.6rem; }
+  .project-lead { font-size: 1.06rem; }
+  .project-cat-title { font-size: 1.12rem; }
+  /* la tira pasa a una columna */
+  .project-details { grid-template-columns: 1fr; gap: 1.4rem; margin-bottom: 2.4rem; }
+  .project-process { flex-direction: column; gap: 1.4rem; }
+}

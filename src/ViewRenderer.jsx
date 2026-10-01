@@ -11,6 +11,7 @@ import Carousel from './Carousel';
 import Gallery from './Gallery';
 import Article from './Article';
 import Diagram from './Diagram';
+import Notes from './Notes';
 
 export default function ViewRenderer({ view, onNavigateView, activeAnno = null, onSelectAnno }) {
   const t = useT();
@@ -29,12 +30,15 @@ export default function ViewRenderer({ view, onNavigateView, activeAnno = null, 
           sources={view.sources}
           activeAnno={activeAnno}
           onSelectAnno={onSelectAnno}
+          options={view.options ?? {}}
         />
       );
     case 'carousel':
       return <Carousel images={view.images} options={view.options} />;
     case 'gallery':
       return <Gallery images={view.images} />;
+    case 'notes':
+      return <Notes body={view.body} />;
     case 'article':
       return <Article body={view.body} bodyPath={view.bodyPath} />;
     case 'diagram':

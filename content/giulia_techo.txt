@@ -1,14 +1,14 @@
 # ============================================================================
-#  Art Unfolded — content/villa_giulia.txt
+#  Art Unfolded — content/giulia_techo.txt
 #  Pasillo semicircular de Villa Giulia (emiciclo) — VISOR RECORRIDO (path3d).
 #
 #  Las lineas que empiezan por # son comentarios y el parser las ignora
 #  (tambien ignora lo que vaya despues de un # dentro de una linea).
 #
 #  CONVENCION DE CARPETAS: manda el id del fichero .txt.
-#  Este fichero es villa_giulia.txt  ->  id = villa_giulia, por tanto:
-#      public/models/villa_giulia/villa_giulia.glb   (la boveda)
-#      public/models/villa_giulia/trayectoria01.obj  (la polilinea)
+#  Este fichero es giulia_techo.txt  ->  id = giulia_techo, por tanto:
+#      public/models/giulia_techo/villa_giulia.glb   (la boveda)
+#      public/models/giulia_techo/trayectoria01.obj  (la polilinea)
 #
 #  RECORDATORIO: altura, mirada inicial y lente son solo el ARRANQUE. Afina en
 #  vivo con los controles y luego hornea el valor:  node scripts/build-monuments.mjs
@@ -29,9 +29,9 @@ en: Rome, Italy
 
 # --- Texto de la pagina (i18n; rellena es: y luego se traduce IT/EN) ---------
 [TEXTO]
-es: Recorre el arco del emiciclo y elevate hasta rozar la boveda renacentista.
-it: Percorri l'arco dell'emiciclo e sali fino a sfiorare la volta rinascimentale.
-en: Walk the arc of the semicircular corridor and rise until you brush the Renaissance vault.
+es: Pórtico semicircular de la villa de Julio III (Roma, 1551–1555), obra de Vignola, Vasari y Ammannati. Su bóveda está pintada como un emparrado de vides, pájaros y putti abierto al cielo. La curvatura impide verla de un vistazo. Aquí puede recorrerse de extremo a extremo.
+it: Portico semicircolare della villa di Giulio III (Roma, 1551–1555), opera di Vignola, Vasari e Ammannati. La sua volta è dipinta come un pergolato di viti, uccelli e putti aperto sul cielo. La curvatura impedisce di abbracciarla con un solo sguardo. Qui si può percorrere da un capo all'altro.
+en: Semicircular portico of Pope Julius III's villa (Rome, 1551–1555), designed by Vignola, Vasari and Ammannati. Its vault is painted as a vine pergola with birds and putti, open to the sky. Its curve makes it impossible to take in at a glance. Here it can be walked from end to end.
 
 
 # --- El visor de recorrido ---------------------------------------------------
@@ -61,17 +61,20 @@ arco lado: auto
 #   radial   -> hacia el centro del arco.
 mirada: tangente
 
-# Mirada al cargar, en grados: yaw,pitch (sobre la base). Aqui 12 de cabeceo
+# Mirada al cargar, en grados: yaw,pitch (sobre la base). Aqui 44 de cabeceo
 # hacia arriba. Debe caber dentro de "mirada limites" (si no, se recorta).
 mirada inicial: 0,44
 
 # Topes de la cabeza libre con el raton: +-yaw, +-pitch en grados.
 # Sube estos numeros si quieres mirar mas alrededor; bajalos para acotar mas.
-mirada limites: 60,45
+# Con mirada: tangente, pitch 90 = mirar en perpendicular a la boveda (cenit).
+# No pasar de 90: por encima la vista se da la vuelta hacia atras.
+mirada limites: 60,90
 
 # Banda del slider de ALTURA: distancia sobre el plano del recorrido hacia el
-# techo, EN METROS (la escena esta a escala real). La corona de la boveda esta
-# a ~7,8 m sobre el camino. min,max
+# techo, EN METROS (la escena esta a escala real). Con el modelo recortado
+# (solo techo, sep 2026) la boveda arranca a ~3,35 m y la corona esta a
+# ~5,8 m sobre el camino. min,max
 #   · si no llegas a rozar el techo -> sube el max
 #   · si atraviesas la boveda       -> baja el max
 altura: 1.2,4.0
@@ -109,3 +112,22 @@ consola: atenua
 #     "c.yaw = ... - dx*SENS" y "c.pitch = ... - dy*SENS".
 #  Si quieres tocar eso, avisame y lo cambio en el componente.
 # ----------------------------------------------------------------------------
+
+# --- Pestaña Historia (tipo notes) --------------------------------------------
+# Cada linea empieza con TABULADOR + es:/it:/en:. Linea en blanco = parrafo nuevo.
+[HISTORIA]
+	es: En marzo de 2026, la bóveda de este pórtico se fotografió con un iPhone 17, a mano, caminando despacio bajo el techo entre los demás visitantes de Villa Giulia. Sin trípode, sin pértiga y sin luz añadida: solo el teléfono y la luz natural del pórtico.
+	it: Nel marzo 2026 la volta di questo portico è stata fotografata con un iPhone 17, a mano, camminando lentamente sotto il soffitto tra gli altri visitatori di Villa Giulia. Senza treppiede, senza asta e senza luce aggiuntiva: solo il telefono e la luce naturale del portico.
+	en: In March 2026, the vault of this portico was photographed with an iPhone 17, handheld, walking slowly beneath the ceiling among the other visitors to Villa Giulia. No tripod, no pole, no added lighting: just the phone and the natural light of the portico.
+
+	es: La pregunta era sencilla: ¿basta el teléfono que casi todo el mundo lleva en el bolsillo para reconstruir en tres dimensiones una bóveda curva y pintada? Esta lámina es la respuesta.
+	it: La domanda era semplice: basta il telefono che quasi tutti portano in tasca per ricostruire in tre dimensioni una volta curva e dipinta? Questa tavola è la risposta.
+	en: The question was simple: is the phone almost everyone carries in their pocket enough to reconstruct a curved, painted vault in three dimensions? This plate is the answer.
+
+	es: De aquellas fotografías sale un modelo fotogramétrico continuo de unos 43 metros de bóveda en arco, que puede recorrerse de un extremo a otro. Su textura suma más de 130 megapíxeles, suficientes para leer la pintura de cerca a lo largo de toda la curva.
+	it: Da quelle fotografie nasce un modello fotogrammetrico continuo di circa 43 metri di volta ad arco, percorribile da un capo all'altro. La sua texture supera i 130 megapixel, abbastanza per leggere la pittura da vicino lungo tutta la curva.
+	en: Those photographs produced a continuous photogrammetric model of some 43 metres of arched vault, which can be walked from one end to the other. Its texture adds up to more than 130 megapixels, enough to read the painting up close along the entire curve.
+
+	es: Un teléfono tiene sus límites: el sensor es pequeño y el techo queda lejos. Con una cámara profesional y una pértiga para acercarnos a la bóveda, el detalle de la pintura crecería varias veces.
+	it: Un telefono ha i suoi limiti: il sensore è piccolo e il soffitto è lontano. Con una fotocamera professionale e un'asta per avvicinarsi alla volta, il dettaglio della pittura crescerebbe di diverse volte.
+	en: A phone has its limits: the sensor is small and the ceiling is far away. With a professional camera and a pole to get closer to the vault, the detail of the painting would increase several times over.

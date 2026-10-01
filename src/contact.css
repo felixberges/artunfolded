@@ -1,0 +1,95 @@
+/* contact.css — página "Contacto". Mismos tokens que project.css: título en
+   la display, una sola columna de lectura, y la dirección de correo como
+   único elemento destacado. */
+
+.contact {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1.4rem 5rem;
+}
+
+.contact-title {
+  max-width: 38rem;
+  margin: 0 auto 2.4rem;
+  font-family: var(--au-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--ink, var(--au-ink));
+}
+
+.contact-body {
+  max-width: 38rem;
+  margin: 0 auto;
+  font-family: var(--au-body);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink, var(--au-ink));
+}
+.contact-body p { margin: 0 0 1.3rem; }
+
+/* ---- dirección --------------------------------------------------------
+   Entre dos líneas finas, como las entradas del catálogo de El proyecto. */
+.contact-email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem 1.4rem;
+  margin: 2.2rem 0 2.2rem;
+  padding: 1.3rem 0;
+  border-top: 1px solid var(--line, var(--au-line));
+  border-bottom: 1px solid var(--line, var(--au-line));
+}
+
+.contact-address {
+  font-family: var(--au-display);
+  font-weight: 500;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink, var(--au-ink));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: var(--line, var(--au-line));
+  overflow-wrap: anywhere;
+  transition: text-decoration-color 0.2s;
+}
+.contact-address:hover { text-decoration-color: currentColor; }
+
+.contact-copy {
+  padding: 0.35rem 0.8rem;
+  font-family: var(--au-body);
+  font-size: 0.82rem;
+  line-height: 1.3;
+  color: var(--ink-dim, var(--au-muted));
+  background: transparent;
+  border: 1px solid var(--line, var(--au-line));
+  border-radius: 2px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-copy:hover { color: var(--ink, var(--au-ink)); border-color: currentColor; }
+
+.contact-address:focus-visible,
+.contact-copy:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
+.contact-body .contact-note { color: var(--ink-dim, var(--au-muted)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-address, .contact-copy { transition: none; }
+}
+
+/* ---- pantallas estrechas ---------------------------------------------- */
+@media (max-width: 700px) {
+  .contact { padding-top: 2rem; }
+  .contact-title { margin-bottom: 1.6rem; }
+}
+
+@media (pointer: coarse) {
+  .contact-copy { padding: 0.6rem 1rem; }
+}

@@ -30,6 +30,7 @@ import { useGLTF } from '@react-three/drei';
 import { KTX2Loader } from 'three-stdlib';
 import * as THREE from 'three';
 import { DebugPanel } from './debug';
+import HelpOverlay from './HelpOverlay';
 import './pathviewer.css';
 
 // Apertura de película (mm) para la conversión lente->fov. Igual que ObjectViewer,
@@ -340,6 +341,7 @@ export default function PathViewer({ model, points = [], path = {}, color }) {
       <div
         className="pv-stage"
         ref={stageRef}
+        style={{ position: 'relative' }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
@@ -355,6 +357,10 @@ export default function PathViewer({ model, points = [], path = {}, color }) {
             <Stage3D url={model} points={points} path={path} controls={controls} color={color} />
           </Suspense>
         </Canvas>
+
+        {/* Ayuda arriba a la derecha. Es hija del stage (que tiene rueda y
+            arrastre propios): HelpOverlay corta esos eventos en nativo. */}
+        <HelpOverlay type="path3d" />
 
         {hint && (
           <div className="pv-hint">

@@ -15,6 +15,9 @@ import ViewSwitcher from './ViewSwitcher';
 import ViewRenderer from './ViewRenderer';
 import Article from './Article';
 import Team from './Team';
+import Method from './Method';
+import Project from './Project';
+import Contact from './Contact';
 
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
 const roman = (n) => ROMAN[n] ?? String(n);
@@ -155,7 +158,9 @@ function MonumentDetail({ monument }) {
             onSelectAnno={setActiveAnno}
           />
         </div>
-        <AnnotationsPanel annotations={annotations} activeAnno={activeAnno} onSelect={setActiveAnno} />
+        {activeView?.type === 'deepzoom' && (
+          <AnnotationsPanel annotations={annotations} activeAnno={activeAnno} onSelect={setActiveAnno} />
+        )}
       </section>
     </main>
   );
@@ -164,18 +169,21 @@ function MonumentDetail({ monument }) {
 function AppInner() {
   const t = useT();
   const [selectedId, setSelectedId] = useState(null);
-  const [showAbout, setShowAbout] = useState(false);
+  // Página secundaria abierta: null | 'project' | 'method' | 'about' | 'contact'
+  const [page, setPage] = useState(null);
   const monument = monuments.find((m) => m.id === selectedId) ?? null;
 
-  const goHome = () => { setSelectedId(null); setShowAbout(false); };
-  const openAbout = () => { setSelectedId(null); setShowAbout(true); };
-  const selectMonument = (id) => { setSelectedId(id); setShowAbout(false); };
+  const goHome = () => { setSelectedId(null); setPage(null); };
+  const openPage = (name) => { setSelectedId(null); setPage(name); window.scrollTo(0, 0); };
+  const selectMonument = (id) => { setSelectedId(id); setPage(null); };
+
+  const inDetail = Boolean(monument || page);
 
   return (
-    <div className={'app' + (monument || showAbout ? ' is-detail' : '')}>
+    <div className={'app' + (inDetail ? ' is-detail' : '')}>
       <header className="app-bar">
         <div className="app-bar-left">
-          {(monument || showAbout) && (
+          {inDetail && (
             <button type="button" className="back-button" onClick={goHome}>
               <span className="arrow" aria-hidden="true">←</span> {t(ui.back)}
             </button>
@@ -183,15 +191,22 @@ function AppInner() {
           <span className="app-mark">Art Unfolded</span>
         </div>
         <div className="app-bar-right">
-          {!showAbout && (
-            <button type="button" className="about-link" onClick={openAbout}>{t(ui.aboutNav)}</button>
-          )}
+          <button type="button" className={`about-link${page === 'project' ? ' is-active' : ''}`} onClick={() => openPage('project')}>{t(ui.projectNav)}</button>
+          <button type="button" className={`about-link${page === 'method' ? ' is-active' : ''}`} onClick={() => openPage('method')}>{t(ui.methodNav)}</button>
+          <button type="button" className={`about-link${page === 'about' ? ' is-active' : ''}`} onClick={() => openPage('about')}>{t(ui.aboutNav)}</button>
+          <button type="button" className={`about-link${page === 'contact' ? ' is-active' : ''}`} onClick={() => openPage('contact')}>{t(ui.contactNav)}</button>
           <LanguageSelector />
         </div>
       </header>
 
-      {showAbout
+      {page === 'project'
+        ? <Project />
+        : page === 'method'
+        ? <Method />
+        : page === 'about'
         ? <Team />
+        : page === 'contact'
+        ? <Contact />
         : monument
           ? <MonumentDetail monument={monument} />
           : <Archive onSelect={selectMonument} />}
