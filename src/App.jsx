@@ -19,6 +19,7 @@ import Method from './Method';
 import Project from './Project';
 import News from './News';
 import Contact from './Contact';
+import MobileNotice from './MobileNotice';
 
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
 const roman = (n) => ROMAN[n] ?? String(n);
@@ -255,6 +256,8 @@ function AppInner() {
           <LanguageSelector />
         </div>
       </header>
+
+      <MobileNotice />
 
       {page === 'project'
         ? <Project />

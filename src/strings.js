@@ -342,4 +342,12 @@ export const ui = {
     it: ['Trascina per guardarti intorno.', 'Cursore in basso per avanzare, laterale per l’altezza.', 'Rotella, pizzico o + − per ingrandire e ridurre.', '⌂ torna alla vista iniziale.', 'Il pulsante dei quattro angoli apre lo schermo intero (Esc per uscire).'],
     en: ['Drag to look around.', 'Bottom slider to move forward, side slider for height.', 'Scroll, pinch or + − to zoom in and out.', '⌂ returns to the initial view.', 'The four-corners button opens full screen (Esc to exit).'],
   },
+
+  // --- Aviso en móviles (MobileNotice.jsx) --------------------------------
+  mobileNotice: {
+    es: 'Esta web está pensada para ordenador o tableta. Puede consultarse en el móvil, pero los visores se aprecian mejor en una pantalla mayor.',
+    it: 'Questo sito è pensato per computer o tablet. Si può consultare anche dal telefono, ma i visori si apprezzano meglio su uno schermo più grande.',
+    en: 'This site is designed for computers and tablets. It can be viewed on a phone, but the viewers are best appreciated on a larger screen.',
+  },
+  mobileNoticeOk: { es: 'Entendido', it: 'Ho capito', en: 'Got it' },
 };

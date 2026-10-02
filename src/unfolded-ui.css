@@ -264,6 +264,28 @@
   .dz-fs-hint-text { display: none; }
 }
 
+/* ---- aviso en móviles (MobileNotice.jsx) ----------------------------- */
+.mobile-notice {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 0.7rem 1.4rem;
+  background: var(--ground-2, #1e1a15);
+  border-bottom: 1px solid var(--line, var(--au-line));
+  font-family: var(--au-body); font-size: 0.84rem; line-height: 1.45;
+  color: var(--ink-dim, var(--au-muted));
+}
+.mobile-notice-text { flex: 1 1 auto; margin: 0; }
+.mobile-notice-ok {
+  flex: 0 0 auto;
+  padding: 0.4rem 0.8rem;
+  font-family: var(--au-body); font-size: 0.82rem; font-weight: 500;
+  color: var(--ink, var(--au-ink));
+  background: none;
+  border: 1px solid var(--accent, var(--au-accent));
+  border-radius: 4px;
+  cursor: pointer;
+}
+.mobile-notice-ok:focus-visible { outline: 2px solid var(--accent, #b08953); outline-offset: 2px; }
+
 /* ---- gallery ---------------------------------------------------------- */
 .photo-grid {
   display: grid; gap: 0.9rem;
