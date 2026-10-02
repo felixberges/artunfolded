@@ -322,12 +322,48 @@
 .hotspot:hover .hotspot-label { opacity: 1; }
 
 /* ======================================================================
-   La vista de monumento ya NO hace scroll de página: ocupa exactamente
-   el espacio entre la app-bar y el borde inferior (height: calc(100svh -
-   --app-bar-h)). El header tiene overflow-y:auto propio (max-height: 40vh)
-   y el stage (visor + panel de anotaciones) llena el resto con flex:1.
-   Cada área gestiona su propio scroll de forma independiente.
+   En escritorio la vista de monumento NO hace scroll de página: ocupa
+   exactamente el espacio entre la app-bar y el borde inferior (height:
+   calc(100svh - --app-bar-h)). El header tiene overflow-y:auto propio
+   (max-height: 40vh) y el stage (visor + panel de anotaciones) llena el
+   resto con flex:1. Cada área gestiona su propio scroll.
+
+   En pantallas estrechas o bajas (móvil en horizontal, móvil y tableta en
+   vertical) ese reparto no cabe: lo que queda por debajo del visor se
+   corta y no hay forma de llegar a ello. Ahí la página vuelve a hacer
+   scroll normal:
+   - el header y el panel de anotaciones crecen lo que necesiten;
+   - el visor tiene una altura fija del 75 % de la pantalla, de modo que
+     siempre queda al menos una cuarta parte por donde arrastrar el dedo
+     para desplazar la página (dentro del visor el dedo mueve la imagen);
+   - la app-bar deja de ser fija para no quitar alto al visor.
+   La condición de altura solo se aplica en pantallas táctiles, para no
+   cambiar el comportamiento de una ventana baja en el ordenador.
    ====================================================================== */
+@media (max-width: 899px), (max-height: 600px) and (pointer: coarse) {
+  .app-bar { position: static; flex-wrap: wrap; }
+
+  .monument { height: auto; overflow: visible; }
+  .monument-header { max-height: none; overflow: visible; }
+
+  .monument-stage { grid-template-columns: 1fr; }
+  .stage-viewer { height: 75svh; }
+
+  /* deepzoom: la altura fija va en el marco de la imagen, no en todo el
+     visor, para que los controles (fuentes, capas) queden debajo. El
+     marco lleva height:100% en línea, de ahí el !important; no se aplica
+     en pantalla completa. */
+  .stage-viewer:has(.deepzoom) { height: auto; }
+  .deepzoom { height: auto; grid-template-columns: 1fr; }
+  .deepzoom:has(.deepzoom-controls) { grid-template-columns: 1fr; }
+  .deepzoom-stage-wrap:not(.is-fullscreen) { height: 75svh !important; }
+
+  .anno-panel {
+    overflow: visible;
+    border-left: none; border-top: 1px solid var(--line, var(--au-line));
+    padding-left: 0; padding-top: 1rem;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .hotspot-label { transition: none; }
