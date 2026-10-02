@@ -1,11 +1,12 @@
 // ViewSwitcher.jsx — tabs to move between a monument's views. State-based, no router.
 import { useT } from './i18n';
+import { ui } from './strings';
 
 export default function ViewSwitcher({ views, activeId, onChange }) {
   const t = useT();
   if (!views || views.length <= 1) return null;
   return (
-    <nav className="view-switcher" aria-label="Views">
+    <nav className="view-switcher" aria-label={t(ui.views)}>
       {views.map((v) => (
         <button
           key={v.id}

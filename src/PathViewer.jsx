@@ -31,6 +31,9 @@ import { KTX2Loader } from 'three-stdlib';
 import * as THREE from 'three';
 import { DebugPanel } from './debug';
 import HelpOverlay from './HelpOverlay';
+import { useT } from './i18n';
+import { ui as S } from './strings';   // alias: `ui` ya es un estado local aquí
+import { ViewerToolbar, FullscreenHint, useFullscreen } from './viewerUI';
 import './pathviewer.css';
 
 // Apertura de película (mm) para la conversión lente->fov. Igual que ObjectViewer,
@@ -224,10 +227,18 @@ function Stage3D({ url, points, path, controls, color }) {
 }
 
 // --- Componente público -----------------------------------------------------
+// Paso de lente de los botones + / − (mm).
+const LENS_STEP = 6;
+
 export default function PathViewer({ model, points = [], path = {}, color }) {
+  const t = useT();
+  // Pantalla completa sobre TODO el visor (lienzo + deslizadores).
+  const rootRef = useRef(null);
+  const fs = useFullscreen(rootRef);
   const lookLimits = path.lookLimits || [60, 45];
   const height = path.height || [1.5, 3.0];
-  const focalRange = path.focalRange || [24, 85];
+  // Memorizado: un array nuevo en cada render rehacía init y el listener de rueda.
+  const focalRange = useMemo(() => path.focalRange || [24, 85], [path.focalRange]);
   const hLo = Math.min(...height), hHi = Math.max(...height);
 
   // Estado inicial (clamp a límites).
@@ -322,6 +333,15 @@ export default function PathViewer({ model, points = [], path = {}, color }) {
     if (DEV) setTune((s) => ({ ...s, height: v }));
     poke();
   };
+  // Botones + / −: cambian la lente, igual que la rueda pero a pasos mayores.
+  const zoomLens = (dir) => {
+    const c = controls.current;
+    c.lens = clamp(c.lens + dir * LENS_STEP, focalRange[0], focalRange[1]);
+    setUi((u) => ({ ...u, lens: c.lens }));
+    if (DEV) setTune((s) => ({ ...s, lens: c.lens }));
+    setHint(false); poke();
+  };
+
   const reset = () => {
     controls.current = { ...init };
     setUi({ advance: init.advance, height: init.height, lens: init.lens });
@@ -337,7 +357,7 @@ export default function PathViewer({ model, points = [], path = {}, color }) {
     `lente: ${Math.round(tune.lens)}`;
 
   return (
-    <div className={`pathviewer${dim ? ' is-dim' : ''}`}>
+    <div className={`pathviewer au-fs-root${dim ? ' is-dim' : ''}`} ref={rootRef}>
       <div
         className="pv-stage"
         ref={stageRef}
@@ -362,9 +382,16 @@ export default function PathViewer({ model, points = [], path = {}, color }) {
             arrastre propios): HelpOverlay corta esos eventos en nativo. */}
         <HelpOverlay type="path3d" />
 
+        {/* Arriba a la izquierda: barra común. Corta el arrastre del stage
+            para que pulsar un botón no se interprete como mirar. */}
+        <div onPointerDown={(e) => e.stopPropagation()} style={toolbarWrap}>
+          <ViewerToolbar onZoom={zoomLens} onHome={reset} fs={fs} />
+        </div>
+        <FullscreenHint fs={fs} />
+
         {hint && (
           <div className="pv-hint">
-            <span className="pv-hint-dot" /> arrastra para mirar
+            <span className="pv-hint-dot" /> {t(S.pathDragHint)}
           </div>
         )}
 
@@ -379,17 +406,16 @@ export default function PathViewer({ model, points = [], path = {}, color }) {
 
       {/* Raíl lateral: altura (arriba = hacia el techo) + Inicio */}
       <div className="pv-rail">
-        <span className="pv-rail-cap">techo</span>
+        <span className="pv-rail-cap">{t(S.pathCeiling)}</span>
         <input
           className="pv-height"
           type="range"
           min={hLo} max={hHi} step="0.01"
           value={ui.height}
           onChange={onHeight}
-          aria-label="Altura"
+          aria-label={t(S.pathHeight)}
         />
         <span className="pv-val">{ui.height.toFixed(1)}&#8201;m</span>
-        <button className="pv-home" onClick={reset} aria-label="Inicio" title="Inicio">⌂</button>
       </div>
 
       {/* Franja inferior: avance por el arco */}
@@ -400,10 +426,13 @@ export default function PathViewer({ model, points = [], path = {}, color }) {
           min="0" max="1" step="0.001"
           value={ui.advance}
           onChange={onAdvance}
-          aria-label="Avance por el recorrido"
+          aria-label={t(S.pathAdvance)}
         />
         <span className="pv-val">{Math.round(ui.advance * 100)}%</span>
       </div>
     </div>
   );
 }
+
+// Barra común arriba a la izquierda, por encima del lienzo.
+const toolbarWrap = { position: 'absolute', top: 20, left: 20, zIndex: 11 };

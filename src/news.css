@@ -1,0 +1,71 @@
+/* news.css — página «Noticias». Mismos tokens y medidas que project.css:
+   título en la display y una columna de lectura; cada noticia separada por
+   una línea fina, con la fecha en mono y bronce, como los números de lámina. */
+
+.news {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1.4rem 5rem;
+}
+.news-heading {
+  max-width: 38rem;
+  margin: 0 auto 2.4rem;
+  font-family: var(--au-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--ink, var(--au-ink));
+}
+.news-list { max-width: 38rem; margin: 0 auto; }
+
+.news-item {
+  padding: 1.8rem 0 1.4rem;
+  border-top: 1px solid var(--line, var(--au-line));
+  font-family: var(--au-body);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink, var(--au-ink));
+}
+.news-item:last-child { border-bottom: 1px solid var(--line, var(--au-line)); }
+.news-item p { margin: 0 0 1.1rem; }
+
+.news-date {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--au-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent, var(--au-accent));
+}
+.news-title {
+  margin: 0 0 0.9rem;
+  font-family: var(--au-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  color: var(--ink, var(--au-ink));
+}
+.news-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0.4rem 0 1.2rem;
+  border: 1px solid var(--line, var(--au-line));
+}
+.news-link {
+  display: inline-block;
+  font-size: 0.92rem;
+  color: var(--accent, var(--au-accent));
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.news-link:hover { color: var(--ink, var(--au-ink)); }
+.news-link:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+
+@media (max-width: 700px) {
+  .news { padding-top: 2rem; }
+  .news-heading { margin-bottom: 1.6rem; }
+  .news-title { font-size: 1.3rem; }
+}

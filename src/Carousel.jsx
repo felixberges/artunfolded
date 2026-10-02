@@ -14,6 +14,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useT } from './i18n';
+import { ui } from './strings';
 import './carousel.css';
 
 const prefersReducedMotion = () =>
@@ -74,7 +75,7 @@ export default function Carousel({ images = [], options = {} }) {
       ref={rootRef}
       role="group"
       aria-roledescription="carrusel"
-      aria-label={`Imagen ${index + 1} de ${count}`}
+      aria-label={t(ui.carouselImageOf).replace('{n}', index + 1).replace('{total}', count)}
       tabIndex={0}
       onKeyDown={onKeyDown}
       onMouseEnter={() => setPaused(true)}
@@ -98,7 +99,7 @@ export default function Carousel({ images = [], options = {} }) {
               className="carousel-arrow carousel-prev"
               onClick={() => go(-1)}
               disabled={!loop && atStart}
-              aria-label="Imagen anterior"
+              aria-label={t(ui.carouselPrev)}
             >
               &#8249;
             </button>
@@ -107,7 +108,7 @@ export default function Carousel({ images = [], options = {} }) {
               className="carousel-arrow carousel-next"
               onClick={() => go(1)}
               disabled={!loop && atEnd}
-              aria-label="Imagen siguiente"
+              aria-label={t(ui.carouselNext)}
             >
               &#8250;
             </button>
@@ -121,7 +122,7 @@ export default function Carousel({ images = [], options = {} }) {
       )}
 
       {count > 1 && thumbnails && (
-        <div className="carousel-thumbs" role="tablist" aria-label="Miniaturas">
+        <div className="carousel-thumbs" role="tablist" aria-label={t(ui.carouselThumbs)}>
           {images.map((img, i) => (
             <button
               key={img.src}
@@ -130,7 +131,7 @@ export default function Carousel({ images = [], options = {} }) {
               aria-selected={i === index}
               className={'carousel-thumb' + (i === index ? ' is-active' : '')}
               onClick={() => setIndex(i)}
-              aria-label={t(img.caption) || `Ir a la imagen ${i + 1}`}
+              aria-label={t(img.caption) || t(ui.carouselGoTo).replace('{n}', i + 1)}
             >
               <img src={img.src} alt="" loading="lazy" />
             </button>
@@ -139,7 +140,7 @@ export default function Carousel({ images = [], options = {} }) {
       )}
 
       {count > 1 && !thumbnails && (
-        <div className="carousel-dots" role="tablist" aria-label="Posicion">
+        <div className="carousel-dots" role="tablist" aria-label={t(ui.carouselPosition)}>
           {images.map((img, i) => (
             <button
               key={img.src}

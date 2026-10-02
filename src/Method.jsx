@@ -39,7 +39,6 @@ const VIEWER = [
   { figs: [
       { src: '/method/farnesina-lista.jpg', ratio: 4.011, alt: ui.methodCase1ListAlt },
     ], caption: ui.methodCase1ListCaption },
-  { p: ui.methodCase1ViewerP4 },
 ];
 
 // Presentación de la obra: mismo esquema de dos columnas que los pasos,

@@ -28,6 +28,9 @@ import { useGLTF, AdaptiveDpr } from '@react-three/drei';
 import * as THREE from 'three';
 import { KTX2Loader } from 'three-stdlib';
 import HelpOverlay from './HelpOverlay';
+import { useT } from './i18n';
+import { ui } from './strings';
+import { ViewerToolbar, FullscreenHint, useFullscreen } from './viewerUI';
 import './objectviewer.css';
 
 const BASIS_PATH = '/basis/';
@@ -564,6 +567,10 @@ function LightBallWidget({ lightDirRef }) {
 }
 
 export default function ObjectViewer({ model, camera, light, color, options }) {
+  const t = useT();
+  // Pantalla completa sobre TODO el visor (lienzo + deslizadores).
+  const rootRef = useRef(null);
+  const fs = useFullscreen(rootRef);
   const [moveLight, setMoveLight] = useState(false);
 
   // Ref compartida: RakingLight la escribe en cada place(), LightBall la lee.
@@ -598,21 +605,24 @@ export default function ObjectViewer({ model, camera, light, color, options }) {
     setOrbitEl(v); setOrbitAll(orbitAz, v);
   }, [orbitAz, setOrbitAll]);
 
-  const center = camera?.center ?? [0, 0, 0];
-  const position = camera?.position ?? [0, 0, 5];
+  // Memorizados: un array nuevo en cada render rehacía initialCam.
+  const center = useMemo(() => camera?.center ?? [0, 0, 0], [camera?.center]);
+  const position = useMemo(() => camera?.position ?? [0, 0, 5], [camera?.position]);
   const initialCam = useMemo(() => ({ position, fov: 45, near: 0.01, far: 5000 }), [position]);
 
   return (
-    <div className="objectviewer">
+    <div className="objectviewer au-fs-root" ref={rootRef}>
       <div className="ov-stage">
-        <div style={wrapTL}>
-          <button type="button" onClick={() => setMoveLight((v) => !v)} style={btn(moveLight)} className="ov-btn"
-            title="Activa para mover la luz arrastrando (con cualquier botón)">
-            {moveLight ? 'Moviendo luz' : 'Mover luz'}
-          </button>
-        </div>
+        {/* Arriba a la izquierda: barra común */}
+        <ViewerToolbar onZoom={doZoom} onHome={goHome} fs={fs} style={wrapTL} />
+        <FullscreenHint fs={fs} />
+
+        {/* Arriba a la derecha: mover luz + ayuda */}
         <div style={wrapTR}>
-          <button type="button" onClick={goHome} style={btn(false)} className="ov-btn" title="Volver a la vista inicial">⌂ Inicio</button>
+          <button type="button" onClick={() => setMoveLight((v) => !v)} style={btn(moveLight)} className="ov-btn"
+            title={t(ui.viewerMoveLightTitle)} aria-pressed={moveLight}>
+            {moveLight ? t(ui.viewerMovingLight) : t(ui.viewerMoveLight)}
+          </button>
           <HelpOverlay type="object3d" corner="inline" />
         </div>
 
@@ -648,19 +658,15 @@ export default function ObjectViewer({ model, camera, light, color, options }) {
         </Canvas>
 
         {/* Bolita indicadora de la dirección de la luz — abajo izquierda */}
-        <div style={wrapBL} title="Dirección de la luz">
+        <div style={wrapBL} title={t(ui.viewerLightDir)}>
           <LightBallWidget lightDirRef={lightDirRef} />
         </div>
 
-        <div style={wrapBR}>
-          <button type="button" onClick={() => doZoom(1)} style={zbtn} className="ov-zbtn" title="Acercar" aria-label="Acercar">+</button>
-          <button type="button" onClick={() => doZoom(-1)} style={zbtn} className="ov-zbtn" title="Alejar" aria-label="Alejar">−</button>
-        </div>
       </div>
 
       {/* Raíl lateral: slider de ALTURA (fuera del lienzo, como en pathviewer) */}
       <div className="ov-rail">
-        <span className="ov-rail-cap">altura</span>
+        <span className="ov-rail-cap">{t(ui.viewerHeightCap)}</span>
         <input
           className="ov-height"
           type="range"
@@ -669,7 +675,7 @@ export default function ObjectViewer({ model, camera, light, color, options }) {
           step={0.5}
           value={orbitEl}
           onChange={onElChange}
-          aria-label="Altura de la cámara"
+          aria-label={t(ui.viewerCamHeight)}
         />
         <span className="ov-val">{orbitEl.toFixed(0)}°</span>
       </div>
@@ -684,7 +690,7 @@ export default function ObjectViewer({ model, camera, light, color, options }) {
           step={0.5}
           value={orbitAz}
           onChange={onAzChange}
-          aria-label="Azimut de la cámara"
+          aria-label={t(ui.viewerCamAzimuth)}
         />
         <span className="ov-val">{orbitAz.toFixed(0)}°</span>
       </div>
@@ -693,19 +699,13 @@ export default function ObjectViewer({ model, camera, light, color, options }) {
 }
 
 // --- estilos inline (coherentes con ModelViewer) ---
-const wrapTL = { position: 'absolute', top: 20, left: 20, zIndex: 11, display: 'flex', gap: 6 };
+const wrapTL = { position: 'absolute', top: 20, left: 20, zIndex: 11 };
 // zIndex 12: el panel de ayuda cae por encima del resto de controles.
 const wrapTR = { position: 'absolute', top: 20, right: 20, zIndex: 12, display: 'flex', alignItems: 'stretch', gap: 6 };
 const wrapBL = { position: 'absolute', bottom: 20, left: 20, zIndex: 11, width: 80, height: 80, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(233,231,226,0.18)', background: 'rgba(20,18,16,0.55)', backdropFilter: 'blur(6px)' };
-const wrapBR = { position: 'absolute', bottom: 20, right: 20, zIndex: 11, display: 'flex', flexDirection: 'column', gap: 6 };
 const btn = (active) => ({
   padding: '0.55rem 0.95rem', fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.72rem',
   letterSpacing: '0.14em', textTransform: 'uppercase', color: active ? '#e9e7e2' : '#9a9387',
   background: 'rgba(20, 18, 16, 0.72)', border: `1px solid rgba(233, 231, 226, ${active ? 0.25 : 0.12})`,
   borderRadius: 4, cursor: 'pointer', backdropFilter: 'blur(6px)',
 });
-const zbtn = {
-  width: 40, height: 40, fontFamily: "'IBM Plex Mono', monospace", fontSize: '1.2rem', lineHeight: 1,
-  color: '#e9e7e2', background: 'rgba(20, 18, 16, 0.72)', border: '1px solid rgba(233, 231, 226, 0.25)',
-  borderRadius: 4, cursor: 'pointer', backdropFilter: 'blur(6px)',
-};

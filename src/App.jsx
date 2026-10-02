@@ -5,7 +5,7 @@
 // derecha de anotaciones. La selección de punto se coordina entre el visor
 // (pines) y el panel (lista).
 
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import './unfolded-ui.css';
 import { monuments } from './monuments';
 import { LanguageProvider, useT } from './i18n';
@@ -17,6 +17,7 @@ import Article from './Article';
 import Team from './Team';
 import Method from './Method';
 import Project from './Project';
+import News from './News';
 import Contact from './Contact';
 
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
@@ -166,18 +167,73 @@ function MonumentDetail({ monument }) {
   );
 }
 
+// --- Direcciones (hash) ---------------------------------------------------
+// Cada página y cada lámina tiene su dirección: #/proyecto, #/metodologia,
+// #/noticias, #/equipo, #/contacto, #/<id de la lámina> (el nombre del .txt). Así el botón
+// «atrás» del navegador vuelve a donde estabas, y se puede enviar un enlace
+// directo a una lámina. Con hash no hace falta configurar nada en Vercel.
+const PAGE_SLUGS = { project: 'proyecto', method: 'metodologia', news: 'noticias', about: 'equipo', contact: 'contacto' };
+const SLUG_TO_PAGE = Object.fromEntries(Object.entries(PAGE_SLUGS).map(([k, v]) => [v, k]));
+
+function parseHash() {
+  const slug = decodeURIComponent(window.location.hash.replace(/^#\/?/, '')).split('/')[0];
+  if (!slug) return { page: null, monumentId: null };
+  if (SLUG_TO_PAGE[slug]) return { page: SLUG_TO_PAGE[slug], monumentId: null };
+  if (monuments.some((m) => m.id === slug)) return { page: null, monumentId: slug };
+  return { page: null, monumentId: null };   // dirección desconocida -> portada
+}
+
+function useHashRoute() {
+  const [route, setRoute] = useState(parseHash);
+  useEffect(() => {
+    const onChange = () => setRoute(parseHash());
+    window.addEventListener('hashchange', onChange);
+    return () => window.removeEventListener('hashchange', onChange);
+  }, []);
+  const navigate = (path) => {
+    const target = '#/' + path;
+    if (window.location.hash === target) return;
+    window.location.hash = target;            // añade una entrada al historial
+  };
+  return [route, navigate];
+}
+
 function AppInner() {
   const t = useT();
-  const [selectedId, setSelectedId] = useState(null);
-  // Página secundaria abierta: null | 'project' | 'method' | 'about' | 'contact'
-  const [page, setPage] = useState(null);
-  const monument = monuments.find((m) => m.id === selectedId) ?? null;
+  const [{ page, monumentId }, navigate] = useHashRoute();
+  const monument = monuments.find((m) => m.id === monumentId) ?? null;
 
-  const goHome = () => { setSelectedId(null); setPage(null); };
-  const openPage = (name) => { setSelectedId(null); setPage(name); window.scrollTo(0, 0); };
-  const selectMonument = (id) => { setSelectedId(id); setPage(null); };
+  const goHome = () => navigate('');
+  const openPage = (name) => navigate(PAGE_SLUGS[name]);
+  const selectMonument = (id) => navigate(id);
 
   const inDetail = Boolean(monument || page);
+
+  // Scroll: al volver a la portada, se recupera la posición en la que estabas
+  // entre las láminas; al abrir cualquier otra cosa, se empieza arriba.
+  const archiveScroll = useRef(0);
+  useLayoutEffect(() => {
+    if (!inDetail) window.scrollTo(0, archiveScroll.current);
+    else window.scrollTo(0, 0);
+  }, [page, monumentId, inDetail]);
+  useEffect(() => {
+    if (inDetail) return;
+    const onScroll = () => { archiveScroll.current = window.scrollY; };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [inDetail]);
+
+  // Título de la pestaña del navegador (y de cada entrada del historial).
+  useEffect(() => {
+    const name = monument ? t(monument.title)
+      : page === 'project' ? t(ui.projectNav)
+      : page === 'method' ? t(ui.methodNav)
+      : page === 'news' ? t(ui.newsNav)
+      : page === 'about' ? t(ui.aboutNav)
+      : page === 'contact' ? t(ui.contactNav)
+      : '';
+    document.title = name ? `${name} · Art Unfolded` : 'Art Unfolded';
+  });
 
   return (
     <div className={'app' + (inDetail ? ' is-detail' : '')}>
@@ -193,6 +249,7 @@ function AppInner() {
         <div className="app-bar-right">
           <button type="button" className={`about-link${page === 'project' ? ' is-active' : ''}`} onClick={() => openPage('project')}>{t(ui.projectNav)}</button>
           <button type="button" className={`about-link${page === 'method' ? ' is-active' : ''}`} onClick={() => openPage('method')}>{t(ui.methodNav)}</button>
+          <button type="button" className={`about-link${page === 'news' ? ' is-active' : ''}`} onClick={() => openPage('news')}>{t(ui.newsNav)}</button>
           <button type="button" className={`about-link${page === 'about' ? ' is-active' : ''}`} onClick={() => openPage('about')}>{t(ui.aboutNav)}</button>
           <button type="button" className={`about-link${page === 'contact' ? ' is-active' : ''}`} onClick={() => openPage('contact')}>{t(ui.contactNav)}</button>
           <LanguageSelector />
@@ -203,12 +260,14 @@ function AppInner() {
         ? <Project />
         : page === 'method'
         ? <Method />
+        : page === 'news'
+        ? <News />
         : page === 'about'
         ? <Team />
         : page === 'contact'
         ? <Contact />
         : monument
-          ? <MonumentDetail monument={monument} />
+          ? <MonumentDetail key={monument.id} monument={monument} />
           : <Archive onSelect={selectMonument} />}
     </div>
   );

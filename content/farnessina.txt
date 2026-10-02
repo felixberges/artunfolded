@@ -1,5 +1,5 @@
 [TITULO]
-es: Loggia Galatea en Villa Farnessina
+es: Loggia di Galatea en Villa Farnesina
 it: Loggia di Galatea a Villa Farnesina
 en: Loggia of Galatea at Villa Farnesina
 [TEXTO]
@@ -8,7 +8,7 @@ titulo:
 	it: Affresco Il trionfo di Galatea
 	en: Fresco The Triumph of Galatea
 
-	es: La Logia de Galatea es una de las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512.
+	es: La Loggia di Galatea es una de las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512.
 	it: La Loggia di Galatea è una delle gallerie decorate più spettacolari dell'Alto Rinascimento, situata nella Villa Farnesina di Roma (Italia). Deve il suo nome al celebre affresco Il trionfo di Galatea che Raffaello vi dipinse intorno al 1512.
 	en: The Loggia of Galatea is one of the most spectacular decorated galleries of the High Renaissance, located in the Villa Farnesina in Rome, Italy. It takes its name from the famous fresco The Triumph of Galatea, which Raphael painted there around 1512.
 
@@ -73,11 +73,11 @@ punto:0.1343, 0.2756
 info visor:
 	es: Constelación de Argo
 	it: Costellazione di Argo
-	en: Constellation of Argus
+	en: Constellation of Argo
 info anotaciones:
 	es: La constelación de Argo y la constelación del Can.
 	it: La costellazione di Argo e la costellazione del Cane.
-	en: The constellation of Argus and the constellation of Canis.
+	en: The constellation of Argo and the constellation of Canis.
 
 punto:0.1223, 0.4376
 info visor:
@@ -242,7 +242,7 @@ info anotaciones:
 opciones: ajuste=contain, autoplay=0, bucle, miniaturas
 
 [HISTORIA]
-	es: Fotografías realizadas en marzo de 2026 durante una visita turística a Villa Farnessina.
+	es: Fotografías realizadas en marzo de 2026 durante una visita turística a Villa Farnesina.
 	it: Fotografie realizzate nel marzo 2026 durante una visita turistica a Villa Farnesina.
 	en: Photographs taken in March 2026 during a tourist visit to Villa Farnesina.
 

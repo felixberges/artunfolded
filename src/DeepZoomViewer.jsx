@@ -25,12 +25,22 @@
 //   - AYUDA: <HelpOverlay type="deepzoom"/> es HERMANO del div de OSD (no
 //     hijo), para que la rueda/doble clic sobre el panel no lleguen al visor.
 //     Se apila en la columna de la derecha, bajo los botones de giro.
+//   - BOTONES PROPIOS (arriba a la izquierda): acercar, alejar, inicio y
+//     pantalla completa. Sustituyen a los de OSD (PNG pequeñas con degradado,
+//     poco legibles); mismo estilo que los de giro. Iconos en SVG.
+//   - PANTALLA COMPLETA con la API del navegador sobre el CONTENEDOR
+//     (stage-wrap), no con la de OSD: así los botones, la ayuda y el aviso
+//     siguen visibles, porque son hermanos del div de OSD. Mientras dura, un
+//     aviso fijo abajo recuerda que se sale con Esc, con un botón de salir
+//     para tabletas (sin tecla Esc). Si el navegador no la permite (iPhone),
+//     el botón no aparece.
 
 import { useEffect, useRef, useState } from 'react';
 import OpenSeadragon from 'openseadragon';
 import { useT, useLang } from './i18n';
 import { ui } from './strings';
 import HelpOverlay from './HelpOverlay';
+import { ToolButton, ViewerToolbar, FullscreenHint, useFullscreen } from './viewerUI';
 import './annotations.css';
 
 const OSD_PREFIX = '/openseadragon/images/';
@@ -66,6 +76,8 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
   const active = sources.find((s) => s.id === activeId) ?? sources[0];
 
   const containerRef = useRef(null);
+  const wrapRef = useRef(null);   // stage-wrap: lo que se pone a pantalla completa
+  const fs = useFullscreen(wrapRef);
   const viewerRef = useRef(null);
   const pinsRef = useRef([]);     // botones (pin) DOM
   const labelsRef = useRef([]);   // <span> del rótulo de cada pin
@@ -115,7 +127,7 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
       element: containerRef.current,
       prefixUrl: OSD_PREFIX,
       tileSources,
-      showNavigationControl: true,
+      showNavigationControl: false,   // botones propios (ver toolbar)
       showNavigator: false,
       gestureSettingsMouse: { clickToZoom: false },
       visibilityRatio: 1,
@@ -336,6 +348,8 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
     viewer.addHandler('animation', onZoomOrPan);
     viewer.addHandler('home', onHome);
     viewer.addHandler('rotate', onZoomOrPan);
+    // Al entrar/salir de pantalla completa cambia el tamaño: repinta el velo.
+    viewer.addHandler('resize', onZoomOrPan);
 
     // --- Modo autor: doble clic -> añade punto al panel superpuesto -----------
     if (AUTHOR_MODE) {
@@ -406,6 +420,20 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
     }
   }, [activeAnno]);
 
+  // dir: +1 acercar, -1 alejar
+  const zoomStep = (dir) => {
+    const factor = dir > 0 ? 1.5 : 1 / 1.5;
+    const vp = viewerRef.current?.viewport;
+    if (!vp) return;
+    vp.zoomBy(factor);
+    vp.applyConstraints();
+  };
+  const goHome = () => {
+    const vp = viewerRef.current?.viewport;
+    if (!vp) return;
+    vp.setRotation(0, vp.getCenter(true));
+    vp.goHome();
+  };
   function setOverlayOpacity(overlayId, value) {
     const idx = imageOverlays.findIndex((o) => o.id === overlayId);
     const item = viewerRef.current?.world.getItemAt(idx + 1);
@@ -419,8 +447,11 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
 
   return (
     <div className="deepzoom">
-      <div className="deepzoom-stage-wrap" style={stageWrap}>
+      <div className={'deepzoom-stage-wrap au-fs-root' + (fs.isFs ? ' is-fullscreen' : '')} style={stageWrap} ref={wrapRef}>
         <div className="deepzoom-stage" ref={containerRef} />
+
+        <ViewerToolbar onZoom={zoomStep} onHome={goHome} fs={fs} style={wrapTL} />
+        <FullscreenHint fs={fs} />
 
         {AUTHOR_MODE && (
           <div style={authorPanel}>
@@ -457,26 +488,8 @@ export default function DeepZoomViewer({ sources = [], activeAnno = null, onSele
 
         {options.rotate !== false && (
           <div style={wrapTR}>
-            <button
-              type="button"
-              onClick={() => rotateByRef.current(-ROTATE_STEP)}
-              style={zbtn}
-              className="ov-zbtn"
-              title="Girar antihorario"
-              aria-label="Girar antihorario"
-            >
-              ↺
-            </button>
-            <button
-              type="button"
-              onClick={() => rotateByRef.current(ROTATE_STEP)}
-              style={zbtn}
-              className="ov-zbtn"
-              title="Girar horario"
-              aria-label="Girar horario"
-            >
-              ↻
-            </button>
+            <ToolButton icon="rotCCW" label={t(ui.viewerRotateCCW)} onClick={() => rotateByRef.current(-ROTATE_STEP)} />
+            <ToolButton icon="rotCW" label={t(ui.viewerRotateCW)} onClick={() => rotateByRef.current(ROTATE_STEP)} />
           </div>
         )}
 
@@ -530,6 +543,7 @@ const stageWrap = { position: 'relative', width: '100%', height: '100%' };
 // Ayuda en la misma columna que los botones de giro (2 × 40px + 2 × 6px de gap).
 const helpTR = { top: 20, right: 20 };
 const helpBelowRotate = { top: 20 + 2 * 40 + 2 * 6, right: 20 };
+const wrapTL = { position: 'absolute', top: 20, left: 20, zIndex: 11 };
 const wrapTR = { position: 'absolute', top: 20, right: 20, zIndex: 11, display: 'flex', flexDirection: 'column', gap: 6 };
 const authorPanel = {
   position: 'absolute', bottom: 16, left: 16, zIndex: 20,
@@ -557,9 +571,4 @@ const authorPre = {
   lineHeight: 1.6, color: '#e9e7e2',
   overflowY: 'auto', flex: 1,
   whiteSpace: 'pre-wrap', wordBreak: 'break-all',
-};
-const zbtn = {
-  width: 40, height: 40, fontFamily: "'IBM Plex Mono', monospace", fontSize: '1.2rem', lineHeight: 1,
-  color: '#e9e7e2', background: 'rgba(20, 18, 16, 0.72)', border: '1px solid rgba(233, 231, 226, 0.25)',
-  borderRadius: 4, cursor: 'pointer', backdropFilter: 'blur(6px)',
 };

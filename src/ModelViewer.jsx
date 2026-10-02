@@ -23,6 +23,9 @@ import { useGLTF, Bounds, Center, AdaptiveDpr, OrbitControls } from '@react-thre
 import * as THREE from 'three';
 import { KTX2Loader } from 'three-stdlib'; // misma fuente que usa drei internamente
 import HelpOverlay from './HelpOverlay';
+import { useT } from './i18n';
+import { ui } from './strings';
+import { ViewerToolbar, FullscreenHint, useFullscreen } from './viewerUI';
 
 // --- Rutas de decodificadores (offline-first) --------------------------------
 const BASIS_PATH = '/basis/';
@@ -355,6 +358,10 @@ function CameraReadout({ onChange }) {
 }
 
 export default function ModelViewer({ model, options, camera }) {
+  const t = useT();
+  // Pantalla completa sobre el contenedor del visor (ver viewerUI.jsx).
+  const rootRef = useRef(null);
+  const fs = useFullscreen(rootRef);
   // `model` = URL pública del .glb. `camera` = { orbit?, eyeLevel? } o undefined.
   const hasCamera = !!camera;
   const hasEye = !!camera?.eyeLevel;
@@ -402,34 +409,37 @@ export default function ModelViewer({ model, options, camera }) {
   const eyeMode = hasEye && mode === 'eye';
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      {hasEye && (
-        <div className="model-mode-toggle" style={toggleWrapStyle}>
-          <button
-            type="button"
-            onClick={() => setMode('orbit')}
-            aria-pressed={mode === 'orbit'}
-            style={toggleBtnStyle(mode === 'orbit')}
-          >
-            Órbita
-          </button>
-          <button
-            type="button"
-            onClick={() => setMode('eye')}
-            aria-pressed={mode === 'eye'}
-            style={toggleBtnStyle(mode === 'eye')}
-          >
-            Eye-level
-          </button>
-        </div>
-      )}
+    <div className="au-fs-root" ref={rootRef} style={{ position: 'relative', width: '100%', height: '100%' }}>
+      {/* Arriba a la izquierda: barra común (zoom e inicio solo si hay cámara) */}
+      <ViewerToolbar
+        onZoom={hasCamera ? doZoom : null}
+        onHome={hasCamera ? goHome : null}
+        fs={fs}
+        style={toolbarWrapStyle}
+      />
+      <FullscreenHint fs={fs} />
 
-      {/* Arriba a la derecha: Inicio (si hay cámara) + ayuda, en la misma fila */}
+      {/* Arriba a la derecha: modo de vista (si hay eye-level) + ayuda */}
       <div className="model-home" style={homeWrapStyle}>
-        {hasCamera && (
-          <button type="button" onClick={goHome} style={toggleBtnStyle(false)} title="Volver a la posición inicial">
-            ⌂ Inicio
-          </button>
+        {hasEye && (
+          <div className="model-mode-toggle" style={toggleWrapStyle}>
+            <button
+              type="button"
+              onClick={() => setMode('orbit')}
+              aria-pressed={mode === 'orbit'}
+              style={toggleBtnStyle(mode === 'orbit')}
+            >
+              {t(ui.viewerModeOrbit)}
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode('eye')}
+              aria-pressed={mode === 'eye'}
+              style={toggleBtnStyle(mode === 'eye')}
+            >
+              {t(ui.viewerModeEye)}
+            </button>
+          </div>
         )}
         <HelpOverlay type="model3d" corner="inline" />
       </div>
@@ -463,12 +473,6 @@ export default function ModelViewer({ model, options, camera }) {
         <CameraReadout onChange={setReadout} />
       </Canvas>
 
-      {hasCamera && (
-        <div className="model-zoom" style={zoomWrapStyle}>
-          <button type="button" onClick={() => doZoom(1)} style={zoomBtnStyle} title="Acercar" aria-label="Acercar">+</button>
-          <button type="button" onClick={() => doZoom(-1)} style={zoomBtnStyle} title="Alejar" aria-label="Alejar">−</button>
-        </div>
-      )}
 
       {readout && (
         <div className="model-cam-hud" style={hudStyle}>
@@ -481,14 +485,8 @@ export default function ModelViewer({ model, options, camera }) {
 }
 
 // --- Estilos del toggle (inline para no depender de CSS externo) -------------
-const toggleWrapStyle = {
-  position: 'absolute',
-  top: 20,
-  left: 20,
-  zIndex: 11,
-  display: 'flex',
-  gap: 6,
-};
+const toolbarWrapStyle = { position: 'absolute', top: 20, left: 20, zIndex: 11 };
+const toggleWrapStyle = { display: 'flex', gap: 6 };
 const homeWrapStyle = {
   position: 'absolute',
   top: 20,
@@ -497,28 +495,6 @@ const homeWrapStyle = {
   display: 'flex',
   alignItems: 'stretch',
   gap: 6,
-};
-const zoomWrapStyle = {
-  position: 'absolute',
-  bottom: 20,
-  right: 20,
-  zIndex: 11,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 6,
-};
-const zoomBtnStyle = {
-  width: 40,
-  height: 40,
-  fontFamily: "'IBM Plex Mono', monospace",
-  fontSize: '1.2rem',
-  lineHeight: 1,
-  color: '#e9e7e2',
-  background: 'rgba(20, 18, 16, 0.72)',
-  border: '1px solid rgba(233, 231, 226, 0.25)',
-  borderRadius: 4,
-  cursor: 'pointer',
-  backdropFilter: 'blur(6px)',
 };
 const toggleBtnStyle = (active) => ({
   padding: '0.55rem 0.95rem',

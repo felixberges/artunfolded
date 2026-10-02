@@ -2,7 +2,6 @@
 // Each entry is a localized field consumed via t(ui.xxx).
 
 export const ui = {
-  archive:        { es: 'Archivo', it: 'Archivio', en: 'Archive' },
   back:           { es: 'Archivo', it: 'Archivio', en: 'Archive' }, // arrow is rendered separately
   language:       { es: 'Idioma', it: 'Lingua', en: 'Language' },
   views:          { es: 'Vistas', it: 'Viste', en: 'Views' },
@@ -40,6 +39,8 @@ export const ui = {
   methodNav: { es: 'Metodología', it: 'Metodologia', en: 'Methodology' },
   projectNav: { es: 'El proyecto', it: 'Il progetto', en: 'The project' },
   contactNav: { es: 'Contacto', it: 'Contatti', en: 'Contact' },
+  newsNav: { es: 'Noticias', it: 'Notizie', en: 'News' },
+  newsTitle: { es: 'Noticias', it: 'Notizie', en: 'News' },
 
   // --- Página El proyecto (Project.jsx) ---------------------------------------
   projectTitle: { es: 'El proyecto', it: 'Il progetto', en: 'The project' },
@@ -142,31 +143,26 @@ export const ui = {
   methodIntroImgAlt:  { es: 'La bóveda de la Loggia di Galatea fotografiada desde abajo, con los lunetos y las ventanas', it: 'La volta della Loggia di Galatea fotografata dal basso, con le lunette e le finestre', en: 'The vault of the Loggia di Galatea photographed from below, with the lunettes and windows' },
   methodCase1Title: { es: 'Villa Farnesina, Loggia di Galatea', it: 'Villa Farnesina, Loggia di Galatea', en: 'Villa Farnesina, Loggia di Galatea' },
   methodCase1Body: {
-    es: 'La bóveda de la Loggia di Galatea, pintada por Baldassarre Peruzzi hacia 1511, representa según la lectura más aceptada el horóscopo de Agostino Chigi, el banquero que mandó construir la villa. Desde el suelo se ve repartida entre la zona central, las enjutas y los lunetos, y siempre en escorzo. A partir de la cobertura fotográfica se obtuvo un modelo fotogramétrico de la bóveda y, sobre él, un desplegado que la muestra entera y de frente, con cada escena en su relación real con las demás.',
-    it: 'La volta della Loggia di Galatea, dipinta da Baldassarre Peruzzi intorno al 1511, rappresenta secondo la lettura più accreditata l\'oroscopo di Agostino Chigi, il banchiere che fece costruire la villa. Da terra la si vede divisa tra la parte centrale, i pennacchi e le lunette, e sempre di scorcio. Dalla copertura fotografica si è ottenuto un modello fotogrammetrico della volta e, a partire da esso, uno sviluppo che la mostra intera e di fronte, con ogni scena nel suo rapporto reale con le altre.',
-    en: 'The vault of the Loggia di Galatea, painted by Baldassarre Peruzzi around 1511, depicts, according to the most widely accepted reading, the horoscope of Agostino Chigi, the banker who had the villa built. From the floor it is seen divided between the central field, the spandrels and the lunettes, and always foreshortened. From the photographic coverage, a photogrammetric model of the vault was produced and, from it, an unfolded image that shows it whole and face on, with each scene in its true relation to the others.',
+    es: 'La bóveda de la Loggia di Galatea, pintada por Baldassarre Peruzzi hacia 1511, representa según la lectura más aceptada el horóscopo de Agostino Chigi, el banquero que mandó construir la villa.',
+    it: 'La volta della Loggia di Galatea, dipinta da Baldassarre Peruzzi intorno al 1511, rappresenta secondo la lettura più accreditata l\'oroscopo di Agostino Chigi, il banchiere che fece costruire la villa.',
+    en: 'The vault of the Loggia di Galatea, painted by Baldassarre Peruzzi around 1511, represents, according to the most widely accepted reading, the horoscope of Agostino Chigi, the banker who had the villa built.',
   },
   // Final del caso Farnesina: el visor diseñado para esta bóveda
   methodCase1ViewerTitle: { es: 'Un visor pensado para esta bóveda', it: 'Un visore pensato per questa volta', en: 'A viewer designed for this vault' },
   methodCase1ViewerP1: {
-    es: 'Cada obra de Art Unfolded tiene un visor diseñado para ella. No es una plantilla que se rellena con imágenes distintas. Se parte de cómo está construida la obra y de cómo se mira en su sitio, y a partir de ahí se decide qué tiene que permitir hacer el visor.',
-    it: 'Ogni opera di Art Unfolded ha un visore progettato per lei. Non è un modello da riempire con immagini diverse. Si parte da come è costruita l\'opera e da come la si guarda nel suo luogo, e da lì si decide che cosa deve permettere di fare il visore.',
-    en: 'Every work in Art Unfolded has a viewer designed for it. It is not a template filled with different images. The starting point is how the work is built and how it is seen in its place, and from there we decide what the viewer needs to make possible.',
+    es: 'Cada obra tiene un visor diseñado para ella, a partir de cómo está construida y de cómo se mira en su sitio.',
+    it: 'Ogni opera ha un visore progettato per lei, a partire da come è costruita e da come la si guarda nel suo luogo.',
+    en: 'Each work has a viewer designed for it, based on how it is built and how it is seen in its place.',
   },
   methodCase1ViewerP2: {
-    es: 'En la Loggia di Galatea, las escenas de la bóveda no comparten una misma orientación: cada una está pensada para verse desde una zona distinta de la sala. Al desplegar el techo sobre un plano, unas quedan del derecho, otras de lado y otras boca abajo. En la sala, esto se resuelve caminando bajo la bóveda. En la pantalla, el visor permite girar la imagen en pasos de quince grados hasta que la escena que interesa queda en su posición natural. Los rótulos de los puntos de información no giran con ella, de modo que siempre se pueden leer.',
-    it: 'Nella Loggia di Galatea le scene della volta non condividono lo stesso orientamento: ognuna è pensata per essere vista da una zona diversa della sala. Distendendo il soffitto su un piano, alcune risultano dritte, altre di lato e altre capovolte. Nella sala lo si risolve camminando sotto la volta. Sullo schermo, il visore permette di ruotare l\'immagine a passi di quindici gradi finché la scena che interessa non torna nella sua posizione naturale. Le etichette dei punti informativi non ruotano con l\'immagine e restano sempre leggibili.',
-    en: 'In the Loggia di Galatea, the scenes on the vault do not share a single orientation: each is meant to be seen from a different part of the room. When the ceiling is unfolded onto a plane, some end up upright, some on their side and some upside down. In the room, this is resolved by walking beneath the vault. On screen, the viewer lets you rotate the image in fifteen-degree steps until the scene you are interested in sits in its natural position. The labels on the information points do not rotate with it, so they always remain legible.',
+    es: 'Las escenas de la bóveda miran hacia distintas zonas de la sala, así que en el desplegado unas quedan de lado y otras boca abajo. El visor permite girar la imagen hasta poner cada escena del derecho, y los rótulos se mantienen siempre legibles.',
+    it: 'Le scene della volta sono rivolte verso zone diverse della sala, per cui nella distesa alcune risultano di lato e altre capovolte. Il visore permette di ruotare l\'immagine fino a raddrizzare ogni scena, e le etichette restano sempre leggibili.',
+    en: 'The scenes on the vault face different parts of the room, so in the unfolded image some lie on their side and others upside down. The viewer lets you rotate the image until each scene is upright, and the labels always remain legible.',
   },
   methodCase1ViewerP3: {
-    es: 'La bóveda reúne además un programa astrológico denso, con las constelaciones y los signos del zodíaco que componen el horóscopo de Agostino Chigi. Para orientarse en él, el visor acompaña la imagen con una lista de anotaciones. Al elegir una, la imagen se centra en la escena correspondiente y la señala. A la inversa, al pulsar un punto sobre la pintura se resalta su entrada en la lista. Los puntos aparecen a medida que uno se acerca, para no cubrir la pintura en la vista general.',
-    it: 'La volta riunisce inoltre un programma astrologico denso, con le costellazioni e i segni zodiacali che compongono l\'oroscopo di Agostino Chigi. Per orientarsi, il visore accompagna l\'immagine con un elenco di annotazioni. Scegliendone una, l\'immagine si centra sulla scena corrispondente e la segnala. Al contrario, toccando un punto sulla pittura si evidenzia la sua voce nell\'elenco. I punti compaiono man mano che ci si avvicina, per non coprire la pittura nella vista d\'insieme.',
-    en: 'The vault also holds a dense astrological programme, with the constellations and signs of the zodiac that make up Agostino Chigi\'s horoscope. To help find one\'s way through it, the viewer pairs the image with a list of annotations. Choosing one centres the image on the corresponding scene and marks it. Conversely, selecting a point on the painting highlights its entry in the list. The points appear as you move closer, so they do not cover the painting in the overall view.',
-  },
-  methodCase1ViewerP4: {
-    es: 'El resultado permite leer la bóveda escena a escena: girarla, acercarse a cada figura y pasar de una a otra siguiendo el programa.',
-    it: 'Il risultato permette di leggere la volta scena per scena: ruotarla, avvicinarsi a ogni figura e passare dall\'una all\'altra seguendo il programma.',
-    en: 'The result makes it possible to read the vault scene by scene: rotating it, moving close to each figure and passing from one to the next as the programme unfolds.',
+    es: 'Para orientarse en el horóscopo de Chigi, el visor acompaña la imagen con una lista de anotaciones: al elegir una, la imagen se centra en la escena y la señala. Los puntos aparecen al acercarse, para no cubrir la pintura.',
+    it: 'Per orientarsi nell\'oroscopo di Chigi, il visore accompagna l\'immagine con un elenco di annotazioni: scegliendone una, l\'immagine si centra sulla scena e la segnala. I punti compaiono avvicinandosi, per non coprire la pittura.',
+    en: 'To find one\'s way through Chigi\'s horoscope, the viewer pairs the image with a list of annotations: choosing one centres the image on the scene and marks it. The points appear as you move closer, so they do not cover the painting.',
   },
   methodCase1ViewerImgCaption: {
     es: 'El visor de la Loggia di Galatea: la bóveda desplegada y, a la derecha, la lista de anotaciones.',
@@ -192,9 +188,9 @@ export const ui = {
   methodStep1Num:     { es: 'paso 1', it: 'passo 1', en: 'step 1' },
   methodStep1Title:   { es: 'Fotografiar', it: 'Fotografare', en: 'Photograph' },
   methodStep1Body: {
-    es: 'La captura es sistemática. Cada superficie se fotografía con un solape amplio entre tomas, con referencias de color y en condiciones de luz lo más estables posible. Después, las fotografías se seleccionan una a una y se igualan en color y exposición de forma exhaustiva. De ello depende que la reconstrucción sea coherente y que el color final se corresponda con el original y no con la cámara.',
-    it: 'La ripresa è sistematica. Ogni superficie viene fotografata con un\'ampia sovrapposizione tra gli scatti, con riferimenti colore e in condizioni di luce il più possibile stabili. Le fotografie vengono poi selezionate una per una e uniformate in colore ed esposizione in modo accurato. Da questo dipende che la ricostruzione sia coerente e che il colore finale corrisponda all\'originale e non alla fotocamera.',
-    en: 'Capture is systematic. Each surface is photographed with generous overlap between shots, with colour references and under lighting conditions kept as stable as possible. The photographs are then selected one by one and matched in colour and exposure with great care. This is what makes the reconstruction coherent and ensures that the final colour reflects the original rather than the camera.',
+    es: 'La captura es sistemática: cada superficie se fotografía con un solape amplio entre tomas, con referencias de color y con la luz lo más estable posible. Después, las fotografías se igualan en color y exposición, para que el color final sea el de la obra y no el de la cámara.',
+    it: 'La ripresa è sistematica: ogni superficie viene fotografata con un\'ampia sovrapposizione tra gli scatti, con riferimenti di colore e con una luce il più possibile stabile. Poi le fotografie vengono uniformate per colore ed esposizione, perché il colore finale sia quello dell\'opera e non quello della fotocamera.',
+    en: 'Capture is systematic: each surface is photographed with generous overlap between shots, with colour references and with the light kept as stable as possible. The photographs are then matched in colour and exposure, so that the final colour is that of the work and not of the camera.',
   },
   methodStep1Caption: { es: 'Cobertura fotográfica — Villa Farnesina, Loggia di Psiche', it: 'Copertura fotografica — Villa Farnesina, Loggia di Psiche', en: 'Photographic coverage — Villa Farnesina, Loggia di Psiche' },
   methodStep1ImgAlt:  { es: 'Cobertura fotográfica de la Loggia de Psique', it: 'Copertura fotografica della Loggia di Psiche', en: 'Photographic coverage of the Loggia of Psyche' },
@@ -202,9 +198,9 @@ export const ui = {
   methodStep2Num:     { es: 'paso 2', it: 'passo 2', en: 'step 2' },
   methodStep2Title:   { es: 'Reconstruir en tres dimensiones', it: 'Ricostruire in tre dimensioni', en: 'Reconstruct in three dimensions' },
   methodStep2Body: {
-    es: 'A partir de ese material, la fotogrametría obtiene la geometría de la superficie: comparando los puntos comunes entre fotografías, deduce su forma exacta. Para relieves y esculturas se generan además mapas de normales, que registran la orientación de la superficie y permiten iluminarla de nuevo.',
-    it: 'A partire da questo materiale, la fotogrammetria ricava la geometria della superficie: confrontando i punti comuni tra le fotografie, ne deduce la forma esatta. Per rilievi e sculture si generano inoltre mappe delle normali, che registrano l\'orientamento della superficie e permettono di illuminarla di nuovo.',
-    en: 'From this material, photogrammetry recovers the geometry of the surface: by comparing the points shared between photographs, it deduces its exact shape. For reliefs and sculptures, normal maps are also generated; these record the orientation of the surface and make it possible to relight it.',
+    es: 'La fotogrametría compara los puntos comunes entre fotografías y deduce la forma exacta de la superficie. En relieves y esculturas se generan además mapas de normales, que permiten iluminarla de nuevo.',
+    it: 'La fotogrammetria confronta i punti comuni tra le fotografie e ne ricava la forma esatta della superficie. Per rilievi e sculture si generano inoltre mappe delle normali, che permettono di illuminarla di nuovo.',
+    en: 'Photogrammetry compares the points shared between photographs and derives the exact shape of the surface. For reliefs and sculptures, normal maps are also generated, which allow the surface to be relit.',
   },
   methodStep2Caption: { es: 'Modelo fotogramétrico — Blender', it: 'Modello fotogrammetrico — Blender', en: 'Photogrammetric model — Blender' },
   methodStep2ImgAlt:  { es: 'Modelo fotogramétrico 3D, vista exterior', it: 'Modello fotogrammetrico 3D, vista esterna', en: '3D photogrammetric model, exterior view' },
@@ -224,9 +220,9 @@ export const ui = {
   methodStep4Num:     { es: 'paso 4', it: 'passo 4', en: 'step 4' },
   methodStep4Title: { es: 'Retocar', it: 'Ritoccare', en: 'Retouch' },
   methodStep4Body: {
-    es: 'El retoque se limita a lo que es ajeno a la obra: uniones entre fotografías, reflejos, sombras de andamios, diferencias de exposición y elementos añadidos con posterioridad, como cables, focos o señalización. No se reconstruyen zonas perdidas ni se "mejora" la obra. Lo que se ve en pantalla debe ser lo que hay en el muro.',
-    it: 'Il ritocco si limita a ciò che è estraneo all\'opera: giunzioni tra le fotografie, riflessi, ombre dei ponteggi, differenze di esposizione ed elementi aggiunti successivamente, come cavi, faretti o segnaletica. Non si ricostruiscono parti perdute né si "migliora" l\'opera. Ciò che si vede sullo schermo deve essere ciò che c\'è sul muro.',
-    en: 'Retouching is limited to what is foreign to the work: seams between photographs, reflections, scaffolding shadows, differences in exposure, and later additions such as cables, spotlights or signage. Lost areas are not reconstructed, and the work is not "improved". What appears on screen should be what is on the wall.',
+    es: 'El retoque se limita a lo que es ajeno a la obra: uniones entre fotografías, reflejos, sombras y elementos añadidos, como cables o focos. No se reconstruyen zonas perdidas. Lo que se ve en pantalla es lo que hay en el muro.',
+    it: 'Il ritocco si limita a ciò che è estraneo all\'opera: giunzioni tra le fotografie, riflessi, ombre ed elementi aggiunti, come cavi o fari. Non si ricostruiscono le parti perdute. Ciò che si vede sullo schermo è ciò che c\'è sul muro.',
+    en: 'Retouching is limited to what is foreign to the work: seams between photographs, reflections, shadows and added elements such as cables or lights. Lost areas are not reconstructed. What you see on screen is what is on the wall.',
   },
   methodStep4Caption: { es: 'Los cinco planos — antes y después de componer', it: 'I cinque piani — prima e dopo la composizione', en: 'The five planes — before and after composing' },
   methodStep4ImgAlt:  { es: 'Los cinco planos antes de componer', it: 'I cinque piani prima della composizione', en: 'The five planes before composing' },
@@ -234,9 +230,9 @@ export const ui = {
 
   methodResultTitle: { es: 'El resultado', it: 'Il risultato', en: 'The result' },
   methodResultBody: {
-    es: 'Por último, cada resultado se prepara para verse en la web a plena resolución, sin programas adicionales, de forma que cualquier persona pueda acercarse al detalle con la misma libertad que tendría el restaurador subido al andamio.',
-    it: 'Infine, ogni risultato viene preparato per essere visto sul web alla massima risoluzione, senza programmi aggiuntivi, perché chiunque possa avvicinarsi al dettaglio con la stessa libertà che avrebbe il restauratore salito sul ponteggio.',
-    en: 'Finally, each result is prepared to be viewed online at full resolution, with no additional software, so that anyone can approach the detail with the same freedom a restorer would have up on the scaffolding.',
+    es: 'Cada resultado se prepara para verse en la web a plena resolución, sin programas adicionales, de modo que cualquiera pueda acercarse al detalle como lo haría un restaurador subido al andamio.',
+    it: 'Ogni risultato viene preparato per essere visto sul web a piena risoluzione, senza programmi aggiuntivi, così che chiunque possa avvicinarsi al dettaglio come farebbe un restauratore sul ponteggio.',
+    en: 'Each result is prepared to be viewed on the web at full resolution, with no additional software, so that anyone can move in on the detail as a restorer on the scaffolding would.',
   },
   methodResultImgAlt: { es: 'Resultado final — Loggia di Psiche desplegada', it: 'Risultato finale — Loggia di Psiche dispiegata', en: 'Final result — Loggia di Psiche unfolded' },
 
@@ -268,6 +264,39 @@ export const ui = {
     en: 'Félix Bergés is a visual effects supervisor and co-founder of El Ranchito, a studio that has spent more than twenty years at the highest level of visual effects history. He has worked on films such as Agora, The Impossible, A Monster Calls and Society of the Snow, and on series including Game of Thrones and The Mandalorian. His work has earned nine Goya Awards for Best Special Effects and several Visual Effects Society honours, and he is a member of the Spanish Academy of Motion Picture Arts and Sciences, the Visual Effects Society, and the U.S. Academy of Motion Picture Arts and Sciences (the Oscars). Trained as a physicist and a devoted photographer, he has spent an entire career looking, shot by shot, for another way of seeing.',
   },
 
+  // --- Carrusel (Carousel.jsx). {n} y {total} se sustituyen en el código.
+  carouselPrev:     { es: 'Imagen anterior', it: 'Immagine precedente', en: 'Previous image' },
+  carouselNext:     { es: 'Imagen siguiente', it: 'Immagine successiva', en: 'Next image' },
+  carouselThumbs:   { es: 'Miniaturas', it: 'Miniature', en: 'Thumbnails' },
+  carouselPosition: { es: 'Posición', it: 'Posizione', en: 'Position' },
+  carouselImageOf:  { es: 'Imagen {n} de {total}', it: 'Immagine {n} di {total}', en: 'Image {n} of {total}' },
+  carouselGoTo:     { es: 'Ir a la imagen {n}', it: 'Vai all\'immagine {n}', en: 'Go to image {n}' },
+
+  // --- Botones del visor 2D (DeepZoomViewer.jsx) --------------------------
+  viewerZoomIn:      { es: 'Acercar', it: 'Ingrandisci', en: 'Zoom in' },
+  viewerZoomOut:     { es: 'Alejar', it: 'Riduci', en: 'Zoom out' },
+  viewerHome:        { es: 'Vista inicial', it: 'Vista iniziale', en: 'Initial view' },
+  viewerFsEnter:     { es: 'Pantalla completa', it: 'Schermo intero', en: 'Full screen' },
+  viewerFsExit:      { es: 'Salir de pantalla completa', it: 'Esci da schermo intero', en: 'Exit full screen' },
+  viewerFsHint:      { es: 'Pulsa Esc para salir de la pantalla completa', it: 'Premi Esc per uscire dallo schermo intero', en: 'Press Esc to exit full screen' },
+  viewerFsExitShort: { es: 'Salir', it: 'Esci', en: 'Exit' },
+  viewerRotateCCW:   { es: 'Girar a la izquierda', it: 'Ruota a sinistra', en: 'Rotate left' },
+  viewerRotateCW:    { es: 'Girar a la derecha', it: 'Ruota a destra', en: 'Rotate right' },
+  // visores 3D
+  viewerModeOrbit:      { es: 'Objeto 3D', it: 'Oggetto 3D', en: '3D object' },
+  viewerModeEye:        { es: 'Desde el suelo', it: 'Dal pavimento', en: 'From the floor' },
+  viewerMoveLight:      { es: 'Mover luz', it: 'Muovi luce', en: 'Move light' },
+  viewerMovingLight:    { es: 'Moviendo luz', it: 'Luce in movimento', en: 'Moving light' },
+  viewerMoveLightTitle: { es: 'Actívalo para mover la luz arrastrando', it: 'Attivalo per muovere la luce trascinando', en: 'Turn on to move the light by dragging' },
+  viewerLightDir:       { es: 'Dirección de la luz', it: 'Direzione della luce', en: 'Light direction' },
+  viewerHeightCap:      { es: 'altura', it: 'altezza', en: 'height' },
+  viewerCamHeight:      { es: 'Altura de la cámara', it: 'Altezza della camera', en: 'Camera height' },
+  viewerCamAzimuth:     { es: 'Azimut de la cámara', it: 'Azimut della camera', en: 'Camera azimuth' },
+  pathCeiling:          { es: 'techo', it: 'soffitto', en: 'ceiling' },
+  pathHeight:           { es: 'Altura', it: 'Altezza', en: 'Height' },
+  pathAdvance:          { es: 'Avance por el recorrido', it: 'Avanzamento lungo il percorso', en: 'Progress along the path' },
+  pathDragHint:         { es: 'arrastra para mirar', it: 'trascina per guardare', en: 'drag to look around' },
+
   // --- Página Contacto (Contact.jsx) -------------------------------------
   contactTitle: { es: 'Contacto', it: 'Contatti', en: 'Contact' },
   contactP1: {
@@ -294,23 +323,23 @@ export const ui = {
   helpTitle: { es: 'Cómo usar este visor', it: 'Come usare questo visore', en: 'How to use this viewer' },
   helpOpen:  { es: 'Mostrar ayuda', it: 'Mostra aiuto', en: 'Show help' },
   helpDeepzoom: {
-    es: ['Arrastra para desplazarte.', 'Gira con ↺ ↻.', 'Doble clic sobre una zona marcada para ver su descripción.', 'Rueda o pellizco para zoom.', '⌂ vuelve al inicio.'],
-    it: ['Trascina per spostarti.', 'Ruota con ↺ ↻.', 'Doppio clic su una zona segnata per leggerne la descrizione.', 'Rotella o pizzico per lo zoom.', '⌂ torna alla vista iniziale.'],
-    en: ['Drag to pan.', 'Rotate with ↺ ↻.', 'Double-click a marked area to read its description.', 'Scroll or pinch to zoom.', '⌂ returns to the start view.'],
+    es: ['Arrastra para desplazarte.', 'Rueda, pellizco o + − para acercar y alejar.', 'Gira la imagen con ↺ ↻.', 'Al acercarte aparecen puntos marcados: púlsalos para ver su descripción.', '⌂ vuelve a la vista inicial.', 'El botón de las cuatro esquinas abre la pantalla completa (Esc para salir).'],
+    it: ['Trascina per spostarti.', 'Rotella, pizzico o + − per ingrandire e ridurre.', 'Ruota l’immagine con ↺ ↻.', 'Avvicinandoti compaiono dei punti segnati: toccali per leggerne la descrizione.', '⌂ torna alla vista iniziale.', 'Il pulsante dei quattro angoli apre lo schermo intero (Esc per uscire).'],
+    en: ['Drag to pan.', 'Scroll, pinch or + − to zoom in and out.', 'Rotate the image with ↺ ↻.', 'Marked points appear as you zoom in: select one to read its description.', '⌂ returns to the initial view.', 'The four-corners button opens full screen (Esc to exit).'],
   },
   helpModel3d: {
-    es: ['Arrastra para orbitar.', 'Rueda o pellizco para zoom.', '⌂ vuelve al inicio.'],
-    it: ['Trascina per ruotare attorno al modello.', 'Rotella o pizzico per lo zoom.', '⌂ torna alla vista iniziale.'],
-    en: ['Drag to orbit.', 'Scroll or pinch to zoom.', '⌂ returns to the start view.'],
+    es: ['Arrastra para orbitar.', 'Rueda, pellizco o + − para acercar y alejar.', '⌂ vuelve a la vista inicial.', 'El botón de las cuatro esquinas abre la pantalla completa (Esc para salir).'],
+    it: ['Trascina per ruotare attorno al modello.', 'Rotella, pizzico o + − per ingrandire e ridurre.', '⌂ torna alla vista iniziale.', 'Il pulsante dei quattro angoli apre lo schermo intero (Esc per uscire).'],
+    en: ['Drag to orbit.', 'Scroll, pinch or + − to zoom in and out.', '⌂ returns to the initial view.', 'The four-corners button opens full screen (Esc to exit).'],
   },
   helpObject3d: {
-    es: ['Arrastra para desplazarte.', 'Sliders de Azimut y Altura para girar.', 'Activa «Mover luz» para cambiar la dirección de la luz rasante.', 'Rueda o pellizco para zoom.', '⌂ vuelve al inicio.'],
-    it: ['Trascina per spostarti.', 'Cursori Azimut e Altezza per ruotare.', 'Attiva «Muovi luce» per cambiare la direzione della luce radente.', 'Rotella o pizzico per lo zoom.', '⌂ torna alla vista iniziale.'],
-    en: ['Drag to pan.', 'Azimuth and Height sliders to rotate.', 'Turn on “Move light” to change the direction of the raking light.', 'Scroll or pinch to zoom.', '⌂ returns to the start view.'],
+    es: ['Arrastra para desplazarte.', 'Deslizadores de azimut y altura para girar.', 'Activa «Mover luz» para cambiar la dirección de la luz rasante.', 'Rueda, pellizco o + − para acercar y alejar.', '⌂ vuelve a la vista inicial.', 'El botón de las cuatro esquinas abre la pantalla completa (Esc para salir).'],
+    it: ['Trascina per spostarti.', 'Cursori di azimut e altezza per ruotare.', 'Attiva «Muovi luce» per cambiare la direzione della luce radente.', 'Rotella, pizzico o + − per ingrandire e ridurre.', '⌂ torna alla vista iniziale.', 'Il pulsante dei quattro angoli apre lo schermo intero (Esc per uscire).'],
+    en: ['Drag to pan.', 'Azimuth and height sliders to rotate.', 'Turn on “Move light” to change the direction of the raking light.', 'Scroll, pinch or + − to zoom in and out.', '⌂ returns to the initial view.', 'The four-corners button opens full screen (Esc to exit).'],
   },
   helpPath3d: {
-    es: ['Arrastra para mirar alrededor.', 'Slider inferior para avanzar, slider lateral para la altura.', 'Rueda o pellizco para zoom.', '⌂ vuelve al inicio.'],
-    it: ['Trascina per guardarti intorno.', 'Cursore in basso per avanzare, cursore laterale per l’altezza.', 'Rotella o pizzico per lo zoom.', '⌂ torna alla vista iniziale.'],
-    en: ['Drag to look around.', 'Bottom slider to move forward, side slider for height.', 'Scroll or pinch to zoom.', '⌂ returns to the start view.'],
+    es: ['Arrastra para mirar alrededor.', 'Deslizador inferior para avanzar, lateral para la altura.', 'Rueda, pellizco o + − para acercar y alejar.', '⌂ vuelve a la vista inicial.', 'El botón de las cuatro esquinas abre la pantalla completa (Esc para salir).'],
+    it: ['Trascina per guardarti intorno.', 'Cursore in basso per avanzare, laterale per l’altezza.', 'Rotella, pizzico o + − per ingrandire e ridurre.', '⌂ torna alla vista iniziale.', 'Il pulsante dei quattro angoli apre lo schermo intero (Esc per uscire).'],
+    en: ['Drag to look around.', 'Bottom slider to move forward, side slider for height.', 'Scroll, pinch or + − to zoom in and out.', '⌂ returns to the initial view.', 'The four-corners button opens full screen (Esc to exit).'],
   },
 };

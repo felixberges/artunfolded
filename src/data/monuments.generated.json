@@ -148,7 +148,7 @@
   {
     "id": "farnessina",
     "title": {
-      "es": "Loggia Galatea en Villa Farnessina",
+      "es": "Loggia di Galatea en Villa Farnesina",
       "it": "Loggia di Galatea a Villa Farnesina",
       "en": "Loggia of Galatea at Villa Farnesina"
     },
@@ -165,7 +165,7 @@
           "en": "Fresco The Triumph of Galatea"
         },
         "body": {
-          "es": "La Logia de Galatea es una de las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512.",
+          "es": "La Loggia di Galatea es una de las galerías decoradas más espectaculares del Alto Renacimiento, ubicada en la Villa Farnesina de Roma (Italia). Debe su nombre al famoso fresco El triunfo de Galatea que Rafael pintó allí alrededor de 1512.",
           "it": "La Loggia di Galatea è una delle gallerie decorate più spettacolari dell'Alto Rinascimento, situata nella Villa Farnesina di Roma (Italia). Deve il suo nome al celebre affresco Il trionfo di Galatea che Raffaello vi dipinse intorno al 1512.",
           "en": "The Loggia of Galatea is one of the most spectacular decorated galleries of the High Renaissance, located in the Villa Farnesina in Rome, Italy. It takes its name from the famous fresco The Triumph of Galatea, which Raphael painted there around 1512."
         }
@@ -278,12 +278,12 @@
                     "label": {
                       "es": "Constelación de Argo",
                       "it": "Costellazione di Argo",
-                      "en": "Constellation of Argus"
+                      "en": "Constellation of Argo"
                     },
                     "text": {
                       "es": "La constelación de Argo y la constelación del Can.",
                       "it": "La costellazione di Argo e la costellazione del Cane.",
-                      "en": "The constellation of Argus and the constellation of Canis."
+                      "en": "The constellation of Argo and the constellation of Canis."
                     },
                     "mask": "/masks/farnessina/06.png"
                   },
@@ -531,7 +531,7 @@
           "en": "Behind the lens"
         },
         "body": {
-          "es": "Fotografías realizadas en marzo de 2026 durante una visita turística a Villa Farnessina.\n\nEl objetivo de esta lámina era probar el método desde el principio hasta el final con medios de aficionado: demostrar que el proceso funciona incluso con material básico y sin condiciones ideales.\n\nEl resultado es, ya de por sí, una imagen con muchísimo detalle (200 megapíxeles). Con una cámara profesional, trípode y el tiempo adecuado, podríamos multiplicar por cuatro la resolución final.\n\nCámara Nikon compacta, a mano y sin trípode, con unos 16 megapíxeles y una focal equivalente a 50mm. Todo el trabajo de captura se hizo en poco más de media hora, sin molestar a los numerosos turistas que compartían el espacio.",
+          "es": "Fotografías realizadas en marzo de 2026 durante una visita turística a Villa Farnesina.\n\nEl objetivo de esta lámina era probar el método desde el principio hasta el final con medios de aficionado: demostrar que el proceso funciona incluso con material básico y sin condiciones ideales.\n\nEl resultado es, ya de por sí, una imagen con muchísimo detalle (200 megapíxeles). Con una cámara profesional, trípode y el tiempo adecuado, podríamos multiplicar por cuatro la resolución final.\n\nCámara Nikon compacta, a mano y sin trípode, con unos 16 megapíxeles y una focal equivalente a 50mm. Todo el trabajo de captura se hizo en poco más de media hora, sin molestar a los numerosos turistas que compartían el espacio.",
           "it": "Fotografie realizzate nel marzo 2026 durante una visita turistica a Villa Farnesina.\n\nL'obiettivo di questa tavola era testare il metodo dall'inizio alla fine con mezzi da appassionato: dimostrare che il processo funziona anche con attrezzatura di base e senza condizioni ideali.\n\nIl risultato è già di per sé un'immagine con un dettaglio straordinario (200 megapixel). Con una fotocamera professionale, treppiede e il tempo adeguato, potremmo moltiplicare per quattro la risoluzione finale.\n\nFotocamera Nikon compatta, a mano e senza treppiede, con circa 16 megapixel e una focale equivalente a 50mm. L'intera sessione fotografica si è svolta in poco più di mezz'ora, senza disturbare i numerosi turisti presenti.",
           "en": "Photographs taken in March 2026 during a tourist visit to Villa Farnesina.\n\nThe aim of this plate was to test the method from start to finish with amateur equipment: to show that the process works even with basic gear and less-than-ideal conditions.\n\nThe result is, in itself, an image of extraordinary detail (200 megapixels). With a professional camera, a tripod and the right time, we could achieve four times the final resolution.\n\nCompact Nikon camera, handheld without a tripod, at roughly 16 megapixels and a focal length equivalent to 50mm. The entire shoot took just over half an hour, without disturbing the many other tourists in the space."
         }
@@ -849,7 +849,7 @@
   {
     "id": "trastevere",
     "title": {
-      "es": "Santa Maria del Trastevere",
+      "es": "Santa Maria in Trastevere",
       "it": "Santa Maria in Trastevere",
       "en": "Santa Maria in Trastevere"
     },

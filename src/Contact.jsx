@@ -24,7 +24,7 @@ async function copyText(text) {
     ta.style.left = '-9999px';
     document.body.appendChild(ta);
     ta.select();
-    let ok = false;
+    let ok;
     try { ok = document.execCommand('copy'); } catch { ok = false; }
     document.body.removeChild(ta);
     return ok;

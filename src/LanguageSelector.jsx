@@ -1,10 +1,12 @@
 // LanguageSelector.jsx — three-way switch for ES / IT / EN.
-import { LANGS, useLang } from './i18n';
+import { LANGS, useLang, useT } from './i18n';
+import { ui } from './strings';
 
 export default function LanguageSelector() {
   const { lang, setLang } = useLang();
+  const t = useT();
   return (
-    <div className="lang-selector" role="group" aria-label="Language">
+    <div className="lang-selector" role="group" aria-label={t(ui.language)}>
       {LANGS.map((code) => (
         <button
           key={code}

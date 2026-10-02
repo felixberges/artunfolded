@@ -3,7 +3,7 @@
 // Mismo renderer de texto que Article.jsx (párrafos separados por línea en blanco),
 // pero con un estilo visualmente distinto: monoespaciado, tono de cuaderno de trabajo.
 
-import { useT, pick } from './i18n';
+import { useT } from './i18n';
 import './notes.css';
 
 function renderBody(md) {

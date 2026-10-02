@@ -1,5 +1,5 @@
 [TITULO]
-es: Santa Maria del Trastevere
+es: Santa Maria in Trastevere
 it: Santa Maria in Trastevere
 en: Santa Maria in Trastevere
 [TEXTO]
